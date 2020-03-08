@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Huck</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://39.97.232.17/"/>
+  <updated>2020-03-08T11:39:35.245Z</updated>
+  <id>http://39.97.232.17/</id>
+  
+  <author>
+    <name>Huck</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>镜像</title>
+    <link href="http://39.97.232.17/2020/03/08/docker/%E9%95%9C%E5%83%8F/"/>
+    <id>http://39.97.232.17/2020/03/08/docker/%E9%95%9C%E5%83%8F/</id>
+    <published>2020-03-08T12:19:13.893Z</published>
+    <updated>2020-03-08T11:39:35.245Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>镜像是被封装好的服务，镜像可以随时调用，方便进行部署。镜像可以是docker hub上的，也可以是自己封装的。</p></blockquote><p>咱们看一下系统镜像的组成</p><p><img src="img/docker-filesystems-multilayer.png" alt=""></p><p>可以认为镜像都是多镜像叠加起来的。</p><p>咱们要部署环境，第一件事就是查找相关镜像。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search image_name:tag</span><br></pre></td></tr></table></figure><p>系统会返回相关的镜像信息，咱们以centos为例：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server etc]# docker search centos</span><br><span class="line">INDEX       NAME                                         DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">docker.io   docker.io&#x2F;centos                             The official build of CentOS.                   5703      [OK]</span><br><span class="line">docker.io   docker.io&#x2F;ansible&#x2F;centos7-ansible            Ansible on Centos7                              126                  [OK]</span><br></pre></td></tr></table></figure><p>看一下返回的东西。INDEX是镜像库，NAME是镜像名，DESCRIPTION是镜像简介，OFFICIAL表示是否官方镜像，AUTOMATED表示自动部署。</p><p>咱们再看看搜索命令，image_name后有tag，一般情况下，tag表示的是镜像的版本，但是也有其他的用途。</p><p>获取到镜像信息了，咱们可以拉取镜像了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull image_name:tag</span><br></pre></td></tr></table></figure><p>咱们再这里发现，拉取镜像的时候有多个拉取进度条，这就可以说明，镜像是多个镜像叠加成的。</p><p>拉取镜像和查询镜像的时候，可以不要tag。如果不要tag的话，那就是拉取最新的镜像，及默认latest。</p><p>拉取镜像到本地后，咱们可以查看以下本地的镜像：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">docker.io/centos    latest              0f3e07c0138f        2 months ago        220 MB</span><br></pre></td></tr></table></figure><p>看看这个列表。</p><p>REPOSITORY表示镜像来源，TAG表示镜像的标签。</p><p>IMAGE ID这个参数很重要。每个镜像都会分配一个image id，且唯一。这个image id是拉取镜像的时候系统给分配的。所以再docker hub上是没有分配image id的。</p><p>CREATED表示拉取镜像的时间，是拉取镜像到现在的时长。SIZE表示镜像的大小。</p><p><strong>咱们看看这个SIZE。一个完整的centos大概需要6G左右，但是这里只有200M左右，且能完成基本的服务功能。这就体现出了容器化相对于虚拟化的优越性了。</strong></p><p>运行以下镜像吧：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd 0f3e07c0138f</span><br></pre></td></tr></table></figure><p>镜像这样就运行起来了，咱们看一下状态。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">d24f69f87efb        0f3e07c0138f        <span class="string">"/bin/bash"</span>         4 seconds ago       Up 2 seconds</span><br></pre></td></tr></table></figure><p>运行成功。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;镜像是被封装好的服务，镜像可以随时调用，方便进行部署。镜像可以是docker hub上的，也可以是自己封装的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;咱们看一下系统镜像的组成&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;img/docker-filesy
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://39.97.232.17/categories/docker/"/>
+    
+    
+      <category term="容器技术" scheme="http://39.97.232.17/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络</title>
+    <link href="http://39.97.232.17/2020/03/08/docker/%E7%BD%91%E7%BB%9C/"/>
+    <id>http://39.97.232.17/2020/03/08/docker/%E7%BD%91%E7%BB%9C/</id>
+    <published>2020-03-08T12:19:13.888Z</published>
+    <updated>2020-03-08T11:40:50.642Z</updated>
+    
+    <content type="html"><![CDATA[<p>docker网络默认时使用NAT模式的，结构图如下</p><p><img src="img/1529328359399810.png" alt=""></p><p>这张图上有两种模式。第一个容器是host模式，该容器的的IP和主机是相同的，和主机共享网络。第二个是bridge模式。</p><p>主要说一下bridge模式。</p><p>在docker内部，软件会生成一个虚拟网关，形成一个虚拟的网络。容器分配的IP是这个虚拟网关分配的。外网无法访问，除非在创建容器的时候创建端口映射。</p><h1 id="查看docker网络"><a href="#查看docker网络" class="headerlink" title="查看docker网络"></a>查看docker网络</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">194c884755b2        bridge              bridge              <span class="built_in">local</span></span><br><span class="line">ee717ffaa64f        host                host                <span class="built_in">local</span></span><br><span class="line">f39060423673        none                null                <span class="built_in">local</span></span><br></pre></td></tr></table></figure><p>上边是docker的三种网络模式。</p><p>在主机上执行ip add命令可以发现一条信息：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3: docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default</span><br><span class="line">    link&#x2F;ether 02:42:98:a4:a1:70 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.17.0.1&#x2F;16 scope global docker0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::42:98ff:fea4:a170&#x2F;64 scope link</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure><p>这是docker创建的虚拟网卡，这里以虚拟网卡为网关。</p><h2 id="bridge通信原理"><a href="#bridge通信原理" class="headerlink" title="bridge通信原理"></a>bridge通信原理</h2><p>容器将数据发送到虚拟网卡上，然后通过虚拟网卡发送出去。外网访问也是同理。</p><h1 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h1><p>因为有虚拟网络存在，所以外网因为有内网隔离无法访问到容器。我们需要添加端口映射。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd -p 主机端口:容器端口 image_id</span><br></pre></td></tr></table></figure><p>这样的话外网就可以访问到相应的端口了。</p><p>也可所以使用-P参数，就是随机分配端口。</p><h1 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h1><p>创建容器时添加–link参数，在新容器的hosts文件添加原容器的解析。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;docker网络默认时使用NAT模式的，结构图如下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;img/1529328359399810.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这张图上有两种模式。第一个容器是host模式，该容器的的IP和主机是相同的，和主机共享网络。第二个是bri
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://39.97.232.17/categories/docker/"/>
+    
+    
+      <category term="容器技术" scheme="http://39.97.232.17/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据卷</title>
+    <link href="http://39.97.232.17/2020/03/08/docker/%E6%95%B0%E6%8D%AE%E5%8D%B7/"/>
+    <id>http://39.97.232.17/2020/03/08/docker/%E6%95%B0%E6%8D%AE%E5%8D%B7/</id>
+    <published>2020-03-08T12:19:13.878Z</published>
+    <updated>2020-03-08T11:40:16.117Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据卷可将主机和容器之间做文件上的连接，更便于容器中的文件管理。</p><h1 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h1><p>添加数据卷。在创建容器的时候添加-v参数，即可添加数据卷。语法如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd -v 本地目录:容器目录 image_id</span><br></pre></td></tr></table></figure><p>这里可以不写容器目录，如果不写的话是给容器加载了数据卷，但是不挂载。如果加容器目录则加载到容器内。</p><p>目录可以改成文件，则是文件挂载。</p><h1 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h1><p>数据卷容器时一个容器，就是把容器作为数据卷挂载到新容器。</p><p>创建数据卷容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /dbdata --name dbdata ubuntu</span><br></pre></td></tr></table></figure><p>挂载数据卷容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --volumes-from dbdata --name db1 ubuntu</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;数据卷可将主机和容器之间做文件上的连接，更便于容器中的文件管理。&lt;/p&gt;
+&lt;h1 id=&quot;数据卷&quot;&gt;&lt;a href=&quot;#数据卷&quot; class=&quot;headerlink&quot; title=&quot;数据卷&quot;&gt;&lt;/a&gt;数据卷&lt;/h1&gt;&lt;p&gt;添加数据卷。在创建容器的时候添加-v参数，即可添加数
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://39.97.232.17/categories/docker/"/>
+    
+    
+      <category term="容器技术" scheme="http://39.97.232.17/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>容器</title>
+    <link href="http://39.97.232.17/2020/03/08/docker/%E5%AE%B9%E5%99%A8/"/>
+    <id>http://39.97.232.17/2020/03/08/docker/%E5%AE%B9%E5%99%A8/</id>
+    <published>2020-03-08T12:19:13.868Z</published>
+    <updated>2020-03-08T11:39:53.104Z</updated>
+    
+    <content type="html"><![CDATA[<p>容器就是镜像跑起来之后的东西。容器之间可以互相访问，但是和实环境隔离。</p><p>咱们看一下运行的容器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># docker ps -a</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">d24f69f87efb        0f3e07c0138f        <span class="string">"/bin/bash"</span>         6 hours ago         Up 6 seconds                            epic_bose</span><br></pre></td></tr></table></figure><p>看一下上边的参数。</p><p>CONTAINER ID 容器的ID号。</p><p>IMAGE 容器的来源镜像ID。</p><p>COMMAND 容器运行时候的命令。</p><p>CREATED 创建时间。</p><p>PORTS 端口映射。</p><p>NAMES 容器名。</p><h1 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h1><p>容器由镜像创建来，且一直保存。则容器往往会有运行和停止两个状态。</p><p>启动容器<code>docker start CONTAINER ID</code></p><p>停止容器<code>docker stop CONTAINER ID</code></p><p>有时候咱们启动容器了，但是发现查看容器的时候还是有问题，不能启动。一般情况下，容器不会没有原因的无法启动，肯定是出问题了，那么就看看容器的日志。</p><figure class="highlight docker"><figcaption><span>logs CONTAINER ID```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">分析一下日志信息，按照信息报的错误修改配置。</span><br><span class="line"></span><br><span class="line">容器也不是永远都有用的，所以有时候我们会删除有些容器。</span><br><span class="line"></span><br><span class="line">```docker rm CONTAINER ID</span><br></pre></td></tr></table></figure><p><strong>注意：运行中的容器不能删除，所以一般情况需要停止容器才能删除。如果要强制删除的话直接加参数-f就好了。</strong></p><h1 id="文件交互"><a href="#文件交互" class="headerlink" title="文件交互"></a>文件交互</h1><p>有时候需要将物理机上的文件拷贝到容器中，有时候需要将容器中的文件拷贝到本地。这个直接使用docker的拷贝功能就好。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp file CONTAINER_ID:file <span class="comment">#本地复制到容器</span></span><br><span class="line">docker cp CONTAINER_ID:file file <span class="comment">#容器复制到本地</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;容器就是镜像跑起来之后的东西。容器之间可以互相访问，但是和实环境隔离。&lt;/p&gt;
+&lt;p&gt;咱们看一下运行的容器：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://39.97.232.17/categories/docker/"/>
+    
+    
+      <category term="容器技术" scheme="http://39.97.232.17/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker的安装和配置</title>
+    <link href="http://39.97.232.17/2020/03/08/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/"/>
+    <id>http://39.97.232.17/2020/03/08/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</id>
+    <published>2020-03-08T12:19:13.863Z</published>
+    <updated>2020-03-08T11:39:11.616Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Docker是目前容器化的常用软件，它可以隔离真是主机环境，且上线环境部署容易，容灾性高。</p></blockquote><h1 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h1><p>docker可以通过yum进行安装，安装方法</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce</span><br></pre></td></tr></table></figure><p>安装后，咱们最好更改一下docker的加速源，修改<code>/etc/docker/daemon.json</code>，添加以下内容：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;registry-mirrors&quot;: [&quot;http:&#x2F;&#x2F;hub-mirror.c.163.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>重启以下docker服务就行了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;Docker是目前容器化的常用软件，它可以隔离真是主机环境，且上线环境部署容易，容灾性高。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;安装环境&quot;&gt;&lt;a href=&quot;#安装环境&quot; class=&quot;headerlink&quot; title=&quot;安装环境
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://39.97.232.17/categories/docker/"/>
+    
+    
+      <category term="容器技术" scheme="http://39.97.232.17/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>模块</title>
+    <link href="http://39.97.232.17/2020/03/08/ansible/%E6%A8%A1%E5%9D%97/"/>
+    <id>http://39.97.232.17/2020/03/08/ansible/%E6%A8%A1%E5%9D%97/</id>
+    <published>2020-03-08T12:19:13.840Z</published>
+    <updated>2020-03-08T11:35:59.368Z</updated>
+    
+    <content type="html"><![CDATA[<p>ansible 和 saltstack 相似，都是调用相关模块实现功能的，有一些模块是我们很常用的。</p><p>这里调用模块的方法和 saltstack 不同，需要使用 -m 参数进行调用。</p><h1 id="ping-模块"><a href="#ping-模块" class="headerlink" title="ping 模块"></a>ping 模块</h1><p>和广义上的 ping 意义相似，都是进行主机连通性测试的，检查群内主机是否在线。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s1 log]# ansible all -m ping </span><br><span class="line">192.168.89.130 | SUCCESS &#x3D;&gt; &#123;</span><br><span class="line">    &quot;ansible_facts&quot;: &#123;</span><br><span class="line">        &quot;discovered_interpreter_python&quot;: &quot;&#x2F;usr&#x2F;bin&#x2F;python&quot;</span><br><span class="line">    &#125;, </span><br><span class="line">    &quot;changed&quot;: false, </span><br><span class="line">    &quot;ping&quot;: &quot;pong&quot;</span><br><span class="line">&#125;</span><br><span class="line">192.168.89.129 | SUCCESS &#x3D;&gt; &#123;</span><br><span class="line">    &quot;ansible_facts&quot;: &#123;</span><br><span class="line">        &quot;discovered_interpreter_python&quot;: &quot;&#x2F;usr&#x2F;bin&#x2F;python&quot;</span><br><span class="line">    &#125;, </span><br><span class="line">    &quot;changed&quot;: false, </span><br><span class="line">    &quot;ping&quot;: &quot;pong&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>出现success就说明主机是在线的。</p><h1 id="command-模块"><a href="#command-模块" class="headerlink" title="command 模块"></a>command 模块</h1><p>自动化操作基本都是基于ssh远程操作的shell指令的，我们会经常使用shell语句进行系统的操作。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s1 log]# ansible test -m command -a &#39;ls -al &#x2F;root&#39;</span><br><span class="line">192.168.89.130 | CHANGED | rc&#x3D;0 &gt;&gt;</span><br><span class="line">总用量 80</span><br><span class="line">dr-xr-x---.  5 root root  4096 1月  27 18:55 .</span><br><span class="line">dr-xr-xr-x. 17 root root   244 1月  27 18:49 ..</span><br><span class="line">-rw-------.  1 root root  1253 1月  27 16:07 anaconda-ks.cfg</span><br><span class="line">...</span><br><span class="line">-rw-r--r--.  1 root root   129 12月 29 2013 .tcshrc</span><br><span class="line"></span><br><span class="line">192.168.89.129 | CHANGED | rc&#x3D;0 &gt;&gt;</span><br><span class="line">总用量 68</span><br><span class="line">dr-xr-x---.  7 root root  4096 1月  27 20:00 .</span><br><span class="line">dr-xr-xr-x. 17 root root   244 1月  27 18:49 ..</span><br><span class="line">-rw-------.  1 root root  1253 1月  27 16:07 anaconda-ks.cfg</span><br><span class="line">...</span><br><span class="line">-rw-------   1 root root  1261 1月  27 20:00 .viminfo</span><br></pre></td></tr></table></figure><p>调用command模块后，使用-a参数传入要运行的shell语句。</p><p>有时候因为我们没有root权限，或者有些文件不能用root进行操作，那么我们会用到其他账户，使用 -u 参数有指定账户。</p><p>command模块的几个功能：</p><ol><li>removes：存在条件判断，当文件存在时运行后边的命令。</li><li>creates：不存在条件判断，当文件不存在的时候执行后边的命令。</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s1 ~]# ansible all -a &#39;creates&#x3D;&#x2F;root&#x2F;setup.log cat &#x2F;root&#x2F;setup.log&#39;</span><br><span class="line">192.168.89.129 | SUCCESS | rc&#x3D;0 &gt;&gt;</span><br><span class="line">skipped, since &#x2F;root&#x2F;setup.log exists</span><br><span class="line"></span><br><span class="line">192.168.89.130 | SUCCESS | rc&#x3D;0 &gt;&gt;</span><br><span class="line">skipped, since &#x2F;root&#x2F;setup.log exists</span><br></pre></td></tr></table></figure><p>从以上文本可以看出，存在就不执行。</p><h2 id="shell模块"><a href="#shell模块" class="headerlink" title="shell模块"></a>shell模块</h2><p>这是标准的shell模块，和command相似，但是shell对于linux更专业，所以执行远程命令更推荐使用shell模块。</p><p>command模块不支持管道符，但是shell模块可以使用。</p><h1 id="Script-模块"><a href="#Script-模块" class="headerlink" title="Script 模块"></a>Script 模块</h1><p>一般情况下运行脚本需要将脚本文件分发到各主机上分别进行运行，这样很不方便，在ansible中我们使用了script模块，只需要在master主机上编辑脚本就可以了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash# ansible all -m script -a &#39;&#x2F;root&#x2F;test.sh&#39;</span><br></pre></td></tr></table></figure><p>这样就分别在主机上执行了test.sh脚本，输出格式有普通输出和格式化输出。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;stdout&quot;: &quot;k8s1\r\n&quot;, </span><br><span class="line">&quot;stdout_lines&quot;: [</span><br><span class="line">    &quot;k8s1&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h1 id="copy-模块"><a href="#copy-模块" class="headerlink" title="copy 模块"></a>copy 模块</h1><p>就是复制模块，需要进行目标文件和目的的指定。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m copy -a &#39;src&#x3D;&#x2F;root&#x2F;test.sh dest&#x3D;&#x2F;tmp owner&#x3D;root group&#x3D;root mode&#x3D;0755&#39;</span><br></pre></td></tr></table></figure><p>这样就把文件以复制的方式分发给了主机。前提：master上存在这个文件。指定为src，目的指定为dest。</p><h1 id="yum模块"><a href="#yum模块" class="headerlink" title="yum模块"></a>yum模块</h1><p>yum模块是只针对于Centos的安装模块。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m yum -a &#39;name&#x3D;vim state&#x3D;latest&#39;</span><br></pre></td></tr></table></figure><p>上边这一段命令就给主机安装了vim编辑器。</p><h1 id="service模块"><a href="#service模块" class="headerlink" title="service模块"></a>service模块</h1><p>服务器的主要功能就是服务，服务器系统主要任务就是提供服务。我们经常会对集群内服务进行操作，如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m service -a &#39;name&#x3D;nginx state&#x3D;started&#39;</span><br></pre></td></tr></table></figure><p>这段命令启动了nginx。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;ansible 和 saltstack 相似，都是调用相关模块实现功能的，有一些模块是我们很常用的。&lt;/p&gt;
+&lt;p&gt;这里调用模块的方法和 saltstack 不同，需要使用 -m 参数进行调用。&lt;/p&gt;
+&lt;h1 id=&quot;ping-模块&quot;&gt;&lt;a href=&quot;#ping-模块&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="ansible" scheme="http://39.97.232.17/categories/ansible/"/>
+    
+    
+      <category term="自动化运维技术" scheme="http://39.97.232.17/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>主机管理</title>
+    <link href="http://39.97.232.17/2020/03/08/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/"/>
+    <id>http://39.97.232.17/2020/03/08/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/</id>
+    <published>2020-03-08T12:19:13.835Z</published>
+    <updated>2020-03-08T11:36:22.376Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="分组管理"><a href="#分组管理" class="headerlink" title="分组管理"></a>分组管理</h1><p>在大型集群里，机器会分为多个可用域，每个可用域做的业务也不相同，执行的命令和在集群中承担的角色也不同，那就需要进行分组管理。</p><h2 id="创建分组："><a href="#创建分组：" class="headerlink" title="创建分组："></a>创建分组：</h2><p>在/etc/ansible/hosts文件下创建之际和组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[group]</span><br><span class="line">host</span><br></pre></td></tr></table></figure><p>这样就创建了一个管理组。</p><p>需要注意，ansible是基于ssh的集群管理工具，默认的链接端口是22，如果主机的ssh端口被修改过，则在声明hosts的时候著名ssh的端口。</p><p>有时候服务器的使用账户并非root，那就需要进行指定：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[group]</span><br><span class="line">host ansible_connection&#x3D;connect_method ansible_ssh_user&#x3D;user</span><br></pre></td></tr></table></figure><p>这样来指定ssh连接方式和连接的用户名。</p><h2 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h2><p>有时候需要给服务器增加一个变量或者标志，那么就在<br>hosts文件上添加变量即可：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[group]</span><br><span class="line">host var&#x3D;value</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;分组管理&quot;&gt;&lt;a href=&quot;#分组管理&quot; class=&quot;headerlink&quot; title=&quot;分组管理&quot;&gt;&lt;/a&gt;分组管理&lt;/h1&gt;&lt;p&gt;在大型集群里，机器会分为多个可用域，每个可用域做的业务也不相同，执行的命令和在集群中承担的角色也不同，那就需要进行分组管理。
+      
+    
+    </summary>
+    
+    
+      <category term="ansible" scheme="http://39.97.232.17/categories/ansible/"/>
+    
+    
+      <category term="自动化运维技术" scheme="http://39.97.232.17/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>playbook</title>
+    <link href="http://39.97.232.17/2020/03/08/ansible/playbook/"/>
+    <id>http://39.97.232.17/2020/03/08/ansible/playbook/</id>
+    <published>2020-03-08T12:19:13.830Z</published>
+    <updated>2020-03-08T11:35:29.863Z</updated>
+    
+    <content type="html"><![CDATA[<p>playbook就是和saltstack类似的yaml部署描述文件。一个playbooks内包含一个或多个play，下面对play进行一下解析：</p><p>下边是一个例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">- hosts: webservers</span><br><span class="line">  vars:</span><br><span class="line">    http_port: 80</span><br><span class="line">    max_clients: 200</span><br><span class="line">  remote_user: root</span><br><span class="line">  tasks:</span><br><span class="line">  - name: ensure apache is at the latest version</span><br><span class="line">    yum: pkg&#x3D;httpd state&#x3D;latest</span><br><span class="line">  - name: write the apache config file</span><br><span class="line">    template: src&#x3D;&#x2F;srv&#x2F;httpd.j2 dest&#x3D;&#x2F;etc&#x2F;httpd.conf</span><br><span class="line">    notify:</span><br><span class="line">    - restart apache</span><br><span class="line">  - name: ensure apache is running</span><br><span class="line">    service: name&#x3D;httpd state&#x3D;started</span><br><span class="line">  handlers:</span><br><span class="line">    - name: restart apache</span><br><span class="line">      service: name&#x3D;httpd state&#x3D;restarted</span><br></pre></td></tr></table></figure><h1 id="指定机器"><a href="#指定机器" class="headerlink" title="指定机器"></a>指定机器</h1><p>在yaml的前半段是对机器、用户和组的配置。</p><ul><li>hosts：指定执行的机器或者组</li><li>remote_user：运行的用户</li></ul><p>** 这里可以添加sudo: yes语句，表示使用sudo执行操作**</p><ul><li>vars：创建变量表</li></ul><h1 id="tasks-表"><a href="#tasks-表" class="headerlink" title="tasks 表"></a>tasks 表</h1><p>tasks表就是任务表，每个数据元素就是一个任务。</p><p>这是一个简单的nginx自动构建playbook。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- hosts: test</span><br><span class="line">  vars:</span><br><span class="line">    httpport: 80</span><br><span class="line">  remote_user: root</span><br><span class="line">  tasks:</span><br><span class="line">    - name: install nginx</span><br><span class="line">      yum: pkg&#x3D;nginx state&#x3D;latest</span><br><span class="line">    - name: start nginx</span><br><span class="line">      service: name&#x3D;nginx state&#x3D;started</span><br></pre></td></tr></table></figure><p>这个文件包含了两个task。</p><p>第一个是安装nginx，直接调用yum，用pkg key指定安装nginx，用state指定安装的版本。</p><p>第二个是服务状态控制。安装完成后nginx的状态是关闭的，需要进行手动启动。这里使用了service模块进行了自动启动。在name中指定服务名，在state中指定服务状态。</p><p>这里要注意，service指定的state必须是reload，started或者stopped，其他状态都是无效的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;playbook就是和saltstack类似的yaml部署描述文件。一个playbooks内包含一个或多个play，下面对play进行一下解析：&lt;/p&gt;
+&lt;p&gt;下边是一个例子：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="ansible" scheme="http://39.97.232.17/categories/ansible/"/>
+    
+    
+      <category term="自动化运维技术" scheme="http://39.97.232.17/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ansible安装</title>
+    <link href="http://39.97.232.17/2020/03/08/ansible/ansible%E5%AE%89%E8%A3%85/"/>
+    <id>http://39.97.232.17/2020/03/08/ansible/ansible%E5%AE%89%E8%A3%85/</id>
+    <published>2020-03-08T12:19:13.826Z</published>
+    <updated>2020-03-08T11:27:47.276Z</updated>
+    
+    <content type="html"><![CDATA[<p>ansible是一个基于SSH协议的自动化运维工具，通常使用的时候需要给其他主机配置免密登录，且只需要安装控制端。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在控制端安装依赖及主程序</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yum install epel-release</span><br><span class="line"></span><br><span class="line">yum install ansible</span><br></pre></td></tr></table></figure><p>也可以使用pip安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pip install ansible</span><br></pre></td></tr></table></figure><p>安装好后进行主机配置和远程配置。</p><p>在控制端配置/etc/ansible/hosts文件，在这个文件里可以使用ip，也可以使用hostname（那就需要使用hosts文件对主机进行解析或者DNS能进行解析）。</p><p><img src="img/1.png" alt="1.png"></p><p>生成SSH公钥，将公钥信息下发给被控制主机。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure><p>可以看到，生成的rsa公钥被存放在~/.ssh/id_rsa.pub中，那么久需要将这个文件下发：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh-copy-id -i ~&#x2F;.ssh&#x2F;id_rsa.pub root@192.168.89.129</span><br></pre></td></tr></table></figure><p>这样就配置好了SSH免密登录。</p><p>对配置好的集群进行验证：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">bash#</span><span class="bash"> ansible all -m ping</span></span><br><span class="line"></span><br><span class="line">192.168.89.130 | SUCCESS =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    "ansible_facts": &#123;</span><br><span class="line"></span><br><span class="line">        "discovered_interpreter_python": "/usr/bin/python"</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    "changed": false,</span><br><span class="line"></span><br><span class="line">    "ping": "pong"</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">192.168.89.129 | SUCCESS =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    "ansible_facts": &#123;</span><br><span class="line"></span><br><span class="line">        "discovered_interpreter_python": "/usr/bin/python"</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    "changed": false,</span><br><span class="line"></span><br><span class="line">    "ping": "pong"</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这条命令和saltstack的test.ping的用途相同，就是尝试进行服务器间的通信测试。这里的两条success表示测试正常。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;ansible是一个基于SSH协议的自动化运维工具，通常使用的时候需要给其他主机配置免密登录，且只需要安装控制端。&lt;/p&gt;
+&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;在控制端安
+      
+    
+    </summary>
+    
+    
+      <category term="ansible" scheme="http://39.97.232.17/categories/ansible/"/>
+    
+    
+      <category term="自动化运维技术" scheme="http://39.97.232.17/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>业务理论/灰度发布</title>
+    <link href="http://39.97.232.17/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/"/>
+    <id>http://39.97.232.17/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/</id>
+    <published>2020-03-08T12:19:13.816Z</published>
+    <updated>2020-03-02T09:28:29.288Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>灰度发布就是在黑和白之间发布网站。假设有一个黑区和白区。黑区使用旧版本的产品，白区发布新版本产品，然后对白区进行产品调研。如果白区没有什么意见，则可白区向黑区扩散。</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>beta和正式版。对特定用户推送beta版本产品，进行使用状况调研，然后根据调研逐渐将beta转化为正式版。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;p&gt;灰度发布就是在黑和白之间发布网站。假设有一个黑区和白区。黑区使用旧版本的产品，白区发布新版本产品，然后对白区进行产品调研。如果白区没有什么意
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟化（KVM）/虚拟化及磁盘</title>
+    <link href="http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8F%8A%E7%A3%81%E7%9B%98/"/>
+    <id>http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8F%8A%E7%A3%81%E7%9B%98/</id>
+    <published>2020-03-08T12:19:13.599Z</published>
+    <updated>2020-01-13T11:22:49.369Z</updated>
+    
+    <content type="html"><![CDATA[<p>虚拟机，我们常叫做实例。一个实例就含一个最基本的服务器的最小系统，包括虚拟硬件系统和软件系统。</p><p>通常生产环节的服务器不适用GUI界面，但是再做KVM的时候，需要GUI界面做辅助管理，所以再安装KVM之前务必先安装桌面。</p><p><strong>KVM最终生成的配置文件是xml文件</strong></p><p>创建虚拟机时，使用命令<code>virt-install</code>创建KVM虚拟机。</p><p>常用参数：</p><ul><li>name：虚拟机名</li><li>vCPUs：虚拟CPU核心数</li><li>ram：虚拟内存大小</li><li>os-type：系统类型</li><li>cdrom：CD挂载的镜像文件</li><li>file：虚拟机硬盘文件</li><li>file-size：虚拟硬盘大小</li></ul><h1 id="虚拟硬盘"><a href="#虚拟硬盘" class="headerlink" title="虚拟硬盘"></a>虚拟硬盘</h1><p>通常情况，任何电脑想运行起来都得有硬盘做数据存储支持，所以，咱们先创建虚拟硬盘：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create xxx.qcow2 -f qcow2 size</span><br></pre></td></tr></table></figure><p>上述代码创建了一个qcow2格式的虚拟硬盘。</p><p>虚拟磁盘大概有两种类型，一个是IDE，一个是Virtio。根据读写数据测试，Virtio是性能最好的方案。</p><p>虚拟磁盘的格式也有很多种，用的最多的是qcow2格式的硬盘文件。</p><p>QEMU支持常见使用的raw和qcow2格式。</p><h1 id="硬盘虚拟化的主要操作"><a href="#硬盘虚拟化的主要操作" class="headerlink" title="硬盘虚拟化的主要操作"></a>硬盘虚拟化的主要操作</h1><h2 id="硬盘创建"><a href="#硬盘创建" class="headerlink" title="硬盘创建"></a>硬盘创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create test 50G</span><br></pre></td></tr></table></figure><p>创建一个50G的硬盘，但是没有写是什么格式。要实际使用必须给一个指定的硬盘格式。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create test.qcow2 -f qcow2 50G</span><br></pre></td></tr></table></figure><p>上边就是指定生成一个qcow2格式的硬盘。注意钱两段语句test有无后缀。</p><p>这里不写绝对地址，那么就再当前目录生成文件。</p><p>可以通过<code>qemu-img info test.qcow2</code>查看生成硬盘的信息。</p><h2 id="硬盘格式转换"><a href="#硬盘格式转换" class="headerlink" title="硬盘格式转换"></a>硬盘格式转换</h2><p>平时硬盘也就一两种格式常用，但是有时候也会使用其他格式，那么就需要进行转换。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -p -f raw -O qcow2 test test1.qcow2</span><br></pre></td></tr></table></figure><p>#快照</p><p>快照就是系统在某一个瞬间被“抓拍”到的状态，这个状态可以随时进行恢复。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img snapshot test.qcow2 -c s1</span><br></pre></td></tr></table></figure><p>以上代码创建了一个名为s1的快照，我们可以查看一下快照列表：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img snapshot test.qcow2 -l</span><br></pre></td></tr></table></figure><p>镜像是用来给特殊情况下给服务器做还原用的，所以必然就会用到还原，使用a参数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img snapshot test.qcow2 -a s1</span><br></pre></td></tr></table></figure><h1 id="后备镜像"><a href="#后备镜像" class="headerlink" title="后备镜像"></a>后备镜像</h1><p>后备镜像就是常说的公有镜像，一个后备镜像可以做多个虚拟机的母盘。</p><p>后备（backend）使用：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2 -b backend img_name</span><br></pre></td></tr></table></figure><p>使用后备磁盘创建一个虚拟硬盘。</p><h1 id="虚拟硬盘属性定义"><a href="#虚拟硬盘属性定义" class="headerlink" title="虚拟硬盘属性定义"></a>虚拟硬盘属性定义</h1><p>最常用的硬盘指标是容量，虚拟主机经常会出现硬盘不足，那么我们就需要手动再给加大硬盘了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img resize test1.qcow2 +2G</span><br></pre></td></tr></table></figure><p>这里是给元硬盘的基础加2G，当然也可以写成需要改到的大小。</p><h1 id="裸设备"><a href="#裸设备" class="headerlink" title="裸设备"></a>裸设备</h1><p>为让虚拟机获取极致的算力和性能，可以直接挂在裸硬盘到虚拟机。也可以使用lvm，但是lvm需要关闭cache，防止数据丢失。</p><h1 id="常用虚拟硬盘格式对比"><a href="#常用虚拟硬盘格式对比" class="headerlink" title="常用虚拟硬盘格式对比"></a>常用虚拟硬盘格式对比</h1><p>RAW：整体性能较高</p><p>qcow2：常见的虚拟硬盘格式，适合高消耗计算</p><p>lvm：适合高IO的计算</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;虚拟机，我们常叫做实例。一个实例就含一个最基本的服务器的最小系统，包括虚拟硬件系统和软件系统。&lt;/p&gt;
+&lt;p&gt;通常生产环节的服务器不适用GUI界面，但是再做KVM的时候，需要GUI界面做辅助管理，所以再安装KVM之前务必先安装桌面。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;KVM最终
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟化（KVM）/网络虚拟化</title>
+    <link href="http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+    <id>http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/</id>
+    <published>2020-03-08T12:19:13.591Z</published>
+    <updated>2020-01-13T11:22:49.358Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="虚拟化分类"><a href="#虚拟化分类" class="headerlink" title="虚拟化分类"></a>虚拟化分类</h1><p>虚拟化可分为半虚拟化和全虚拟化。半虚拟化和全虚拟化的本质区别在于虚拟化层。</p><h1 id="半虚拟化网络（Virtio驱动）"><a href="#半虚拟化网络（Virtio驱动）" class="headerlink" title="半虚拟化网络（Virtio驱动）"></a>半虚拟化网络（Virtio驱动）</h1><p>半虚拟化主机需要对客户机操作系统进行一定的修改才能使用。半虚拟化宿主机和虚拟机都需要安装Virtio的虚拟工具。</p><h2 id="半虚拟化安装过程"><a href="#半虚拟化安装过程" class="headerlink" title="半虚拟化安装过程"></a>半虚拟化安装过程</h2><p>目前主流操作系统都默认带有Virtio的网络驱动，只需要再内核中看看是否支持。</p><p>在启动虚拟机的时候加入参数virtio-net-oci，指定网卡if=virtio（网卡类型）。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;虚拟化分类&quot;&gt;&lt;a href=&quot;#虚拟化分类&quot; class=&quot;headerlink&quot; title=&quot;虚拟化分类&quot;&gt;&lt;/a&gt;虚拟化分类&lt;/h1&gt;&lt;p&gt;虚拟化可分为半虚拟化和全虚拟化。半虚拟化和全虚拟化的本质区别在于虚拟化层。&lt;/p&gt;
+&lt;h1 id=&quot;半虚拟化网络（V
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟化（KVM）/KVM概念</title>
+    <link href="http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/KVM%E6%A6%82%E5%BF%B5/"/>
+    <id>http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/KVM%E6%A6%82%E5%BF%B5/</id>
+    <published>2020-03-08T12:19:13.587Z</published>
+    <updated>2020-01-13T11:22:49.347Z</updated>
+    
+    <content type="html"><![CDATA[<p>目前各大云计算厂商都在使用虚拟化云服务，大部分以VMware、Xen和KVM（Openstack）等架构，KVM是使用最广的虚拟化方案。</p><p>虚拟化是将空闲的硬件资源分配到虚拟计算机中，使服务器的性能能达到最好，发挥到极致。</p><p>KVM是内核加强虚拟机，从他的名称可以看出这是个基于内核的功能。</p><p>KVM是虚拟机软件，那么运行这个软件则要有CPU虚拟化选项打开，否则CPU无法进行虚拟化。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;目前各大云计算厂商都在使用虚拟化云服务，大部分以VMware、Xen和KVM（Openstack）等架构，KVM是使用最广的虚拟化方案。&lt;/p&gt;
+&lt;p&gt;虚拟化是将空闲的硬件资源分配到虚拟计算机中，使服务器的性能能达到最好，发挥到极致。&lt;/p&gt;
+&lt;p&gt;KVM是内核加强虚拟机，
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟化（KVM）/CPU虚拟及内存虚拟</title>
+    <link href="http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/"/>
+    <id>http://39.97.232.17/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/</id>
+    <published>2020-03-08T12:19:13.583Z</published>
+    <updated>2020-01-13T11:22:49.313Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="硬件虚拟化（CPU和内存）"><a href="#硬件虚拟化（CPU和内存）" class="headerlink" title="硬件虚拟化（CPU和内存）"></a>硬件虚拟化（CPU和内存）</h1><h2 id="常用CPU架构"><a href="#常用CPU架构" class="headerlink" title="常用CPU架构"></a>常用CPU架构</h2><h3 id="SMP技术"><a href="#SMP技术" class="headerlink" title="SMP技术"></a>SMP技术</h3><p>这种架构CPU共同访问所有内存，速率比较低，且效率也低。</p><h3 id="NUMA技术"><a href="#NUMA技术" class="headerlink" title="NUMA技术"></a>NUMA技术</h3><p>这是最常见的虚拟化技术，CPU直接通信自己所属的内存，直接调用，效率较高。</p><p><strong>这里需要用到numactl插件，需手动安装一下</strong></p><p>看以下代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bash$ numactl --hardware</span><br><span class="line">available: 1 nodes (0)</span><br><span class="line">node 0 cpus: 0 1 2 3 4 5 6 7</span><br><span class="line">node 0 size: 7850 MB</span><br><span class="line">node 0 free: 4704 MB</span><br><span class="line">node distances:</span><br><span class="line">node   0 </span><br><span class="line">  0:  10</span><br></pre></td></tr></table></figure><p>从以上代码得，这台电脑是单CPU，是多核的CPU。内存一共7850M，空余4704M。</p><p>查看NUMA使用的内存</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bash# numasat -c qemu-kvm</span><br><span class="line">Per-node numastat info (in MBs):</span><br><span class="line">                Node 0 Total</span><br><span class="line">                ------ -----</span><br><span class="line">Numa_Hit         19365 19365</span><br><span class="line">Numa_Miss            0     0</span><br><span class="line">Numa_Foreign         0     0</span><br><span class="line">Interleave_Hit     175   175</span><br><span class="line">Local_Node       19365 19365</span><br><span class="line">Other_Node           0     0</span><br><span class="line">Local_Node       19365 19365</span><br><span class="line">Other_Node           0     0</span><br></pre></td></tr></table></figure><p>可以看到内存的占用状况。</p><h1 id="KSM技术："><a href="#KSM技术：" class="headerlink" title="KSM技术："></a>KSM技术：</h1><p>虚拟主句和宿主主机内存合并。</p><h2 id="内存气球技术"><a href="#内存气球技术" class="headerlink" title="内存气球技术"></a>内存气球技术</h2><p>需要virt balloon插件调节内存。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;硬件虚拟化（CPU和内存）&quot;&gt;&lt;a href=&quot;#硬件虚拟化（CPU和内存）&quot; class=&quot;headerlink&quot; title=&quot;硬件虚拟化（CPU和内存）&quot;&gt;&lt;/a&gt;硬件虚拟化（CPU和内存）&lt;/h1&gt;&lt;h2 id=&quot;常用CPU架构&quot;&gt;&lt;a href=&quot;#常用
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面试常见问题/uniq和sort</title>
+    <link href="http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/"/>
+    <id>http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/</id>
+    <published>2020-03-08T12:19:13.566Z</published>
+    <updated>2020-02-27T06:30:16.811Z</updated>
+    
+    <content type="html"><![CDATA[<p>sort和uniq是两个查看文件时候经常会用到的筛选工具。</p><p>sort：升序输出，将输入的文本以升序的方式进行输出。</p><p>uniq：降重输出。把输入文本里的重复数据剔除然后输出。</p><h1 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h1><p>查看nginx的PV地址：</p><p>nginx一般会配置access.log日志文件，查询这个日志文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat access.log</span></span><br><span class="line"></span><br><span class="line">111.20.59.9 - - [25/Feb/2020:17:29:04 +0800] <span class="string">"GET /zabbix/favicon.ico HTTP/1.1"</span> 200 32988 <span class="string">"http://39.97.232.17/zabbix/zabbix.php?action=dashboard.view&amp;ddreset=1"</span> <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.1</span></span><br><span class="line"><span class="string">112</span></span><br></pre></td></tr></table></figure><p>分析日志结构，发现第一列是用户的RealIP，也就是这里的PV，后边是http请求头的一些参数。</p><p>按要求进行排序并降重：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat access.log | awk '&#123;print $1&#125;' | sort | uniq</span></span><br></pre></td></tr></table></figure><p>分析命令：第二段使用了awk进行了正则筛选，选中了第一列数据。将选中的数据进行升序和降重。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;sort和uniq是两个查看文件时候经常会用到的筛选工具。&lt;/p&gt;
+&lt;p&gt;sort：升序输出，将输入的文本以升序的方式进行输出。&lt;/p&gt;
+&lt;p&gt;uniq：降重输出。把输入文本里的重复数据剔除然后输出。&lt;/p&gt;
+&lt;h1 id=&quot;面试常见问题&quot;&gt;&lt;a href=&quot;#面试常见问题
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面试常见问题/rsync和scp</title>
+    <link href="http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/"/>
+    <id>http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/</id>
+    <published>2020-03-08T12:19:13.562Z</published>
+    <updated>2020-02-27T11:00:11.118Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="rsync和scp"><a href="#rsync和scp" class="headerlink" title="rsync和scp"></a>rsync和scp</h1><p>rsync是一种常见的征粮备份工具，scp常被用做文件传输。</p><h2 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h2><p>可以进行软硬连接的拷贝。这个文件传输的方式是同步。</p><p>同步的过程中，如果从机的相关目录存在，那reync会惊醒数据比较，对数据不同的进行更新。</p><h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p>scp不支持连接的传输。传输方式是复制。</p><p>复制的过程中，如果从机存在相关的目录，会直接进行覆盖复制。</p><p><strong>从上边综合考虑，rsync更适合于文件同步，scp更适合于文件传输。</strong></p><h1 id="大集群管理方案"><a href="#大集群管理方案" class="headerlink" title="大集群管理方案"></a>大集群管理方案</h1><ol><li>使用跳板机（这里可以使用jumpserver，开源），对集群进行统一管理</li><li>使用自动化工具（ansible）</li><li>运维安全：一般关闭selinux和firewalld，使用物理防火墙</li></ol><h1 id="Toncat和Resin"><a href="#Toncat和Resin" class="headerlink" title="Toncat和Resin"></a>Toncat和Resin</h1><p>Tomcat是很常用的一种java web服务器，用户多，适合于中小型企业。兼容性好，文献多。</p><p>Resin性能更好，常被大型企业采用。</p><h1 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h1><p>解析服从三个优先级：</p><ol><li>查看自身的hosts文件</li><li>在本地设置的DNS服务器解析</li><li>在跟服务器中解析（先查一级根服务器，再查二级根服务器）</li></ol><h1 id="keepalived原理"><a href="#keepalived原理" class="headerlink" title="keepalived原理"></a>keepalived原理</h1><p>再虚拟路由中，Master一直发送VRRP，BACKUP不会抢占VIP，当Master宕机时，BACKUP直接按照优先级抢占VIP。</p><h1 id="LVS原理"><a href="#LVS原理" class="headerlink" title="LVS原理"></a>LVS原理</h1><ol><li><p>NAT模式<br>均衡器收到请求，将请求的目的IP转向RS。回传报文的适合，将RS的IP换成均衡器的IP。<br>优点：只需要均衡器有IP。<br>缺点：服务器过多时效率变低。</p></li><li><p>路由模式（DR）<br>LVS做了调度器，请求发送到LVS上，LVS调度转发到RS上，RS直接返回数据，不经过LVS。<br>LVS的网卡和RS服务器的网卡需要再一个网段上。</p></li><li><p>隧道模式（TUN）<br>多地多中心方案的调度器。此时的VIP，DIP和RIP都是公网IP。客户向VIP发送请求，调度器将请求转发给RS。<br>缺点：服务器局限部分linux系统</p></li></ol><h1 id="MySQL复制延迟问题"><a href="#MySQL复制延迟问题" class="headerlink" title="MySQL复制延迟问题"></a>MySQL复制延迟问题</h1><ol><li>主从硬件差异</li><li>主从线程不匹配</li><li>SQL赘余</li><li>网络延迟</li><li>主库压力大</li></ol><h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><p>栈： 先入后出，只可末尾单端操作。</p><p>队列： 先入先出，单端入，单端出。</p><h1 id="ping原理"><a href="#ping原理" class="headerlink" title="ping原理"></a>ping原理</h1><p>用icmp协议探测远端请求是否可达。</p><h1 id="LNMP卡顿现象排查"><a href="#LNMP卡顿现象排查" class="headerlink" title="LNMP卡顿现象排查"></a>LNMP卡顿现象排查</h1><ol><li>检查服务器的硬件负载（方案：查看MySQL负载，如果MySQL也能正常，那就可以考虑提升设备性能）</li><li>检查服务器的网口负载（方案：使用CDN，加大宽带）</li><li>检查Nginx连接、进程数量（方案：修改Nginx配置，适配于本设备硬件）</li><li>查看php-fpm进程（方案：修改php.ini配置文件）</li><li>查看MySQL负载，查日志（方案：拆日志，加redis等缓存技术）</li></ol><h1 id="MySQL查询慢"><a href="#MySQL查询慢" class="headerlink" title="MySQL查询慢"></a>MySQL查询慢</h1><ol><li>没有索引</li><li>I/O小</li><li>内存不足</li><li>网速较慢（也有外网连接的mysql）</li><li>数据量过大</li><li>死锁</li><li>返回了不必要列</li><li>没优化好</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;rsync和scp&quot;&gt;&lt;a href=&quot;#rsync和scp&quot; class=&quot;headerlink&quot; title=&quot;rsync和scp&quot;&gt;&lt;/a&gt;rsync和scp&lt;/h1&gt;&lt;p&gt;rsync是一种常见的征粮备份工具，scp常被用做文件传输。&lt;/p&gt;
+&lt;h2 id=
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</title>
+    <link href="http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+    <published>2020-03-08T12:19:13.557Z</published>
+    <updated>2020-02-21T06:21:32.414Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol><li>工作在七层，对http协议做分流</li><li>对网络依赖较小</li><li>安装和配置简单</li><li>抗压</li><li>适合做web应用服务器</li><li>做中层反向代理服务器</li></ol><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol><li>仅支持http和https及邮箱协议</li><li>对于后端服务器稳定性要求较高。上传数据时如果后端服务器宕机，Nginx会直接切换后端服务器。</li></ol><h1 id="LVS"><a href="#LVS" class="headerlink" title="LVS"></a>LVS</h1><p>LVS时一种运行在四层协议上的调度器。</p><h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><ol><li>抗高压</li><li>配置简单</li><li>工作在四层，基本可以转发所有数据</li><li>工作更稳定</li><li>LVS只负责分发</li></ol><h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><ol><li>不支持正则，不能做web动静分离</li><li>网站系统过于庞大</li></ol><h1 id="Haproxy"><a href="#Haproxy" class="headerlink" title="Haproxy"></a>Haproxy</h1><p>这是一种工作在四/七层的代理软件。</p><h2 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h2><ol><li>支持虚拟主机</li><li>可以保持session和cookie</li><li>速度更快</li><li>可对MySQL做读写负载均衡</li><li>策略更多</li></ol><h2 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h2><ol><li>不支持POP/SMTP协议</li><li>不支持SPDY协议</li><li>不支持HTTP cache</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Nginx&quot;&gt;&lt;a href=&quot;#Nginx&quot; class=&quot;headerlink&quot; title=&quot;Nginx&quot;&gt;&lt;/a&gt;Nginx&lt;/h1&gt;&lt;p&gt;Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。&lt;/p&gt;
+&lt;h2 id=&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基础服务/定期执行命令</title>
+    <link href="http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/"/>
+    <id>http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/</id>
+    <published>2020-03-08T12:19:13.537Z</published>
+    <updated>2019-12-15T08:17:07.457Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>一般情况下，服务器需要定期执行一些命令。这些命令不可能每次都手动执行，所以咱们就要用到自动执行的工具。</p></blockquote><p>工具名：crontab</p><p>crontab定义命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure><p>此时会打开crontab的配置文件，文件格式如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure><p>配置文件解析：</p><p>第一个<em>：执行命令的时参数，若写成</em>/2则表示每两个小时执行一次。</p><p>第二个<em>：执行命令的分参数，若写成</em>/30则表示每30分钟执行一次。</p><p>第三个*：执行命令的日参数，表示几号执行。这个参数可以是多个，用逗号隔开。</p><p>第四个*：执行命令的月参数，表示几月执行。这个参数可以是多个，用逗号隔开。</p><p>第五个*：执行命令的星期参数，表示周几执行。这个参数可以是多个，用逗号隔开。</p><p>如果这里是五个*，则表示这个命令一直执行。</p><p>command参数：即是命令参数。参数可以是shell脚本，但是要写成bash命令。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;一般情况下，服务器需要定期执行一些命令。这些命令不可能每次都手动执行，所以咱们就要用到自动执行的工具。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;工具名：crontab&lt;/p&gt;
+&lt;p&gt;crontab定义命令：&lt;/p&gt;
+&lt;figure class=&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基础服务/ssh配置</title>
+    <link href="http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/"/>
+    <id>http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/</id>
+    <published>2020-03-08T12:19:13.529Z</published>
+    <updated>2020-02-29T16:45:12.405Z</updated>
+    
+    <content type="html"><![CDATA[<p>SSH服务是Linux的远程命令行服务。一般情况下，Linux系统默认会安装这个服务，我们只需要修改相关的配置。</p><h1 id="多网卡设置"><a href="#多网卡设置" class="headerlink" title="多网卡设置"></a>多网卡设置</h1><p>服务器通常不止有一个网卡，每个网卡的业务不同，所以就需要指定一个网卡做ssh服务。</p><p>在/etc/ssh/下，修改sshd_config服务配置文件。</p><p>添加ListenAddress，绑定到网卡的IP上。</p><h1 id="业务端口绑定"><a href="#业务端口绑定" class="headerlink" title="业务端口绑定"></a>业务端口绑定</h1><p>在上述文件中添加Port参数。</p><p>在默认情况下这个文件这个文件大部分是被注释掉的，所以我们需要手动进行配置。</p><h1 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h1><p>免密登录就是使用密钥进行登录。</p><p>首先创建一下public_key</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ssh]<span class="comment"># ssh-keygen </span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/root/.ssh/id_rsa): </span><br><span class="line">Created directory <span class="string">'/root/.ssh'</span>.</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:63gG1/fyrxc7qJBNKAZ1QPUAgqB7fMX9nr85reoPt8I root@localhost.localdomain</span><br><span class="line">The key<span class="string">'s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 2048]----+</span></span><br><span class="line"><span class="string">| .. ...=++       |</span></span><br><span class="line"><span class="string">|.  . .o.. o      |</span></span><br><span class="line"><span class="string">|.    .o .  .     |</span></span><br><span class="line"><span class="string">| o   ..  ..      |</span></span><br><span class="line"><span class="string">|. o .  oSo..     |</span></span><br><span class="line"><span class="string">| . .  o oo=..  . |</span></span><br><span class="line"><span class="string">|       o.++o.o. o|</span></span><br><span class="line"><span class="string">|       oo E+o+oo.|</span></span><br><span class="line"><span class="string">|      .o..o=O*o+o|</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure><p>将密钥分发到要连接的服务器上：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ssh]<span class="comment"># ssh-copy-id root@0.0.0.0</span></span><br></pre></td></tr></table></figure><p>这样就直接使用ssh连接到服务器了。</p><h1 id="SCP协议"><a href="#SCP协议" class="headerlink" title="SCP协议"></a>SCP协议</h1><p>这里会经常使用SCP协议，传输文件数据。使用的通道也是SSH的通道。使用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp file root@0.0.0.0:path</span><br></pre></td></tr></table></figure><p>这样就将数据传输到指定的服务器上。</p><h1 id="生产环境案例"><a href="#生产环境案例" class="headerlink" title="生产环境案例"></a>生产环境案例</h1><p>通常情况下，生产环境是会禁用掉远程ssh连接root账户的（处于安全考虑），既是使用root远程ssh也会使用跳板机。这里说一下ssh的配置。</p><p>防止被扫描端口后进行端口直接攻击，需要改变ssh的端口号：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Port 222</span><br></pre></td></tr></table></figure><p>限制连接数和密码尝试次数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MaxAuthTries 3 #最大尝试次数</span><br><span class="line">MaxSessions 5 #最大连接数</span><br></pre></td></tr></table></figure><p>禁用ssh远程登录root</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin no</span><br></pre></td></tr></table></figure><p>这样就基本保了服务器的ssh安全。</p><h1 id="ssh同步"><a href="#ssh同步" class="headerlink" title="ssh同步"></a>ssh同步</h1><p>在某些情况下，需要进行ssh协同工作，有时候需要一起在一个终端上进行操作，那么这里就用到了screen工具。</p><p>使用yum安装。</p><p>创建一个screen</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -S linux</span><br></pre></td></tr></table></figure><p>在另一个终端直接使用screen -x就可以直接接入这个共享的连接上了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;SSH服务是Linux的远程命令行服务。一般情况下，Linux系统默认会安装这个服务，我们只需要修改相关的配置。&lt;/p&gt;
+&lt;h1 id=&quot;多网卡设置&quot;&gt;&lt;a href=&quot;#多网卡设置&quot; class=&quot;headerlink&quot; title=&quot;多网卡设置&quot;&gt;&lt;/a&gt;多网卡设置&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基础服务/SAMBA服务</title>
+    <link href="http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/</id>
+    <published>2020-03-08T12:19:13.520Z</published>
+    <updated>2019-12-15T08:17:07.447Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>SAMBA服务可以搭建网上邻居服务器，可共享一些硬件设备。</p></blockquote><h1 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h1><p>安装必要软件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba samba-client samba-common</span><br></pre></td></tr></table></figure><p>配置一下samba的配置信息，位置/etc/samba/smb.conf</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">        workgroup &#x3D; SAMBA</span><br><span class="line">        security &#x3D; user</span><br><span class="line"></span><br><span class="line">        passdb backend &#x3D; tdbsam</span><br><span class="line"></span><br><span class="line">        printing &#x3D; cups</span><br><span class="line">        printcap name &#x3D; cups</span><br><span class="line">        load printers &#x3D; yes</span><br><span class="line">        cups options &#x3D; raw</span><br><span class="line">[print$]</span><br><span class="line">        comment &#x3D; Printer Drivers</span><br><span class="line">        path &#x3D; &#x2F;var&#x2F;lib&#x2F;samba&#x2F;drivers</span><br><span class="line">        write list &#x3D; @printadmin root</span><br><span class="line">        force group &#x3D; @printadmin</span><br><span class="line">        create mask &#x3D; 0664</span><br><span class="line">        directory mask &#x3D; 0775</span><br></pre></td></tr></table></figure><h1 id="global全局配置模块"><a href="#global全局配置模块" class="headerlink" title="global全局配置模块"></a>global全局配置模块</h1><p>workgroup：工作组</p><p>log file：日志文件，文件名可用变量。</p><p>max log size：最大日志大小。</p><p>security：</p><ul><li>share：无密码分享</li><li>user：使用服务器本地的账户密码</li><li>domain：使用外部密码数据库</li></ul><p>passdb backend：密码数据库格式。</p><h1 id="共享文件模块"><a href="#共享文件模块" class="headerlink" title="共享文件模块"></a>共享文件模块</h1><p>comment：目录说明。</p><p>path：共享目录位置。</p><p>browseable：可浏览。</p><p>writeable：可写。</p><h1 id="无密码共享"><a href="#无密码共享" class="headerlink" title="无密码共享"></a>无密码共享</h1><p>在samba 4.2.0 版本之后不再兼容3.0 的版本， 该参数无法兼容security=share，所以无法搭建无密码共享。</p><h1 id="需密码共享"><a href="#需密码共享" class="headerlink" title="需密码共享"></a>需密码共享</h1><p>security写user参数，认证密码是本地密码，</p><p>在配置文件创建共享目录，用<code>testparm -v</code>测试配置文件。没有问题之后启动服务。</p><p>进行本地测试,校验本地配置文件正确性。</p><h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><p>首先添加本地账户和密码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -G users smb1</span><br><span class="line"><span class="built_in">echo</span> 123456 | passwd --stdin smb1</span><br></pre></td></tr></table></figure><p>添加samba账户</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdbedit -a -u smb1</span><br></pre></td></tr></table></figure><p>会要求设置密码，密码是登录samba的密码。</p><p>创建号后重启服务，用本地测试一下连接。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bash# smbclient -L &#x2F;&#x2F;127.0.0.1  -U smb1</span><br><span class="line">Enter SAMBA\smb1&#39;s password:</span><br><span class="line"></span><br><span class="line">        Sharename       Type      Comment</span><br><span class="line">        ---------       ----      -------</span><br><span class="line">        temp            Disk      test</span><br><span class="line">        IPC$            IPC       IPC Service (Samba 4.9.1)</span><br><span class="line">Reconnecting with SMB1 for workgroup listing.</span><br><span class="line"></span><br><span class="line">        Server               Comment</span><br><span class="line">        ---------            -------</span><br><span class="line"></span><br><span class="line">        Workgroup            Master</span><br><span class="line">        ---------            -------</span><br></pre></td></tr></table></figure><p>服务端配置完成。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;SAMBA服务可以搭建网上邻居服务器，可共享一些硬件设备。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;服务端安装&quot;&gt;&lt;a href=&quot;#服务端安装&quot; class=&quot;headerlink&quot; title=&quot;服务端安装&quot;&gt;&lt;/a&gt;服务端安装&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
