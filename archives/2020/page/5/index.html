@@ -347,28 +347,25 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/27/ansible/%E6%A8%A1%E5%9D%97/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E8%BF%9C%E7%A8%8B%E6%A8%A1%E5%9D%97/" >
             
-                <span>模块</span>
+                <span>python/远程模块</span>
         </a>
         <div class="abstract-content">
-            ansible 和 saltstack 相似，都是调用相关模块实现功能的，有一些模块是我们很常用的。
-这里调用模块的方法和 saltstack 不同，需要使用 -m 参数进行调用。
-ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试的，检查群内主机是否在线。
-123456789101112131415[root@k8s1 log]# ansible all -m ping 192.168.89.130 | SUCCESS &#x3D;&gt; &#123;    &quot;ansible_facts&quot;: &#123;        &quot;discove...
+            安装1pip intsall pexpect
+
+spawn方法spawn支持scp，ftp，ssh等协议。实例化spawn方法时传入连接的指令。
+expect方法侦测服务器返回的信息，侦测到以后代码向后执行。参数时侦测的关键字。
+sendline方法发送命令行。参数时要执行的命令。
+logfile参数pexpect方法的日志。及远程机返回信息保存的地方。
+
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/27</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
             
         </div>
     </article>
@@ -379,32 +376,26 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/27/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E7%B1%BB/" >
             
-                <span>主机管理</span>
+                <span>python/类</span>
         </a>
         <div class="abstract-content">
-            分组管理在大型集群里，机器会分为多个可用域，每个可用域做的业务也不相同，执行的命令和在集群中承担的角色也不同，那就需要进行分组管理。
-创建分组：在/etc/ansible/hosts文件下创建之际和组
-12[group]host
+            这篇笔记的术语都是按照Java的术语撰写的，这些术语基本可以通用
+类和咱们说的类时一个意思。类里包含有方法和参数。类实例化后生成一个对象，就是类的实例。
+创建类语法：
+12345class class_name():    def __init__(self):        构造方法    def 函数名(self):        方法内容
 
-这样就创建了一个管理组。
-需要注意，ansible是基于ssh的集群管理工具，默认的链接端口是22，如果主机的ssh端口被修改过，则在声明hosts的时候著名ssh的端口。
-有时候服务器的使用账户并非root，那就需要进行指定：
-12[group]host ansible_connection&#x3D;connect_method ansible_ssh_u...
+数据域类里边的数据，也是该类的特征特征之一。都储存在类的self中。
+构造方法构造方法是类里的init()函数，这个函数是创建对象时候被调用的。这个参数必须有一个形式参数self，就是类本身。除了self的参数都是传入的参数。
+构造方法如果添加...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/27</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
             
         </div>
     </article>
@@ -415,73 +406,24 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/27/ansible/ansible%E5%AE%89%E8%A3%85/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/" >
             
-                <span>ansible安装</span>
+                <span>python/用户输入</span>
         </a>
         <div class="abstract-content">
-            ansible是一个基于SSH协议的自动化运维工具，通常使用的时候需要给其他主机配置免密登录，且只需要安装控制端。
-安装在控制端安装依赖及主程序
-1234yum install epel-releaseyum install ansible
-
-
-
-也可以使用pip安装
-12pip install ansible
-
-
-
-安装好后进行主机配置和远程配置。
-在控制端配置/etc/ansible/hosts文件，在这个文件里可以使用ip，也可以使用hostname（那就需要使用hosts文件对主机进行解析或者DNS能进行解析）。
-
-生成SSH公钥，将公钥信息下发给被控制主机。
-12ssh-key...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/25/mysql/%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/" >
-            
-                <span>mysql/计算字段</span>
-        </a>
-        <div class="abstract-content">
-            我们的身份证号就是一个很常见的计算字段，在这个字段里包含了多个数据。一般情况下，计算字段都是由多字段数据拼接成的。
-拼接字段就是将对各字段进行文本拼接，达到表示更大数据的方法。
-
-这是demo1表的数据，咱们对标中数据进行一下连接。
-1SELECT CONCAT(username,password) FROM demo1;
-
+            常用输入方法输入和C语言的定义相同，就不赘述了。python使用input方法获取输入。
+12a = input('please enter')print(a)
 输出
+12please enter123123
 
-数学计算在一条记录中我们可以对字段进行数学运算，如下：
-12SELECT num1+num2 AS sumFROM demo2;
-
-返回了sum列，内容是num1+num2的结果。但是查看数据库，可以发现数据库内的列并没有被写入数据，说明这样的运算是一次性的。
-
+123是输入，但是这需要注意的是，input获取的是string型数据，所以不能用作数学运算。
+可以将输入的数据进行隐式转换，代码如下：
+123a = input('please enter')a = int(a)print(a)
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/25</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -494,20 +436,22 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/22/kubernetes/Pod%E8%B0%83%E5%BA%A6/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/" >
             
-                <span>kubernetes/Pod调度</span>
+                <span>python/条件语句</span>
         </a>
         <div class="abstract-content">
-            Pod并非已成不变的，在应用场景中会经常进行容器添加、删除和调度。调度是一个很繁琐的活，不可能全由人工进行操作，所以有RC、Deployment和ReplicaSet，控制副本调度。
-自动调度使用deployment或RC。
-创建一个基于deployment的自动调度：
-12345678910111213141516171819apiVersion: apps/v1kind: Deploymentmetadata:  name: nginxspec:  replicas: 3  selector:    matchLabels:      app: nginx  template:   ...
+            三种逻辑在程序设计方面，有三种常用的逻辑，分别是或、与、非。或用or，与用and，非用！。
+123456&gt;&gt;&gt; a = 1&gt;&gt;&gt; b = 0&gt;&gt;&gt; a and b0&gt;&gt;&gt; a or b1
+
+这里可以用int型数据，也可以是Boolean型。int型0是非，其他数据都是是。
+检查元素是否在列表在C语言中，只能通过轮询进行判断。python中可以直接用in语句进行判断,返回Boolean型参数。
+123456&gt;&gt;&gt; a = 1&gt;&gt;&gt; b = 0&gt;&gt;&gt; a and b0...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/22</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -520,27 +464,21 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/22/kubernetes/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >
             
-                <span>kubernetes/Pod生命周期</span>
+                <span>python/文件操作</span>
         </a>
         <div class="abstract-content">
-            Pod状态Pending：正在下载镜像，容器未启动。
-Running：镜像正常运行。
-Succeeded：容器内指令执行完成，容器不会被重启。
-Failed：容器运行出现错误。
-Unknown：未知的容器状态。
-Pod重启策略Always：默认。容器失败自动重启。
-OnFailure：容器终止运行，自动重启。
-Never：不关注容器状态直接重启。
-存活检测（LivenessProbe）k8s中提供了三种容器生存检测，分别是文件检测、TCP检测、HTTP检测
-文件检测使用命令检测容器内的文件是否存在，不存在则重新创建容器。
-1234567livenessProbe:      exec: ...
+            文件读取在进行数据持久化的过程中，经常会将数据储存到文本里，获取写入的数据那就需要读数据。
+在python中，常用的读数据的方法是先open再read，例子如下：
+12345def main():    with open("test.txt","r",encoding="UTF-8") as f:        print(f.read())if __name__ == '__main__':    main()
+这一段代码对文件进行了逐行的读取，并进行了逐行的输出。当然也可以直接使用open：
+12345def main():    f = open("test.txt",'r',e...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/22</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -553,20 +491,31 @@ Never：不关注容器状态直接重启。
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/20/mysql/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" >
             
-                <span>mysql/正则表达式</span>
+                <span>python/循环结构</span>
         </a>
         <div class="abstract-content">
-            在变成中会经常使用到正则表达式，在数据库的查询操作中也不例外，在数据库操作也有相关的正则表达式（后称正则）。
-字符匹配前便学习了%和_进行统配操作，但是有时候数据特殊，无法使用上述两种通配符进行过滤，那么就需要使用正则进行数据筛选。
-REGEXP语句，常用于修饰子句，对数据进行过滤，和like的使用方法相似。
-123456789mysql&gt; SELECT * FROM demo1    -&gt; WHERE username REGEXP &quot;ad&quot;    -&gt; ORDER BY username DESC;+----+----------+-------...
+            while循环语法：
+12while 测试条件：    条件语句
+
+这个语句没有变量自加法，所以有时候遍历需要自行设置循环变量。
+这个语句的执行原理是先进行判断，再执行后边的语句。如果条件不成立则跳出循环。
+测试条件可以是Boolean型，也可以是测试条件。
+循环内常用语句：
+break，可以直接跳出循环。
+
+continue，直接跳过后边的语句，到循环头重新执行。遍历列表列表是有长度的。如果把列表放到测试条件，则执行和长度相同的循环次数。
+for循环常用方法：
+12for 循环量 in 循环列表：    循环语句
+
+循环量是从循环列表依次取出的数据，可以再循环语句使用。
+注意：这里循环...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -579,19 +528,24 @@ REGEXP语句，常用于修饰子句，对数据进行过滤，和like的使用�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/20/mysql/%E6%95%B0%E6%8D%AE%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%AD%97%E5%85%B8/" >
             
-                <span>mysql/数据模糊匹配</span>
+                <span>python/字典</span>
         </a>
         <div class="abstract-content">
-            比如我们在用搜索引擎的时候，输入关键字到一半的时候搜索框下会返回一些类似关键字，在MySQL中也经常会用到这个东西。
-%通配符使用通配符时，不能使用等号筛选，需要使用LIKE关键字。
-12345678910mysql&gt; SELECT * FROM demo    -&gt; WHERE name LIKE &quot;demo%&quot;;+----+-------+| id | name  |+----+-------+|  1 | demo1 ||  2 | demo2 ||  3 | demo3 |+----+-------+3 rows in set (0.00 sec)...
+            字典定义字典类似于C语言的指针的集合，及一个键值对的集合。一个键对应一个内存空间，内存空间内的数据可以读写，但是键不能更改。
+定义方法1字典名 = &#123;key:value,......&#125;
+
+访问字典键值访问的语法：字典名[key]。返回key对应的value。
+123&gt;&gt;&gt; a = &#123;'b':1,'c':2&#125;&gt;&gt;&gt; print(a['b'])1
+同理，咱们在访问键值的时候可以进行重新赋值，则原value就被改变了。
+添加键值对没有特殊的语句，和访问键值的方法类似，但是传入key应该是新的key。
+123&gt;&g...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -604,43 +558,19 @@ REGEXP语句，常用于修饰子句，对数据进行过滤，和like的使用�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/19/Nginx%E8%B0%83%E4%BC%98/server%E5%9D%97%E5%92%8Clocation%E5%9D%97/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" >
             
-                <span>Nginx调优/server块和location块</span>
+                <span>python/多线程</span>
         </a>
         <div class="abstract-content">
-            多网卡服务器一般情况下，生产环境的服务器会有多张网卡，有些网卡是非业务网卡，为了给网卡减小负荷，我们就不能给这些网卡配置http服务。
-例：
-
-
-
-网卡
-IP
-
-
-
-eth0
-10.20.0.2
-
-
-eth1
-192.168.1.2
-
-
-eth2
-172.18.0.2
-
-
-eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证网络，无需配置http网络，那么在server块添加
-12listen 10.20.0.2:80listen 192.168.1.2:80
-
-尝试访问服务。发现前两个地址都能访问到，但是第三个网络无法访问。
-这种配置叫监听，就是让服务守候在指定I...
+            当前主流的服务器和电脑都是多核机器。多核的定义就是多个核心，可以同时独立的进行多个工作。如果使用常规方法的话，程序就会排队进行执行。如果有了多线程，那么程序就会同时进行相关操作，提高程序的效率。
+多进行多进行就是启动多个进程（process）来运行一段方法，比如这样：
+12345678910111213141516171819202122from multiprocessing import Processfrom os import getpidfrom random import randintfrom time import sleepdef download(file):    ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/19</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -653,18 +583,59 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/01/15/kubernetes/Pod/" >
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C/" >
             
-                <span>kubernetes/Pod</span>
+                <span>python/列表操作</span>
         </a>
         <div class="abstract-content">
-            Pod基本用法Pod时一个根容器，多个容器同时存在于Pod内。在定义Pod时候定义业务容器内容，语法如下：
-12345678910111213141516apiVersion: v1kind: Podmetadata:  name: myapp  labels:    name: myappspec:  containers:  - name: myapp    image: &lt;Image&gt;    resources:      limits:        memory: "128Mi"        cpu: "500m"    ports:      - contain...
+            列表的定义列表相当于C语言的数组，用以储存数据组。内存分配和C语言相同，分配连续的内存空间。
+语法列表名 = [元素1，元素2``````]
+用法列表和C语言用法有一些不同，可以对列表进行遍历打印，也可以一次性打印。
+1234a = [1,2,3]print(a)for i in a:    print(i)
+输出
+1234[1, 2, 3]123
+第一列是直接打印列表，下边是使用轮询进行输出。
+索引列表索引方法和C语言相同，使用列表名[索引]。
+12a = [1,2,3]print(a[2])
+
+输出：
+13
+注意：索引是从0开始的，第一个元素索引是0
+修改、添加和删除元素修改：直接取...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/01/15</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%87%BD%E6%95%B0/" >
+            
+                <span>python/函数</span>
+        </a>
+        <div class="abstract-content">
+            定义可以认为函数和java的方法一样，功能也相同，就是一个语句的集合。
+定义方法def 函数名(形参)
+    函数体形参和实参形参是形式参数，没有实际值，只在定义函数的时候才会用上。
+实参是实际参数，是实际值，在调用函数的时候用到。
+参数默认值在定义函数时，形参可以做预定义。写形参的时候写形参=数值就好了。当然，这样的参数也是可以传递实参的。
+返回值函数不但可以做方法集合，也可以做数值处理函数，类似于数学的f(x)。会有一个返回值。返回值用return，和C语言一样可返回字典、列表和数据。
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
             
@@ -674,7 +645,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2020/page/4/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/3/">3</a><a class="page-number" href="/archives/2020/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2020/page/6/">6</a><a class="page-number" href="/archives/2020/page/7/">7</a><a class="extend next" rel="next" href="/archives/2020/page/6/">NEXT &gt;</a>
+        <a class="extend prev" rel="prev" href="/archives/2020/page/4/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/3/">3</a><a class="page-number" href="/archives/2020/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2020/page/6/">6</a><a class="page-number" href="/archives/2020/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/11/">11</a><a class="extend next" rel="next" href="/archives/2020/page/6/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2286,24 +2257,6 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 110
@@ -2322,7 +2275,77 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2020/02/20/Go%E8%AF%AD%E8%A8%80/%E5%87%BD%E6%95%B0/" >Go语言/函数</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/jenkins/%E5%AE%89%E8%A3%85/" >jenkins/安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/jenkins/jenkins+github+nginx%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83/" >jenkins/jenkins+github+nginx实现静态资源自动发布</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" >流程控制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E7%BB%84/" >数组</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" >数据类型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E5%88%87%E7%89%87/" >数据切片</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8F%98%E9%87%8F/" >基础及变量</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E5%87%BD%E6%95%B0/" >函数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/docker/%E9%95%9C%E5%83%8F/" >镜像</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/docker/%E5%AE%B9%E5%99%A8/" >容器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/docker/%E6%95%B0%E6%8D%AE%E5%8D%B7/" >数据卷</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/docker/%E7%BD%91%E7%BB%9C/" >网络</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" >docker的安装和配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/ansible/%E6%A8%A1%E5%9D%97/" >模块</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/" >主机管理</a>
         </li>
     
     
@@ -2336,7 +2359,21 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/10/Go%E8%AF%AD%E8%A8%80/%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8F%98%E9%87%8F/" >Go语言/基础及变量</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/Linux%E6%98%AF%E5%A4%9A%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" >Linux基础/Linux是多用户操作系统</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/Linux%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/" >Linux基础/Linux的文件和目录</a>
         </li>
     
     
@@ -2350,7 +2387,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2020/02/11/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" >Go语言/数据类型</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/ansible/ansible%E5%AE%89%E8%A3%85/" >ansible安装</a>
         </li>
     
     
@@ -2364,7 +2401,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/11/Go%E8%AF%AD%E8%A8%80/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" >Go语言/流程控制</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/man%E5%B7%A5%E5%85%B7/" >Linux基础/man工具</a>
         </li>
     
     
@@ -2378,7 +2415,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2020/02/20/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E5%88%87%E7%89%87/" >Go语言/数据切片</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/ansible/playbook/" >playbook</a>
         </li>
     
     
@@ -2392,7 +2429,133 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/11/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E7%BB%84/" >Go语言/数组</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/vi%E7%BC%96%E8%BE%91%E5%99%A8/" >Linux基础/vi编辑器</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E6%A6%82%E5%BF%B5/" >Linux基础/文件概念</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%94%A8%E6%88%B7%E7%9A%84%E6%9D%83%E9%99%90/" >Linux基础/用户的权限</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/shell%E7%AE%80%E8%BF%B0/" >Linux基础/shell简述</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >Linux基础/压缩文件操作</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%A3%81%E7%9B%98%E5%8F%8A%E7%A3%81%E7%9B%98%E6%93%8D%E4%BD%9C/" >Linux基础/磁盘及磁盘操作</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/SSH%E6%A6%82%E5%BF%B5/" >Linux基础/SSH概念</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C1/" >Linux基础/网络操作1</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%A6%82%E8%AE%BA/" >Linux基础/网络概论</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C2/" >Linux基础/网络操作2</a>
         </li>
     
     
@@ -2406,216 +2569,87 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2020/02/20/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" >Nginx调优/Nginx反向代理</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/redis/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8F%8A%E5%93%A8%E5%85%B5/" >redis/redis主从复制及哨兵</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2020/02/11/jenkins/jenkins+github+nginx%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83/" >jenkins/jenkins+github+nginx实现静态资源自动发布</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E9%82%AE%E7%AE%B1%E6%A8%A1%E5%9D%97/" >python/邮箱模块</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2020/02/05/kubernetes/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/" >kubernetes/容器网络</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E8%BF%9C%E7%A8%8B%E6%A8%A1%E5%9D%97/" >python/远程模块</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2020/02/02/kubernetes/%E6%8E%A7%E5%88%B6%E5%99%A8/" >kubernetes/控制器</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/" >python/用户输入</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/29</span><a class="archive-post-title" href= "/2020/01/29/kubernetes/%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" >kubernetes/容器高级操作</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E7%B1%BB/" >python/类</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2020/01/27/ansible/playbook/" >playbook</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/" >python/条件语句</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2020/01/27/ansible/%E6%A8%A1%E5%9D%97/" >模块</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >python/文件操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2020/01/27/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/" >主机管理</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E5%AD%97%E5%85%B8/" >python/字典</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2020/01/25/mysql/%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/" >mysql/计算字段</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" >python/循环结构</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/22</span><a class="archive-post-title" href= "/2020/01/22/kubernetes/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" >kubernetes/Pod生命周期</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" >python/多线程</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/20</span><a class="archive-post-title" href= "/2020/01/20/mysql/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >mysql/正则表达式</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E5%87%BD%E6%95%B0/" >python/函数</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/20</span><a class="archive-post-title" href= "/2020/01/20/mysql/%E6%95%B0%E6%8D%AE%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D/" >mysql/数据模糊匹配</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C/" >python/列表操作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/19</span><a class="archive-post-title" href= "/2020/01/19/Nginx%E8%B0%83%E4%BC%98/server%E5%9D%97%E5%92%8Clocation%E5%9D%97/" >Nginx调优/server块和location块</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/xls%E8%A1%A8%E6%A0%BC/" >python/xls表格</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2020/01/15/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/" >kubernetes/术语和概念</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/time%E6%A8%A1%E5%9D%97/" >python/time模块</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/12</span><a class="archive-post-title" href= "/2020/01/12/mysql/%E6%95%B0%E6%8D%AE%E6%8E%92%E5%88%97/" >mysql/数据排列</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/psutil%E6%A8%A1%E5%9D%97/" >python/psutil模块</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/12</span><a class="archive-post-title" href= "/2020/01/12/mysql/%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95/" >mysql/数据索引</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/os%E6%A8%A1%E5%9D%97/" >python/os模块</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/12</span><a class="archive-post-title" href= "/2020/01/12/mysql/MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" >mysql/MySQL基础操作</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2020/01/04/kubernetes/%E4%B8%80%E9%94%AE%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/" >kubernetes/一键搭建k8s集群</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/26</span><a class="archive-post-title" href= "/2019/12/26/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%AE%89%E8%A3%85/" >Nginx调优/Nginx安装</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/IPy%E6%A8%A1%E5%9D%97/" >python/IPy模块</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/jenkins/%E5%AE%89%E8%A3%85/" >jenkins/安装</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/mysql/mysql%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8F%8A%E7%8B%AC%E5%86%99%E5%88%86%E7%A6%BB/" >mysql/mysql数据集群主从复制及独写分离</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/docker/%E6%95%B0%E6%8D%AE%E5%8D%B7/" >数据卷</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/docker/%E7%BD%91%E7%BB%9C/" >网络</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/docker/%E9%95%9C%E5%83%8F/" >镜像</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" >docker的安装和配置</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/docker/%E5%AE%B9%E5%99%A8/" >容器</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C2/" >Linux基础/网络操作2</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" >Linux基础/进程与进程管理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%A6%82%E8%AE%BA/" >Linux基础/网络概论</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E7%A3%81%E7%9B%98%E5%8F%8A%E7%A3%81%E7%9B%98%E6%93%8D%E4%BD%9C/" >Linux基础/磁盘及磁盘操作</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C1/" >Linux基础/网络操作1</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E6%96%87%E4%BB%B6%E6%A6%82%E5%BF%B5/" >Linux基础/文件概念</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E7%94%A8%E6%88%B7%E7%9A%84%E6%9D%83%E9%99%90/" >Linux基础/用户的权限</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/vi%E7%BC%96%E8%BE%91%E5%99%A8/" >Linux基础/vi编辑器</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >Linux基础/压缩文件操作</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/man%E5%B7%A5%E5%85%B7/" >Linux基础/man工具</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/shell%E7%AE%80%E8%BF%B0/" >Linux基础/shell简述</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/Linux%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/" >Linux基础/Linux的文件和目录</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/SSH%E6%A6%82%E5%BF%B5/" >Linux基础/SSH概念</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/Linux%E5%9F%BA%E7%A1%80/Linux%E6%98%AF%E5%A4%9A%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" >Linux基础/Linux是多用户操作系统</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/IPy%E6%A8%A1%E5%9D%97/" >python/IPy模块</a>
         </li>
     
     
@@ -2629,7 +2663,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/12/26/Nginx%E8%B0%83%E4%BC%98/Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" >Nginx调优/Nginx配置文件结构</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" >Linux基础/进程与进程管理</a>
         </li>
     
     
@@ -2643,7 +2677,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/01/27/ansible/ansible%E5%AE%89%E8%A3%85/" >ansible安装</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" >mysql/数据库基础</a>
         </li>
     
     
@@ -2657,7 +2691,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2019/12/26/Nginx%E8%B0%83%E4%BC%98/%E5%85%A8%E5%B1%80%E5%9D%97%E5%92%8Chttp%E5%9D%97/" >Nginx调优/全局块和http块</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" >mysql/MySQL基础操作</a>
         </li>
     
     
@@ -2671,7 +2705,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/01/22/kubernetes/Pod%E8%B0%83%E5%BA%A6/" >kubernetes/Pod调度</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/mysql%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8F%8A%E7%8B%AC%E5%86%99%E5%88%86%E7%A6%BB/" >mysql/mysql数据集群主从复制及独写分离</a>
         </li>
     
     
@@ -2685,7 +2719,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/01/15/kubernetes/Pod/" >kubernetes/Pod</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E6%8E%92%E5%88%97/" >mysql/数据排列</a>
         </li>
     
     
@@ -2699,35 +2733,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/01/31/kubernetes/Service/" >kubernetes/Service</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/01/kubernetes/kube-api/" >kubernetes/kube-api</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/01/11/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" >mysql/数据库基础</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D/" >mysql/数据模糊匹配</a>
         </li>
     
     
@@ -2741,36 +2747,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/07</span><a class="archive-post-title" href= "/2020/03/07/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DNS%E6%9C%8D%E5%8A%A1/" >基础服务/DNS服务</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2020/02/27/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/" >面试常见问题/rsync和scp</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/24</span><a class="archive-post-title" href= "/2020/02/24/zabbix/%E5%8A%A8%E4%BD%9C/" >zabbix/动作</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/os%E6%A8%A1%E5%9D%97/" >python/os模块</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/psutil%E6%A8%A1%E5%9D%97/" >python/psutil模块</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/" >mysql/计算字段</a>
         </li>
     
     
@@ -2784,7 +2761,21 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/01/12/mysql/%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE/" >mysql/过滤数据</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95/" >mysql/数据索引</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >mysql/正则表达式</a>
         </li>
     
     
@@ -2798,206 +2789,87 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/24</span><a class="archive-post-title" href= "/2020/02/24/zabbix/nginx%E7%9B%91%E6%8E%A7/" >zabbix/nginx监控</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DHCP%E6%9C%8D%E5%8A%A1/" >基础服务/DHCP服务</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2020/02/22/zabbix/%E7%9B%91%E6%8E%A7%E6%A8%A1%E6%9D%BF/" >zabbix/监控模板</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/Apache/" >基础服务/Apache</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2020/02/22/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >zabbix/zabbix环境搭建</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/RAID/" >储存技术/RAID</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2020/02/22/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/" >zabbix/几个重要术语</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/MooseFS%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" >储存技术/MooseFS分布式存储技术</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/21</span><a class="archive-post-title" href= "/2020/02/21/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/" >面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/LVM/" >储存技术/LVM</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/21</span><a class="archive-post-title" href= "/2020/02/21/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/lvs%E5%8E%9F%E7%90%86/" >基础服务/lvs原理</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/gluster%E5%88%86%E5%B8%83%E5%BC%8F%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/" >储存技术/gluster分布式储存技术</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2020/02/20/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/RAID/" >储存技术/RAID</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/zabbix/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/" >zabbix/资产管理</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2020/02/19/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/" >基础服务/ssh配置</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/zabbix/%E5%8A%A8%E4%BD%9C/" >zabbix/动作</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/17</span><a class="archive-post-title" href= "/2020/02/17/python/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" >python/多线程</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/zabbix/%E7%9B%91%E6%8E%A7%E6%A8%A1%E6%9D%BF/" >zabbix/监控模板</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/15</span><a class="archive-post-title" href= "/2020/02/15/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/gluster%E5%88%86%E5%B8%83%E5%BC%8F%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/" >储存技术/gluster分布式储存技术</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/" >zabbix/几个重要术语</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2020/02/02/python/django/%E6%A8%A1%E6%9D%BF/" >python/django/模板</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >zabbix/zabbix环境搭建</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2020/02/02/python/django/%E8%B7%AF%E7%94%B1%E5%8F%8AURL/" >python/django/路由及URL</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/zabbix/nginx%E7%9B%91%E6%8E%A7/" >zabbix/nginx监控</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2020/02/01/python/django/%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/" >python/django/基本应用</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/saltstack/sls%E5%89%A7%E6%9C%AC/" >saltstack/sls剧本</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/13</span><a class="archive-post-title" href= "/2020/01/13/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8F%8A%E7%A3%81%E7%9B%98/" >虚拟化（KVM）/虚拟化及磁盘</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/saltstack/saltstack%E6%A8%A1%E5%9D%97/" >saltstack/saltstack模块</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/13</span><a class="archive-post-title" href= "/2020/01/13/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/" >虚拟化（KVM）/网络虚拟化</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/saltstack/saltstack%E5%AE%89%E8%A3%85/" >saltstack/saltstack安装</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/13</span><a class="archive-post-title" href= "/2020/01/13/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/KVM%E6%A6%82%E5%BF%B5/" >虚拟化（KVM）/KVM概念</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/saltstack/grains/" >saltstack/grains</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/13</span><a class="archive-post-title" href= "/2020/01/13/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/" >虚拟化（KVM）/CPU虚拟及内存虚拟</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2019 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/nfs/" >基础服务/nfs</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/" >基础服务/定期执行命令</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/" >基础服务/SAMBA服务</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/NTP%E6%9C%8D%E5%8A%A1/" >基础服务/NTP服务</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/haproxy/" >基础服务/haproxy</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/FTP%E6%9C%8D%E5%8A%A1/" >基础服务/FTP服务</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/saltstack/saltstack%E5%AE%89%E8%A3%85/" >saltstack/saltstack安装</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/redis/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8F%8A%E5%93%A8%E5%85%B5/" >redis/redis主从复制及哨兵</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/saltstack/saltstack%E6%A8%A1%E5%9D%97/" >saltstack/saltstack模块</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DHCP%E6%9C%8D%E5%8A%A1/" >基础服务/DHCP服务</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E7%B1%BB/" >python/类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E8%BF%9C%E7%A8%8B%E6%A8%A1%E5%9D%97/" >python/远程模块</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E9%82%AE%E7%AE%B1%E6%A8%A1%E5%9D%97/" >python/邮箱模块</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/" >python/用户输入</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/" >python/条件语句</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E5%AD%97%E5%85%B8/" >python/字典</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >python/文件操作</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" >python/循环结构</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C/" >python/列表操作</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/time%E6%A8%A1%E5%9D%97/" >python/time模块</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/xls%E8%A1%A8%E6%A0%BC/" >python/xls表格</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2019/12/15/python/%E5%87%BD%E6%95%B0/" >python/函数</a>
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/mysql/%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE/" >mysql/过滤数据</a>
         </li>
     
     
@@ -3011,7 +2883,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/29/saltstack/grains/" >saltstack/grains</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >业务理论/灰度发布</a>
         </li>
     
     
@@ -3025,7 +2897,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/29/saltstack/sls%E5%89%A7%E6%9C%AC/" >saltstack/sls剧本</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/KVM%E6%A6%82%E5%BF%B5/" >虚拟化（KVM）/KVM概念</a>
         </li>
     
     
@@ -3039,7 +2911,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/20/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/LVM/" >储存技术/LVM</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/" >虚拟化（KVM）/网络虚拟化</a>
         </li>
     
     
@@ -3053,7 +2925,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/16/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/MooseFS%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" >储存技术/MooseFS分布式存储技术</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8F%8A%E7%A3%81%E7%9B%98/" >虚拟化（KVM）/虚拟化及磁盘</a>
         </li>
     
     
@@ -3067,7 +2939,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/24/zabbix/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/" >zabbix/资产管理</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/NTP%E6%9C%8D%E5%8A%A1/" >基础服务/NTP服务</a>
         </li>
     
     
@@ -3081,7 +2953,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/19/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/Apache/" >基础服务/Apache</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/" >虚拟化（KVM）/CPU虚拟及内存虚拟</a>
         </li>
     
     
@@ -3095,7 +2967,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/02/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >业务理论/灰度发布</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/FTP%E6%9C%8D%E5%8A%A1/" >基础服务/FTP服务</a>
         </li>
     
     
@@ -3109,7 +2981,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/26/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/rabbitMQ/" >基础服务/rabbitMQ</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/" >基础服务/SAMBA服务</a>
         </li>
     
     
@@ -3123,7 +2995,7 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/27/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/" >面试常见问题/uniq和sort</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DNS%E6%9C%8D%E5%8A%A1/" >基础服务/DNS服务</a>
         </li>
     
     
@@ -3137,7 +3009,286 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/02/02/python/django/%E6%95%B0%E6%8D%AE%E5%BA%93/" >python/django/数据库</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/haproxy/" >基础服务/haproxy</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/nfs/" >基础服务/nfs</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/lvs%E5%8E%9F%E7%90%86/" >基础服务/lvs原理</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/rabbitMQ/" >基础服务/rabbitMQ</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/" >基础服务/ssh配置</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/" >基础服务/定期执行命令</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/" >面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/" >面试常见问题/uniq和sort</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/" >面试常见问题/rsync和scp</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/Pod%E8%B0%83%E5%BA%A6/" >kubernetes/Pod调度</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" >kubernetes/Pod生命周期</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/Pod/" >kubernetes/Pod</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/django/%E6%95%B0%E6%8D%AE%E5%BA%93/" >python/django/数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/django/%E6%A8%A1%E6%9D%BF/" >python/django/模板</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/django/%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/" >python/django/基本应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/%E5%85%A8%E5%B1%80%E5%9D%97%E5%92%8Chttp%E5%9D%97/" >Nginx调优/全局块和http块</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/server%E5%9D%97%E5%92%8Clocation%E5%9D%97/" >Nginx调优/server块和location块</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" >Nginx调优/Nginx配置文件结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%AE%89%E8%A3%85/" >Nginx调优/Nginx安装</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" >Nginx调优/Nginx反向代理</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/Service/" >kubernetes/Service</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/" >kubernetes/容器网络</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/%E4%B8%80%E9%94%AE%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/" >kubernetes/一键搭建k8s集群</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/" >kubernetes/术语和概念</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/%E6%8E%A7%E5%88%B6%E5%99%A8/" >kubernetes/控制器</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" >kubernetes/容器高级操作</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/kubernetes/kube-api/" >kubernetes/kube-api</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2020/03/08/python/django/%E8%B7%AF%E7%94%B1%E5%8F%8AURL/" >python/django/路由及URL</a>
         </li>
     
     </div>
@@ -3145,9 +3296,11 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="自动化运维技术"><span class="iconfont-archer">&#xe606;</span>自动化运维技术</span>
+        <span class="sidebar-tag-name" data-tags="云计算开发技术"><span class="iconfont-archer">&#xe606;</span>云计算开发技术</span>
     
         <span class="sidebar-tag-name" data-tags="容器技术"><span class="iconfont-archer">&#xe606;</span>容器技术</span>
+    
+        <span class="sidebar-tag-name" data-tags="自动化运维技术"><span class="iconfont-archer">&#xe606;</span>自动化运维技术</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -3182,9 +3335,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="ansible"><span class="iconfont-archer">&#xe60a;</span>ansible</span>
+        <span class="sidebar-category-name" data-categories="Go语言"><span class="iconfont-archer">&#xe60a;</span>Go语言</span>
     
         <span class="sidebar-category-name" data-categories="docker"><span class="iconfont-archer">&#xe60a;</span>docker</span>
+    
+        <span class="sidebar-category-name" data-categories="ansible"><span class="iconfont-archer">&#xe60a;</span>ansible</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
