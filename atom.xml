@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Huck</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://39.97.232.17/"/>
+  <updated>2020-03-07T08:25:13.757Z</updated>
+  <id>http://39.97.232.17/</id>
+  
+  <author>
+    <name>Huck</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基础服务/DNS服务</title>
+    <link href="http://39.97.232.17/2020/03/07/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DNS%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://39.97.232.17/2020/03/07/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DNS%E6%9C%8D%E5%8A%A1/</id>
+    <published>2020-03-07T04:54:20.242Z</published>
+    <updated>2020-03-07T08:25:13.757Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="DNS服务器原理"><a href="#DNS服务器原理" class="headerlink" title="DNS服务器原理"></a>DNS服务器原理</h1><p>DNS服务器是对域名进行解析的服务器。当浏览器访问网页时，首先会给DNS服务器发送一个请求，解析到域名对应的IP上，然后浏览器对IP进行访问。</p><p>DNS服务器保存了解析的域名和IP，通常来说，这个解析是一一对应的。</p><p>客户端发起请求，首先会在客户端的hosts文件中查询是否有相关的解析，如果没有，将包含有域名的请求头转发给DNS服务器上。当DNS服务器上也查不到相关的解析时，就会将数据转发给根服务器进行数据解析，也可以将数据转发给forward进行解析。</p><h1 id="权威DNS和非权威DNS"><a href="#权威DNS和非权威DNS" class="headerlink" title="权威DNS和非权威DNS"></a>权威DNS和非权威DNS</h1><p>权威DNS是指官方的DNS服务器，这种服务器的解析数量大，且更为稳定。非权威DNS是指自己搭建的DNS服务器，一般是自己或公司使用，使用范围小，可承载的并发量不大的情况。</p><h1 id="根服务器"><a href="#根服务器" class="headerlink" title="根服务器"></a>根服务器</h1><p>目前全球有13个根DNS服务器。九台在美国，还有三台分别在英国，瑞士和日本。还有一台是主跟服务器（相当于根服务器的解析入口，从这被一层一层解析）。</p><h1 id="安装named服务"><a href="#安装named服务" class="headerlink" title="安装named服务"></a>安装named服务</h1><p>可以直接使用yum安装方式安装named</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install <span class="built_in">bind</span></span><br></pre></td></tr></table></figure><p>在默认情况下，named的配置文件会被分布到两个位置，一个是/etc下，一个是/var/named下。</p><p>对named进行基础参数配置。</p><p>编辑named.conf</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># vim /etc/named.conf</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">listen-on port 53 &#123; any; &#125;;</span><br><span class="line">...</span><br><span class="line">allow-query     &#123; any; &#125;;</span><br><span class="line">...</span><br><span class="line">recursion yes;</span><br><span class="line">forward first;</span><br><span class="line">forwarders &#123;</span><br><span class="line">223.5.5.5;</span><br><span class="line">223.6.6.6;</span><br><span class="line">8.8.8.8;</span><br><span class="line">8.8.4.4;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>分析一下上边的字段：</p><p>listen-on：监听，配置了监听端口和监听IP，通常使用any（所有网卡都进行监听），如果需要绑定到特定的ip，就直接在这里写。</p><p>allow-query：允许访问。一般默认情况这里只会允许localhost进行访问。可以改成any，亦可以写成ip的形式。</p><h1 id="创建正向解析"><a href="#创建正向解析" class="headerlink" title="创建正向解析"></a>创建正向解析</h1><p>观察named.conf文件，会发现有以下一段</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include &quot;&#x2F;etc&#x2F;named.rfc1912.zones&quot;;</span><br><span class="line">include &quot;&#x2F;etc&#x2F;named.root.key&quot;;</span><br></pre></td></tr></table></figure><p>不难看出，这里引入了两个文件。通常，第一个文件是zone的文件，第二个是用户密钥文件。查看zone文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat /etc/named.rfc1912.zones</span></span><br><span class="line"></span><br><span class="line">zone <span class="string">"localhost.localdomain"</span> IN &#123;</span><br><span class="line"><span class="built_in">type</span> master;</span><br><span class="line">file <span class="string">"named.localhost"</span>;</span><br><span class="line">allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"localhost"</span> IN &#123;</span><br><span class="line"><span class="built_in">type</span> master;</span><br><span class="line">file <span class="string">"named.localhost"</span>;</span><br><span class="line">allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa"</span> IN &#123;</span><br><span class="line"><span class="built_in">type</span> master;</span><br><span class="line">file <span class="string">"named.loopback"</span>;</span><br><span class="line">allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"1.0.0.127.in-addr.arpa"</span> IN &#123;</span><br><span class="line"><span class="built_in">type</span> master;</span><br><span class="line">file <span class="string">"named.loopback"</span>;</span><br><span class="line">allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"0.in-addr.arpa"</span> IN &#123;</span><br><span class="line"><span class="built_in">type</span> master;</span><br><span class="line">file <span class="string">"named.empty"</span>;</span><br><span class="line">allow-update &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>可以见得，上述的写法是相同的。都是创建一个zone块，然后对zone块进行参数配置。</p><p>type参数：字面意思，就是类型。通常设置master，作为主机。DNS的主从原理后边再说。</p><p>file参数：解析的文件，下边再说这个文件的写法和原理。</p><p>allow-update参数：这也是权限配置。</p><h1 id="解析类型及解析文件"><a href="#解析类型及解析文件" class="headerlink" title="解析类型及解析文件"></a>解析类型及解析文件</h1><p>查看一下前边的file，看看结构：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$TTL 3H</span><br><span class="line">@IN SOA@ rname.invalid. (</span><br><span class="line">0; serial</span><br><span class="line">1D; refresh</span><br><span class="line">1H; retry</span><br><span class="line">1W; expire</span><br><span class="line">3H ); minimum</span><br><span class="line">NS@</span><br><span class="line">A127.0.0.1</span><br><span class="line">AAAA::1</span><br></pre></td></tr></table></figure><p>这里插入一段前置知识：</p><table><thead><tr><th>解析类型</th><th>意义</th></tr></thead><tbody><tr><td>A</td><td>典型的IPV4解析，将域名指向这个IP</td></tr><tr><td>CNAME</td><td>解析到别名，和rewrite有点像</td></tr><tr><td>MX</td><td>邮箱解析，比如@qq.com这样的</td></tr><tr><td>TXT</td><td>为域名设置说明</td></tr><tr><td>NS</td><td>name server</td></tr></tbody></table><p><strong>需要注意：</strong>A解析和AAAA解析的区别：A解析和AAAA解析的作用是相同的，但是一个工作在IPV4网络下，一个工作在IPV6网络下。</p><p>按照上边的文件创建一个自己的解析文件：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$TTL 3H</span><br><span class="line">@IN SOA@ hzlslm.org.cn. (</span><br><span class="line">0; serial</span><br><span class="line">1D; refresh</span><br><span class="line">1H; retry</span><br><span class="line">1W; expire</span><br><span class="line">3H ); minimum</span><br><span class="line">IN NS     dns.test.com.</span><br><span class="line">IN MX  5  mail</span><br><span class="line">wwwINA47.112.118.26</span><br></pre></td></tr></table></figure><p>设置的生存时间是三小时，即三小时后会刷新DNS。</p><p>第一行的那一块是创建了这个域名的解析块，按这样写就好了。</p><p>最后一行，我创建了一个www的解析，这个解析格式如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">记录名IN解析方式解析值</span><br></pre></td></tr></table></figure><p>创建完毕后，可以使用named-checkconf进行配置校验。如果没问题的话就可以启动服务了。</p><h1 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h1><p>客户端一般是windows或者linux用户机。</p><p>windows：在网络和共享中心中直接修改DNS。</p><p>linux：修改resolve.conf文件。</p><p><strong>注意一点，如果要做外网的DNS非权威服务器，最好使用经典网络服务器，直接将IP分配给服务器，尽量不要使用DMZ的方式做内网映射。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;DNS服务器原理&quot;&gt;&lt;a href=&quot;#DNS服务器原理&quot; class=&quot;headerlink&quot; title=&quot;DNS服务器原理&quot;&gt;&lt;/a&gt;DNS服务器原理&lt;/h1&gt;&lt;p&gt;DNS服务器是对域名进行解析的服务器。当浏览器访问网页时，首先会给DNS服务器发送一个请求，
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>业务理论/灰度发布</title>
+    <link href="http://39.97.232.17/2020/03/02/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/"/>
+    <id>http://39.97.232.17/2020/03/02/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/</id>
+    <published>2020-03-02T09:10:23.906Z</published>
+    <updated>2020-03-02T09:28:29.288Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>灰度发布就是在黑和白之间发布网站。假设有一个黑区和白区。黑区使用旧版本的产品，白区发布新版本产品，然后对白区进行产品调研。如果白区没有什么意见，则可白区向黑区扩散。</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>beta和正式版。对特定用户推送beta版本产品，进行使用状况调研，然后根据调研逐渐将beta转化为正式版。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;p&gt;灰度发布就是在黑和白之间发布网站。假设有一个黑区和白区。黑区使用旧版本的产品，白区发布新版本产品，然后对白区进行产品调研。如果白区没有什么意
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>saltstack/grains</title>
+    <link href="http://39.97.232.17/2020/02/29/saltstack/grains/"/>
+    <id>http://39.97.232.17/2020/02/29/saltstack/grains/</id>
+    <published>2020-02-29T05:07:31.881Z</published>
+    <updated>2020-02-29T08:01:21.591Z</updated>
+    
+    <content type="html"><![CDATA[<p>在k8s中，我们常用taget对pod进行调度。在saltstack中也有一种方法进行主机选择。</p><h1 id="grains参数"><a href="#grains参数" class="headerlink" title="grains参数"></a>grains参数</h1><p>grains是salt获取主机的状态及信息的模块，我们可以直接进行调用。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">salt <span class="string">'*'</span> grains.item</span><br></pre></td></tr></table></figure><p>salt会收集所有的节点的所有信息，这个信息类似于k8s中的target。</p><p>和k8s一样，可以用这个东西进行主机选择。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">salt <span class="string">'*'</span> grains.item xxx</span><br></pre></td></tr></table></figure><p>这样就输出了指定的grains。</p><h1 id="创建自定义grains"><a href="#创建自定义grains" class="headerlink" title="创建自定义grains"></a>创建自定义grains</h1><p>grains的配置是存放在minion文件下的，我们直接修改这个文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grains:</span><br><span class="line">  key: value</span><br></pre></td></tr></table></figure><p>这样就创建了一个自定义grains。</p><p>创建自定义后，一定要重启minion，加载这个grains。</p><h1 id="使用grains"><a href="#使用grains" class="headerlink" title="使用grains"></a>使用grains</h1><p>在执行salt的时候，添加-G参数</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">salt -G <span class="string">'nodenum:1'</span> test.ping</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在k8s中，我们常用taget对pod进行调度。在saltstack中也有一种方法进行主机选择。&lt;/p&gt;
+&lt;h1 id=&quot;grains参数&quot;&gt;&lt;a href=&quot;#grains参数&quot; class=&quot;headerlink&quot; title=&quot;grains参数&quot;&gt;&lt;/a&gt;grains
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>saltstack/sls剧本</title>
+    <link href="http://39.97.232.17/2020/02/29/saltstack/sls%E5%89%A7%E6%9C%AC/"/>
+    <id>http://39.97.232.17/2020/02/29/saltstack/sls%E5%89%A7%E6%9C%AC/</id>
+    <published>2020-02-28T16:55:31.778Z</published>
+    <updated>2020-02-28T17:13:04.049Z</updated>
+    
+    <content type="html"><![CDATA[<p>saltstack是一种自动化运维工具，主要体现出自动化就是使用剧本自动部署。下边引入几个概念：</p><ol><li>file_root 这表示文件根的地址。这个目录下存放工具使用的剧本文件。</li><li>state模块 这是salt的状态模块，可以用来安装服务和获取服务状态。</li><li>highstate 高级模式。通常在file_root下存放的是以目录存放的剧本，使用一个top.sls文件引导剧本的入口。</li></ol><h1 id="编写一个简单的剧本"><a href="#编写一个简单的剧本" class="headerlink" title="编写一个简单的剧本"></a>编写一个简单的剧本</h1><p>在编写第一个剧本之前，先修改和创建一个剧本存放目录：</p><p>在master的配置文件中，将file_root的配置字段取消注释。注意，这里一定要包含一个bash字段。这个此段表示文件基础地址。</p><p>创建剧本目录。这个目录多半是不会自动创建的，需要手动创建。权限不需要特别的去设置，默认权限就可以了。</p><p>创建剧本的时候，最好使用目录分类保存，这样更便于剧本管理。</p><p>在剧本目录中创建一个新的剧本：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tomcat-install:</span></span><br><span class="line">  <span class="attr">pkg.installed:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">names:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">tomcat</span></span><br><span class="line"></span><br><span class="line"><span class="attr">tomcat-service:</span></span><br><span class="line">  <span class="attr">service.running:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">tomcat</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">enable:</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure><p>这个剧本在集群中自动安装了tomcat服务，并自动启动了tomcat，并把tomcat设置了自动启动。</p><p>使用salt分发剧本并执行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">salt <span class="string">'*'</span> state.sls web.tomcat</span><br></pre></td></tr></table></figure><p>等待执行完毕会回复成功。</p><h2 id="常见故障"><a href="#常见故障" class="headerlink" title="常见故障"></a>常见故障</h2><p>如果剧本在编写过程中写错了单词，那么salt肯定是不会执行剧本的，master会显示minion无返回的报错。这种情况仔细检查一下剧本是否有错误。</p><h1 id="使用高级模式"><a href="#使用高级模式" class="headerlink" title="使用高级模式"></a>使用高级模式</h1><p>在base目录下创建一个top.sls文件，编写主机执行选择：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">base:</span></span><br><span class="line">  <span class="string">'*'</span><span class="string">:</span></span><br><span class="line">    <span class="string">web.tomcat</span></span><br></pre></td></tr></table></figure><p>这样指定了在base环境下，所有主机都执行web.tomcat的剧本。</p><p>使用高级模式进行剧本执行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">salt <span class="string">'*'</span> state.highstate</span><br></pre></td></tr></table></figure><p>和前边一样，剧本执行完毕后会返回相关的参数。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;saltstack是一种自动化运维工具，主要体现出自动化就是使用剧本自动部署。下边引入几个概念：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;file_root 这表示文件根的地址。这个目录下存放工具使用的剧本文件。&lt;/li&gt;
+&lt;li&gt;state模块 这是salt的状态模块，可以用来安装服务
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面试常见问题/rsync和scp</title>
+    <link href="http://39.97.232.17/2020/02/27/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/"/>
+    <id>http://39.97.232.17/2020/02/27/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/</id>
+    <published>2020-02-27T06:31:24.247Z</published>
+    <updated>2020-02-27T11:00:11.118Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="rsync和scp"><a href="#rsync和scp" class="headerlink" title="rsync和scp"></a>rsync和scp</h1><p>rsync是一种常见的征粮备份工具，scp常被用做文件传输。</p><h2 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h2><p>可以进行软硬连接的拷贝。这个文件传输的方式是同步。</p><p>同步的过程中，如果从机的相关目录存在，那reync会惊醒数据比较，对数据不同的进行更新。</p><h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p>scp不支持连接的传输。传输方式是复制。</p><p>复制的过程中，如果从机存在相关的目录，会直接进行覆盖复制。</p><p><strong>从上边综合考虑，rsync更适合于文件同步，scp更适合于文件传输。</strong></p><h1 id="大集群管理方案"><a href="#大集群管理方案" class="headerlink" title="大集群管理方案"></a>大集群管理方案</h1><ol><li>使用跳板机（这里可以使用jumpserver，开源），对集群进行统一管理</li><li>使用自动化工具（ansible）</li><li>运维安全：一般关闭selinux和firewalld，使用物理防火墙</li></ol><h1 id="Toncat和Resin"><a href="#Toncat和Resin" class="headerlink" title="Toncat和Resin"></a>Toncat和Resin</h1><p>Tomcat是很常用的一种java web服务器，用户多，适合于中小型企业。兼容性好，文献多。</p><p>Resin性能更好，常被大型企业采用。</p><h1 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h1><p>解析服从三个优先级：</p><ol><li>查看自身的hosts文件</li><li>在本地设置的DNS服务器解析</li><li>在跟服务器中解析（先查一级根服务器，再查二级根服务器）</li></ol><h1 id="keepalived原理"><a href="#keepalived原理" class="headerlink" title="keepalived原理"></a>keepalived原理</h1><p>再虚拟路由中，Master一直发送VRRP，BACKUP不会抢占VIP，当Master宕机时，BACKUP直接按照优先级抢占VIP。</p><h1 id="LVS原理"><a href="#LVS原理" class="headerlink" title="LVS原理"></a>LVS原理</h1><ol><li><p>NAT模式<br>均衡器收到请求，将请求的目的IP转向RS。回传报文的适合，将RS的IP换成均衡器的IP。<br>优点：只需要均衡器有IP。<br>缺点：服务器过多时效率变低。</p></li><li><p>路由模式（DR）<br>LVS做了调度器，请求发送到LVS上，LVS调度转发到RS上，RS直接返回数据，不经过LVS。<br>LVS的网卡和RS服务器的网卡需要再一个网段上。</p></li><li><p>隧道模式（TUN）<br>多地多中心方案的调度器。此时的VIP，DIP和RIP都是公网IP。客户向VIP发送请求，调度器将请求转发给RS。<br>缺点：服务器局限部分linux系统</p></li></ol><h1 id="MySQL复制延迟问题"><a href="#MySQL复制延迟问题" class="headerlink" title="MySQL复制延迟问题"></a>MySQL复制延迟问题</h1><ol><li>主从硬件差异</li><li>主从线程不匹配</li><li>SQL赘余</li><li>网络延迟</li><li>主库压力大</li></ol><h1 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h1><p>栈： 先入后出，只可末尾单端操作。</p><p>队列： 先入先出，单端入，单端出。</p><h1 id="ping原理"><a href="#ping原理" class="headerlink" title="ping原理"></a>ping原理</h1><p>用icmp协议探测远端请求是否可达。</p><h1 id="LNMP卡顿现象排查"><a href="#LNMP卡顿现象排查" class="headerlink" title="LNMP卡顿现象排查"></a>LNMP卡顿现象排查</h1><ol><li>检查服务器的硬件负载（方案：查看MySQL负载，如果MySQL也能正常，那就可以考虑提升设备性能）</li><li>检查服务器的网口负载（方案：使用CDN，加大宽带）</li><li>检查Nginx连接、进程数量（方案：修改Nginx配置，适配于本设备硬件）</li><li>查看php-fpm进程（方案：修改php.ini配置文件）</li><li>查看MySQL负载，查日志（方案：拆日志，加redis等缓存技术）</li></ol><h1 id="MySQL查询慢"><a href="#MySQL查询慢" class="headerlink" title="MySQL查询慢"></a>MySQL查询慢</h1><ol><li>没有索引</li><li>I/O小</li><li>内存不足</li><li>网速较慢（也有外网连接的mysql）</li><li>数据量过大</li><li>死锁</li><li>返回了不必要列</li><li>没优化好</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;rsync和scp&quot;&gt;&lt;a href=&quot;#rsync和scp&quot; class=&quot;headerlink&quot; title=&quot;rsync和scp&quot;&gt;&lt;/a&gt;rsync和scp&lt;/h1&gt;&lt;p&gt;rsync是一种常见的征粮备份工具，scp常被用做文件传输。&lt;/p&gt;
+&lt;h2 id=
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面试常见问题/uniq和sort</title>
+    <link href="http://39.97.232.17/2020/02/27/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/"/>
+    <id>http://39.97.232.17/2020/02/27/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/</id>
+    <published>2020-02-27T06:21:27.709Z</published>
+    <updated>2020-02-27T06:30:16.811Z</updated>
+    
+    <content type="html"><![CDATA[<p>sort和uniq是两个查看文件时候经常会用到的筛选工具。</p><p>sort：升序输出，将输入的文本以升序的方式进行输出。</p><p>uniq：降重输出。把输入文本里的重复数据剔除然后输出。</p><h1 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h1><p>查看nginx的PV地址：</p><p>nginx一般会配置access.log日志文件，查询这个日志文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat access.log</span></span><br><span class="line"></span><br><span class="line">111.20.59.9 - - [25/Feb/2020:17:29:04 +0800] <span class="string">"GET /zabbix/favicon.ico HTTP/1.1"</span> 200 32988 <span class="string">"http://39.97.232.17/zabbix/zabbix.php?action=dashboard.view&amp;ddreset=1"</span> <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.1</span></span><br><span class="line"><span class="string">112</span></span><br></pre></td></tr></table></figure><p>分析日志结构，发现第一列是用户的RealIP，也就是这里的PV，后边是http请求头的一些参数。</p><p>按要求进行排序并降重：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat access.log | awk '&#123;print $1&#125;' | sort | uniq</span></span><br></pre></td></tr></table></figure><p>分析命令：第二段使用了awk进行了正则筛选，选中了第一列数据。将选中的数据进行升序和降重。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;sort和uniq是两个查看文件时候经常会用到的筛选工具。&lt;/p&gt;
+&lt;p&gt;sort：升序输出，将输入的文本以升序的方式进行输出。&lt;/p&gt;
+&lt;p&gt;uniq：降重输出。把输入文本里的重复数据剔除然后输出。&lt;/p&gt;
+&lt;h1 id=&quot;面试常见问题&quot;&gt;&lt;a href=&quot;#面试常见问题
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基础服务/rabbitMQ</title>
+    <link href="http://39.97.232.17/2020/02/26/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/rabbitMQ/"/>
+    <id>http://39.97.232.17/2020/02/26/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/rabbitMQ/</id>
+    <published>2020-02-26T14:56:49.709Z</published>
+    <updated>2020-02-26T15:15:40.905Z</updated>
+    
+    <content type="html"><![CDATA[<p>RabbitMQ是一种常用的消息队列服务器，是通过erlang编写的，所以再运行这个服务器的服务器上需要先不是erlang的环境。</p><h1 id="环境部署"><a href="#环境部署" class="headerlink" title="环境部署"></a>环境部署</h1><p>我这里使用的是yum直接安装的RabbitMQ。再生产环境中，常用的是二进制部署或者编译安装。这里为了方便就使用了yum安装。</p><p><strong>注意：在使用yum安装的时候会自动安装erlang的环境，编译安装则需要进行手动安装</strong></p><h1 id="RabbitMQ的原理"><a href="#RabbitMQ的原理" class="headerlink" title="RabbitMQ的原理"></a>RabbitMQ的原理</h1><p>当程序和RabbitMQ服务器认证后，会生成一个AMQP信道。一个AMQP中好汉多个信道。这样的话就可以减少TCP的连接创建数量，提高服务器效率，减少开销。</p><h1 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a>虚拟主机</h1><p>和Nginx类似，RabbitMQ会生成多个虚拟主机，每个虚拟主机负责一个服务。</p><p>添加虚拟主机：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_vhost [vhost_name]</span><br></pre></td></tr></table></figure><p>需要注意的是，每个虚拟主机之间都不会互相通信。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;RabbitMQ是一种常用的消息队列服务器，是通过erlang编写的，所以再运行这个服务器的服务器上需要先不是erlang的环境。&lt;/p&gt;
+&lt;h1 id=&quot;环境部署&quot;&gt;&lt;a href=&quot;#环境部署&quot; class=&quot;headerlink&quot; title=&quot;环境部署&quot;&gt;&lt;/a&gt;环
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix/动作</title>
+    <link href="http://39.97.232.17/2020/02/24/zabbix/%E5%8A%A8%E4%BD%9C/"/>
+    <id>http://39.97.232.17/2020/02/24/zabbix/%E5%8A%A8%E4%BD%9C/</id>
+    <published>2020-02-24T14:52:36.087Z</published>
+    <updated>2020-02-24T15:15:38.606Z</updated>
+    
+    <content type="html"><![CDATA[<p>zabbix监控触发警报时，不仅会在web上进行显示，也会触发相关的动作，比如发送email，这里就需要对报警介质和动作进行配置。</p><h1 id="创建报警媒介"><a href="#创建报警媒介" class="headerlink" title="创建报警媒介"></a>创建报警媒介</h1><p>报警媒介我们常用的是email。这里需要引入一个知识点：</p><blockquote><h2 id="SMTP和POP"><a href="#SMTP和POP" class="headerlink" title="SMTP和POP"></a>SMTP和POP</h2><p>SMTP和POP是两种邮件的传输协议，咱们常用的方式是SMTP。每个邮箱运营商都会提供一个SMTP的服务器。SMTP发送邮件的原理就是登录SMTP服务器，然后通过运营商的SMTP服务器发送一个邮件。</p></blockquote><p>使用SMTP配置媒介：</p><p><img src=".%5Cimg%5C7.png" alt="7.png"></p><p>这里的参数都很简单，按照运营商提供的服务器和密码进行配置就好了，不多做赘述。</p><h1 id="创建动作"><a href="#创建动作" class="headerlink" title="创建动作"></a>创建动作</h1><p>一般情况下zabbix会默认生成一个动作，我们可以直接修改这个动作。</p><p>动作的基本属性没有什么需要设置的，直接看操作。</p><p>动作里有一个文本框，那是发送报警时候的一个模板。这里我们用默认的就好。</p><p>下边的操作细节。这里设置发送相关参数。</p><p>设置发送对象的时候，可以设置用户对象，也可以设置成用户组，我们这里设置成用户组就可以了。</p><h1 id="关联报警媒介"><a href="#关联报警媒介" class="headerlink" title="关联报警媒介"></a>关联报警媒介</h1><p>上边的操作，好像没有吧报警媒介给用户或者用户组，那么我们就进行手动设置。</p><p>在用户界面，选择报警媒介选项卡。添加收信邮箱。然后启动上述的所有操作，动作系统就设置完成了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;zabbix监控触发警报时，不仅会在web上进行显示，也会触发相关的动作，比如发送email，这里就需要对报警介质和动作进行配置。&lt;/p&gt;
+&lt;h1 id=&quot;创建报警媒介&quot;&gt;&lt;a href=&quot;#创建报警媒介&quot; class=&quot;headerlink&quot; title=&quot;创建报警媒介&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix/nginx监控</title>
+    <link href="http://39.97.232.17/2020/02/24/zabbix/nginx%E7%9B%91%E6%8E%A7/"/>
+    <id>http://39.97.232.17/2020/02/24/zabbix/nginx%E7%9B%91%E6%8E%A7/</id>
+    <published>2020-02-24T12:09:24.012Z</published>
+    <updated>2020-02-24T14:40:36.398Z</updated>
+    
+    <content type="html"><![CDATA[<p>nginx通常会留一个api接口，这个接口可以获取到nginx目前的工作状态。通常情况下，一台服务器的连接池资源是有限的，所以我们就需要用nginx做一下性能的监控，防止服务器因为访问量过大导致的崩溃。</p><h1 id="配置nginx-api"><a href="#配置nginx-api" class="headerlink" title="配置nginx api"></a>配置nginx api</h1><p>在nginx.conf的server块中添加一个location，如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> location ~ &#x2F;nginx_status &#123;</span><br><span class="line">                stub_status on;</span><br><span class="line">                access_log off;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样就启动了nginx的api，我们可以使用浏览器进行访问查看这个api是否启用成功。</p><p><img src=".%5Cimg%5C6.png" alt="6.png"></p><p>如果返回这样的参数就说明启动成功了。</p><h1 id="api参数解析"><a href="#api参数解析" class="headerlink" title="api参数解析"></a>api参数解析</h1><p>这个api中列出了nginx服务器的http信息。</p><p>Active connections表示当前活动的连接。</p><p>第三行的三个51分别表示请求数，被允许的请求数和响应数。</p><p>第四行，Reading表示正在读的连接数。Writing表示正在写的连接数，Waiting表示正在等待连接数。</p><h1 id="创建api解析脚本"><a href="#创建api解析脚本" class="headerlink" title="创建api解析脚本"></a>创建api解析脚本</h1><p>在linux中，常用curl获取网页返回值。这里也是这样。我们一般只对Active进行解析，那么，脚本应该写成这样：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl localhost/nginx_status 2&gt;/dev/null | grep Active | awk <span class="string">'&#123;print $3&#125;'</span></span><br></pre></td></tr></table></figure><p>这样就获取到了活动连接数。</p><h1 id="创建自定义监控key"><a href="#创建自定义监控key" class="headerlink" title="创建自定义监控key"></a>创建自定义监控key</h1><p>上边创建了检测脚本，这个脚本是被zabbix账户执行的，那么我们就需要给这个脚本修改所有者并修改权限：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix_script]<span class="comment"># chmod 777 nginx.sh </span></span><br><span class="line">[root@localhost zabbix_script]<span class="comment"># chown zabbix:zabbix nginx.sh</span></span><br></pre></td></tr></table></figure><p>创建zabbix监控键。先观察一下zabbix_agent.conf。</p><p>有两个参数需要修改</p><ul><li>UnsafeUserParameters=1 允许添加key</li><li>EnableRemoteCommands=1 允许执行命令</li></ul><p>观察后边的配置，我们会发现一个配置是这样的：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Include&#x3D;&#x2F;etc&#x2F;zabbix&#x2F;zabbix_agentd.d&#x2F;*.conf</span><br></pre></td></tr></table></figure><p>这表示包含了配置文件，那么我们就可以在这个目录下添加相关配置。</p><p>创建nginx.conf</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter&#x3D;nginx.active[*],&#x2F;etc&#x2F;zabbix&#x2F;zabbix_script&#x2F;nginx.sh</span><br></pre></td></tr></table></figure><p>这样就创建了一个键。这个键里有个*，表示接受所有参数。如果写成参数的话，后边脚本使用参数就使用$</p><h1 id="创建监控"><a href="#创建监控" class="headerlink" title="创建监控"></a>创建监控</h1><p>按前边说过的方法创建监控项。监控项表达式直接写<code>nginx.active[]</code>就ok了。</p><p>这样就定义了一个nginx监控脚本。</p><p><strong>注意：我们会发现监控返回的值，哪怕当前没有访问也是1，那是因为当前脚本会访问nginx，可以根据需求在shell脚本里减1</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;nginx通常会留一个api接口，这个接口可以获取到nginx目前的工作状态。通常情况下，一台服务器的连接池资源是有限的，所以我们就需要用nginx做一下性能的监控，防止服务器因为访问量过大导致的崩溃。&lt;/p&gt;
+&lt;h1 id=&quot;配置nginx-api&quot;&gt;&lt;a href=&quot;#
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix/资产管理</title>
+    <link href="http://39.97.232.17/2020/02/24/zabbix/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/"/>
+    <id>http://39.97.232.17/2020/02/24/zabbix/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/</id>
+    <published>2020-02-24T10:23:21.969Z</published>
+    <updated>2020-02-24T10:52:39.503Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="资产管理"><a href="#资产管理" class="headerlink" title="资产管理"></a>资产管理</h1><p>对于一个大型企业来说，生产环境服务器会有成百上千台，组成一个计算集群。通常目前都用的Openstack的虚拟化架构，能管理虚拟主机资产，但是没有专用的物理机资产管理工具。zabbix就解决了这个问题。</p><h2 id="给主机添加资产标签"><a href="#给主机添加资产标签" class="headerlink" title="给主机添加资产标签"></a>给主机添加资产标签</h2><p>在主机中添加主机资产记录，添加相关的字段。</p><p>这个字段优点类似于target，在做资产管理的适合会使用到。</p><p><img src=".%5Cimg%5C5.png" alt="5.png"></p><p>这里边的字段自行进行区分，尽量让服务器管理的时候不会发生误解。</p><h2 id="管理主机资产"><a href="#管理主机资产" class="headerlink" title="管理主机资产"></a>管理主机资产</h2><p>在资产记录-&gt;主机中可以看到刚才添加的资产。</p><h1 id="主机的可用性"><a href="#主机的可用性" class="headerlink" title="主机的可用性"></a>主机的可用性</h1><p>主机的可用性是服务器稳定性的一种指标，业内常用9的个数进行衡量。通常来说，服务能做到五个9就已经很不错了。</p><p>在zabbix中，zabbix课进行警报触发的计时，并自动的计算出该种警报的发生时长百分比，从而计算出可用性。</p><p>在报表-&gt;可用性包表可以看到各个指标的可用性，从而推断数据的可用性。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;资产管理&quot;&gt;&lt;a href=&quot;#资产管理&quot; class=&quot;headerlink&quot; title=&quot;资产管理&quot;&gt;&lt;/a&gt;资产管理&lt;/h1&gt;&lt;p&gt;对于一个大型企业来说，生产环境服务器会有成百上千台，组成一个计算集群。通常目前都用的Openstack的虚拟化架构，能管理虚
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix/监控模板</title>
+    <link href="http://39.97.232.17/2020/02/22/zabbix/%E7%9B%91%E6%8E%A7%E6%A8%A1%E6%9D%BF/"/>
+    <id>http://39.97.232.17/2020/02/22/zabbix/%E7%9B%91%E6%8E%A7%E6%A8%A1%E6%9D%BF/</id>
+    <published>2020-02-22T14:22:13.286Z</published>
+    <updated>2020-02-23T06:55:40.618Z</updated>
+    
+    <content type="html"><![CDATA[<p>模板就是一些监控条件的集合，一般情况下zabbix具有一些基础的监控模板，但是对于一些特殊情况需要定制监控。这样的情况可以对主机直接设置监控项目。但实际上，集群内可能有击败上千的node，不能一个一个的去设置监控项，所以这里就需要使用模板，直接套给主机。</p><h1 id="创建模板"><a href="#创建模板" class="headerlink" title="创建模板"></a>创建模板</h1><p>在配置-&gt;模板页面中，点击创建模板，创建一个模板。</p><p><img src=".%5Cimg%5C2.png" alt="2.png"></p><p>上边有三个选项卡，我们常用前两个。</p><p>模板选项卡：模板名的制定和群组的指定。</p><p>链接的模板：这和python中的继承父类是一个意思，讲父模板中的数据引入到新的模板中。</p><h1 id="给模板创建监控项"><a href="#给模板创建监控项" class="headerlink" title="给模板创建监控项"></a>给模板创建监控项</h1><p>创建监控项的方法，对于所有对象是一样的。</p><p><img src=".%5Cimg%5C3.png" alt="3.png"></p><p>这里有几个基本的参数需要设置</p><p>名称，一定要定义成唯一的。</p><p>类型和键值，这两个是成对的。可以理解为类型是键值的一个集合，键值是服务端获取监控节点的依据。</p><p>监控项返回的数据是多种多样的，有纯数据，有0和1，也有一些字符串，所以我们就需要不同的方法进行解析。</p><p>这里要注意一点，更新时间。更新时间就是服务器获取监控节点数据的周期，这个周期不宜过长，过长的周期没有数据的监控价值。但是时间过短的话，就会给双端产生一定的压力。所以，这个时间一定要取合适。</p><p>数据保存时间，这个根据需求来保存就ok了，不一定要保存长时间的，只要够咱们分析服务器压力数据就可以了。</p><h1 id="给模板创建触发器"><a href="#给模板创建触发器" class="headerlink" title="给模板创建触发器"></a>给模板创建触发器</h1><p>触发器是对监控项和报警之间的联系纽带。当监控项触及到触发器的阈值时触发报警。</p><p><img src=".%5Cimg%5C4.png" alt="4.png"></p><p>同样，这里的名称需要唯一。</p><p>表达式，通常会使用后边的添加自动生成表达式，一般不会进行手写。这个表达式表示了触发器触发警报的条件。</p><p>这里有一个很重要的项目叫严重性。严重性的分级会影响工程师对不同警报的响应等级。这里建议将服务器宕机设置成灾难，其他的错误按照实际情况进行分级。</p><p>下边的事件迭代，就是表示事件完成的条件。和上边的表达式写法一样。</p><p>事件成功关闭选项，设置了事件关闭的标记匹配条件。</p><h1 id="给模板创建图形"><a href="#给模板创建图形" class="headerlink" title="给模板创建图形"></a>给模板创建图形</h1><p>这里要引入两个不同的概念，图形和聚合图形。图形就是将单个监控数据实现绘图，然后单一表示。聚合图形就是将多个监控图像进行聚合，然后放在一起列出来。</p><p>图形的创建，主要需要注意监控项。监控项一定要注意，数据类型要对应到图形类别，否则会无法绘图，或者出现一条直线都是1的情况。</p><p>上边这些参数就可以构成一个基本的监控模板，可以进行一些基础的业务环境监控。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;模板就是一些监控条件的集合，一般情况下zabbix具有一些基础的监控模板，但是对于一些特殊情况需要定制监控。这样的情况可以对主机直接设置监控项目。但实际上，集群内可能有击败上千的node，不能一个一个的去设置监控项，所以这里就需要使用模板，直接套给主机。&lt;/p&gt;
+&lt;h1 i
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix/几个重要术语</title>
+    <link href="http://39.97.232.17/2020/02/22/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/"/>
+    <id>http://39.97.232.17/2020/02/22/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/</id>
+    <published>2020-02-22T12:43:17.030Z</published>
+    <updated>2020-02-22T12:59:09.723Z</updated>
+    
+    <content type="html"><![CDATA[<p>zabbix是一种监控平台，这个监控和咱们常见的视频监控不太一样。zabbix会自动进行报警，咱们常见的视频系统需要进行人工报警，那么这里肯定就会牵扯到一下几个元素：</p><h1 id="监控项"><a href="#监控项" class="headerlink" title="监控项"></a>监控项</h1><p>监控项就是监控的项目，是一个由key:value组成的东西。服务端向监控端发生key，监控端向服务端发送数据。</p><h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器就是出发报警的条件，监控项常被用做触发器的前提条件。当监控项触及触发器设置的阈值时发生报警。</p><p>这样就构成了一个简单的监控报警平台。</p><p>作为监控平台，zabbix还能对服务器的性能进行监控。则有一下术语：</p><h1 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h1><p>即为监控的图像。这个图像就是通过监控项生成的，这个图像可以是折线图，也可以是hi饼图。</p><p>这个系统主要的功能是上边三个术语，下边说一下其他术语：</p><h1 id="自动发现"><a href="#自动发现" class="headerlink" title="自动发现"></a>自动发现</h1><p>自动发现就是服务端进行自动侦测，获取一些数据。这里边的自动发现主要方式就是扫描网段内主机的端口，若端口在工作中就表示发现。</p><h1 id="资产"><a href="#资产" class="headerlink" title="资产"></a>资产</h1><p>资产和我们常说的资产有一定的出入。这里的资产指群内的主机，这些主机就属于资产。</p><h1 id="报表"><a href="#报表" class="headerlink" title="报表"></a>报表</h1><p>对于一段时间的监控时间进行汇总，生成一个表格。这个表格能很直观的看出最近又哪些事件发生。</p><h1 id="报警媒介"><a href="#报警媒介" class="headerlink" title="报警媒介"></a>报警媒介</h1><p>报警媒介是报警的方式。现在常用的报警方式又email和微信报警两种方式，这个报警的工具就是一种媒介。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;zabbix是一种监控平台，这个监控和咱们常见的视频监控不太一样。zabbix会自动进行报警，咱们常见的视频系统需要进行人工报警，那么这里肯定就会牵扯到一下几个元素：&lt;/p&gt;
+&lt;h1 id=&quot;监控项&quot;&gt;&lt;a href=&quot;#监控项&quot; class=&quot;headerlink&quot; ti
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>zabbix/zabbix环境搭建</title>
+    <link href="http://39.97.232.17/2020/02/22/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://39.97.232.17/2020/02/22/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</id>
+    <published>2020-02-22T12:03:41.274Z</published>
+    <updated>2020-02-25T06:05:15.813Z</updated>
+    
+    <content type="html"><![CDATA[<p>zabbix是一种常用的监控平台。监控在集群中是很有必要的，监控的存在能及时通知相关的工程师进行技术处理。</p><p>zabbix分为三部分。第一部分是server，第二部分是web，第三部分是agent。分别是系统中的服务端，dashbroad和客户端，这些部分都是缺一不可的。</p><h1 id="部署服务端"><a href="#部署服务端" class="headerlink" title="部署服务端"></a>部署服务端</h1><p>首先在服务器上进行yum配置，添加阿里云的镜像源：</p><pre><code class="bash">[root@localhost yum.repos.d]<span class="comment"># cat zabbix.repo </span>[zabbix]name=Zabbix Official Repository - \<span class="variable">$basearch</span>baseurl=https://mirrors.aliyun.com/zabbix/zabbix/4.0/rhel/7/\<span class="variable">$basearch</span>/enabled=1gpgcheck=1gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591[zabbix-non-supported]name=Zabbix Official Repository non-supported - \<span class="variable">$basearch</span> baseurl=https://mirrors.aliyun.com/zabbix/non-supported/rhel/7/\<span class="variable">$basearch</span>/enabled=1gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIXgpgcheck=1</code></pre><p>添加yum源的公钥：</p><pre><code class="bash">bash<span class="comment"># curl https://mirrors.aliyun.com/zabbix/RPM-GPG-KEY-ZABBIX-A14FE591 -o /etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span>bash<span class="comment"># curl https://mirrors.aliyun.com/zabbix/RPM-GPG-KEY-ZABBIX -o /etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span></code></pre><p>通过域名进行安装：</p><pre><code class="bash">bash<span class="comment"># yum install -y zabbix-server-mysql zabbix-web-mysql</span></code></pre><p>这里一般情况下是没有安装mysql数据库的，我们需要手动进行安装。注意，咱们不要安装mysql8数据库，mysql8数据库的数据库引擎发生了改变，不能通用。不建议使用mysql，可以使用mariadb数据库，这是目前数据库最多也是最优的解决方案。</p><pre><code class="bash">bash<span class="comment"># yum install mariadb mariadb-server mariadb-devel</span></code></pre><p>启动数据库并进行数据库初始化：</p><pre><code class="bash">bash<span class="comment"># systemctl start mariadb</span>bash<span class="comment"># mysql_secure_installation</span></code></pre><p>创建数据库，并创建用户授权给用户：</p><pre><code class="bash">mysql&gt; create database zabbix character <span class="built_in">set</span> utf8 collate utf8_bin;mysql&gt; grant all privileges on zabbix.* to <span class="string">'zabbix'</span>@<span class="string">'localhost'</span> identified by <span class="string">'zabbix'</span>;mysql&gt; flush privileges;</code></pre><p>导入数据库：</p><pre><code class="bash">bash<span class="comment"># zcat /usr/share/doc/zabbix-server-mysql-3.0.12/create.sql.gz | mysql zabbix -uzabbix -pzabbix</span></code></pre><p>修改相关配置：</p><pre><code class="bash">bash<span class="comment"># vi zcat /usr/share/doc/zabbix-server-mysql-3.0.12/create.sql.gz | mysql zabbix -uzabbix -pzabbix</span>DBHost=localhostDBName=zabbixDBUser=zabbixDBPassword=zabbixbash<span class="comment"># /etc/httpd/conf.d/zabbix.conf</span>php_value date.timezone Asia/Shanghai</code></pre><p>服务安装完成了，启动相关服务：</p><pre><code class="bash">bash<span class="comment"># systemctl start httpd</span>bash<span class="comment"># systemctl enable httpd</span>bash<span class="comment"># systemctl start zabbix-server</span>bash<span class="comment"># systemctl enable zabbix-server</span></code></pre><p>使用浏览器访问主机的ip，直接进行配置。和普通的cms配置方法相同，这里就不读赘述了。</p><h1 id="安装监控端"><a href="#安装监控端" class="headerlink" title="安装监控端"></a>安装监控端</h1><p>在被监控节点上安装agent：</p><pre><code class="bash">yum install zabbix-agent</code></pre><p>安装完成后配置相关的参数：</p><pre><code class="bash">bash<span class="comment"># vi /etc/zabbix/zabbix_agentd.conf</span>Server=192.168.89.150ServerActive=192.168.89.150Hostname=node1</code></pre><p>Hostname这个参数是必须有的，在整个集群内需要唯一，否则服务端那边注册不了数据。</p><p>在服务端手动添加一下监控端：</p><p><img src=".%5Cimg%5C1.png" alt="1.png"></p><p>这里需要注意，这个主机名称要和刚才设置的Hostname相同。</p><p>在监控端启动服务：</p><pre><code class="bash">bash<span class="comment"># systemctl start zabbix-agent</span></code></pre><p>我们可以使用zabbix-get进行一下集群内主机的测试：</p><pre><code class="bash">[root@localhost yum.repos.d]<span class="comment"># zabbix_get -s 192.168.89.151 -p 10050 -k "agent.hostname"</span>node1</code></pre><p>这就是说明主机安装好了。</p><p><strong>注意：这里没有添加监控项，ZBX的符号是灰色的，并不是没有安装好。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;zabbix是一种常用的监控平台。监控在集群中是很有必要的，监控的存在能及时通知相关的工程师进行技术处理。&lt;/p&gt;
+&lt;p&gt;zabbix分为三部分。第一部分是server，第二部分是web，第三部分是agent。分别是系统中的服务端，dashbroad和客户端，这些部分都是缺
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</title>
+    <link href="http://39.97.232.17/2020/02/21/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://39.97.232.17/2020/02/21/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+    <published>2020-02-21T06:04:32.197Z</published>
+    <updated>2020-02-21T06:21:32.414Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol><li>工作在七层，对http协议做分流</li><li>对网络依赖较小</li><li>安装和配置简单</li><li>抗压</li><li>适合做web应用服务器</li><li>做中层反向代理服务器</li></ol><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol><li>仅支持http和https及邮箱协议</li><li>对于后端服务器稳定性要求较高。上传数据时如果后端服务器宕机，Nginx会直接切换后端服务器。</li></ol><h1 id="LVS"><a href="#LVS" class="headerlink" title="LVS"></a>LVS</h1><p>LVS时一种运行在四层协议上的调度器。</p><h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><ol><li>抗高压</li><li>配置简单</li><li>工作在四层，基本可以转发所有数据</li><li>工作更稳定</li><li>LVS只负责分发</li></ol><h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><ol><li>不支持正则，不能做web动静分离</li><li>网站系统过于庞大</li></ol><h1 id="Haproxy"><a href="#Haproxy" class="headerlink" title="Haproxy"></a>Haproxy</h1><p>这是一种工作在四/七层的代理软件。</p><h2 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h2><ol><li>支持虚拟主机</li><li>可以保持session和cookie</li><li>速度更快</li><li>可对MySQL做读写负载均衡</li><li>策略更多</li></ol><h2 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h2><ol><li>不支持POP/SMTP协议</li><li>不支持SPDY协议</li><li>不支持HTTP cache</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Nginx&quot;&gt;&lt;a href=&quot;#Nginx&quot; class=&quot;headerlink&quot; title=&quot;Nginx&quot;&gt;&lt;/a&gt;Nginx&lt;/h1&gt;&lt;p&gt;Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。&lt;/p&gt;
+&lt;h2 id=&quot;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基础服务/lvs原理</title>
+    <link href="http://39.97.232.17/2020/02/21/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/lvs%E5%8E%9F%E7%90%86/"/>
+    <id>http://39.97.232.17/2020/02/21/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/lvs%E5%8E%9F%E7%90%86/</id>
+    <published>2020-02-21T05:13:18.142Z</published>
+    <updated>2020-02-21T06:03:31.715Z</updated>
+    
+    <content type="html"><![CDATA[<p>LVS全称是Linux Virtual Server，即Linux虚拟服务器。这是一个具有三种工作模式，十种调度算法的代理服务器软件。</p><p>这是一种常见的反向代理案例</p><p><img src="http://www.zsythink.net/wp-content/uploads/2017/07/070617_0124_1.png" alt=""></p><p>这是LVS组成了一个负载均衡集群，LVS服务器将接收到的请求转发给了群内主机上。因为LVS在这里进行了数据的分发，像一个中转，所以我们叫做“调度器”。</p><p>在生产环境中，服务器一般都是要发布在公网的。因为backend的特殊性不便于直接暴露在公网上，那么LVS服务器就起了很大的作用。</p><p>LVS被配置了一个公网IP，这个IP将被客户进行访问，这个IP通常称为VIP。LVS服务器一般都是使用了双网卡，另一张网卡要连接到内网，那么这张内网网卡的IP就叫做DIP，群内主机的内网IP就叫做RIP。</p><h1 id="NAT定义"><a href="#NAT定义" class="headerlink" title="NAT定义"></a>NAT定义</h1><p>NAT的意思就行网络地址转换。了解虚拟化的话就会知道，VMware虚拟机默认运行在NAT的网络模式下，这个网络模式下，群内主机使用一个特殊的IP，与NAT服务器的与外网连接的IP不同。外部访问VIP的时候，请求的VIP会被LVS服务器转换成RIP，再由DIP进行转发，发送到RIP上。返回报文的原理也一样。</p><p>定义方式：</p><p>创建NAT映射：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipvsadm -A -t VIP:port -s rr</span><br><span class="line">ipvsadm -a -t VIP:PORT -r RIP:port -m</span><br></pre></td></tr></table></figure><p>这样创建出来的NAT不能被localhost访问，原因如下：</p><p>NAT被直接绑定到了VIP，并没有绑定到主机本身，那么主机的localhost环路是无法访问到环路外的内容的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;LVS全称是Linux Virtual Server，即Linux虚拟服务器。这是一个具有三种工作模式，十种调度算法的代理服务器软件。&lt;/p&gt;
+&lt;p&gt;这是一种常见的反向代理案例&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.zsythink.net/wp-cont
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx调优/Nginx反向代理</title>
+    <link href="http://39.97.232.17/2020/02/20/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"/>
+    <id>http://39.97.232.17/2020/02/20/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</id>
+    <published>2020-02-20T15:33:00.456Z</published>
+    <updated>2020-02-20T15:56:12.885Z</updated>
+    
+    <content type="html"><![CDATA[<p>Nginx的有一个主要功能就是反向代理。反向代理的原理就是将Nginx服务器收到的请求数据转发给其他服务器。反向代理就是将数据反向发给更多的机器，从而做到负载均衡。</p><h1 id="集群创建"><a href="#集群创建" class="headerlink" title="集群创建"></a>集群创建</h1><p>这里为了节省内存，运行两个docker容器作为站点服务器。这个后端服务器可以是Nginx，也可以是Apache，也可以是Tomcat。Nginx作为一个七层的代理服务器，只能转发HTTP协议的请求信息。</p><h1 id="代理服务器配置"><a href="#代理服务器配置" class="headerlink" title="代理服务器配置"></a>代理服务器配置</h1><p>配置代理服务器就是在服务器上配置一个后端服务器的集群。</p><p>在nginx.conf文件中，在server块中创建一个upstream块。这是一个后端服务器的集群块。在这个块写：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream group&#123;</span><br><span class="line">    server 172.17.0.2;</span><br><span class="line">server 172.17.0.3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样就组成了一个upstream群。upstream群的名字叫group。这个名字是只能被nginx认定的。</p><p>我们对这个upstream进行调用。在location块中使用代理：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F; &#123;</span><br><span class="line">proxy_pass http:&#x2F;&#x2F;group;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样就组成了一个简单的反向代理服务器系统。</p><h1 id="多样的需求"><a href="#多样的需求" class="headerlink" title="多样的需求"></a>多样的需求</h1><h2 id="不同的权重"><a href="#不同的权重" class="headerlink" title="不同的权重"></a>不同的权重</h2><p>在一个upstream群中，有多个服务器，这些服务器的性能可能也不进行同，那么不同的服务器可以承担的并发也不是一个量级的，这时候就需要进行权重配比了。</p><p>在创建server的时候添加一个参数weigth，数字越大表示权重越大，如果不定义则表示weigth=1。</p><h2 id="需要保留的需求"><a href="#需要保留的需求" class="headerlink" title="需要保留的需求"></a>需要保留的需求</h2><p>有时候，某些后端服务器需要获取到客户机的ip即其他一些和参数，那么就需要在代理的时候设置一下转发规则。</p><p>在location块代理后边添加请求头重定义：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host $host;</span><br><span class="line">proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">proxy_set_header X-Forwarded-For $proxy_add_x_forward_for;</span><br></pre></td></tr></table></figure><p>第一段，转发了客户机的Host请求，即主机名。</p><p>第二段，转发了客户机的真实IP。</p><p>第三段，转发了代理地址。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Nginx的有一个主要功能就是反向代理。反向代理的原理就是将Nginx服务器收到的请求数据转发给其他服务器。反向代理就是将数据反向发给更多的机器，从而做到负载均衡。&lt;/p&gt;
+&lt;h1 id=&quot;集群创建&quot;&gt;&lt;a href=&quot;#集群创建&quot; class=&quot;headerlink&quot; t
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>储存技术/LVM</title>
+    <link href="http://39.97.232.17/2020/02/20/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/LVM/"/>
+    <id>http://39.97.232.17/2020/02/20/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/LVM/</id>
+    <published>2020-02-20T09:00:07.795Z</published>
+    <updated>2020-02-20T09:22:07.542Z</updated>
+    
+    <content type="html"><![CDATA[<p>LVM是Linux下逻辑磁盘管理器。在使用LVM时，多块磁盘共同构成一个VG，然后VG（类似于k8s中的PV）又被分成多个lv（逻辑卷，类似于k8s中的PVC）</p><p>通常情况LVM是默认被安装在系统里的，我们可以通过rpm -qa查看lvm是否被正确的安装。</p><p>查看一下由多少块数据盘</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># ll /dev | grep sd</span></span><br></pre></td></tr></table></figure><p>这样就可以看到服务器上安装的数据盘。</p><p>对各个数据盘进行分区：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># fdisk /etc/sdb</span></span><br><span class="line">bash<span class="comment"># fdisk /dev/sdb</span></span><br><span class="line">欢迎使用 fdisk (util-linux 2.23.2)。</span><br><span class="line"></span><br><span class="line">更改将停留在内存中，直到您决定将更改写入磁盘。</span><br><span class="line">使用写入命令前请三思。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)： n</span><br></pre></td></tr></table></figure><p>这里可以不留备用分区，那就一路回车下去，最后输入w完成操作。</p><p>通过上边查看数据盘的方法查看数据分区是否创建完毕。</p><h1 id="创建pv"><a href="#创建pv" class="headerlink" title="创建pv"></a>创建pv</h1><p>创建pv就是将刚才创建的分区转换成可以被利用的卷资源。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sd&#123;b1,c1&#125;</span><br></pre></td></tr></table></figure><h1 id="创建vg"><a href="#创建vg" class="headerlink" title="创建vg"></a>创建vg</h1><p>vg就相当与一个资源池，将多个pv有机的结合起来。这里使用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgcreate vg_name pv</span><br></pre></td></tr></table></figure><p>创建了一个名叫vg_name的vg资源池。</p><p>激活刚才创建的vg</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgchange -a y vg_name</span><br></pre></td></tr></table></figure><h1 id="创建LV"><a href="#创建LV" class="headerlink" title="创建LV"></a>创建LV</h1><p>lv就是一个逻辑卷，被创建出来后可被挂载。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -L space -n lv_name vg_name</span><br></pre></td></tr></table></figure><p>创建完毕后我们可以看一下/dev目录</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># ll /dev | grep vg_2</span></span><br><span class="line">drwxr-xr-x. 2 root root          60 2月  20 16:41 vg_2</span><br><span class="line">bash<span class="comment"># tree /dev/vg_2/</span></span><br><span class="line">/dev/vg_2/</span><br><span class="line">└── lv_1 -&gt; ../dm-2</span><br><span class="line"></span><br><span class="line">0 directories, 1 file</span><br></pre></td></tr></table></figure><p>可见，lvm被制作成了一个虚拟的储存设备，我们直接将这个设备进行挂载就可以使用了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;LVM是Linux下逻辑磁盘管理器。在使用LVM时，多块磁盘共同构成一个VG，然后VG（类似于k8s中的PV）又被分成多个lv（逻辑卷，类似于k8s中的PVC）&lt;/p&gt;
+&lt;p&gt;通常情况LVM是默认被安装在系统里的，我们可以通过rpm -qa查看lvm是否被正确的安装。&lt;/p
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>储存技术/RAID</title>
+    <link href="http://39.97.232.17/2020/02/20/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/RAID/"/>
+    <id>http://39.97.232.17/2020/02/20/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/RAID/</id>
+    <published>2020-02-20T06:47:23.201Z</published>
+    <updated>2020-02-20T07:48:33.096Z</updated>
+    
+    <content type="html"><![CDATA[<p>RAID是linux中常用的一种冗余储存方案。目前主要的RAID技术由RAID0、RAID1、RAID5和RAID10。下边对这些冗余方案做一下总结：</p><h1 id="RAID0"><a href="#RAID0" class="headerlink" title="RAID0"></a>RAID0</h1><p>是一种条带化的储存冗余。将数据离散的分布到多个磁盘上。这样的优点在于性能高，读取速度快，高IO特性。但是，如果某一块磁盘发生了故障，那么对整个文件系统将会是灾难性的。<br><img src="http://mmbiz.qpic.cn/mmbiz/W9DqKgFsc6ibRYQnESPlr3XiaVG1Il4NK656wk6CJb4LkEgwpGMOaMmV3pN5vnmzWWa2TqM0HtZP4kess35eD0kQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="RAID0"></p><h1 id="RAID1"><a href="#RAID1" class="headerlink" title="RAID1"></a>RAID1</h1><p>是一种复制卷存储冗余。在磁盘阵列内，两块或多块磁盘进行文件复制，那么这几块磁盘的数据是相同的。这样的有点是数据的可用性更高（高容错），但是同时，磁盘阵列的容量下降，读性能由显著提高，写性能较低。适合做高可用数据阵列。</p><p><img src="http://mmbiz.qpic.cn/mmbiz/W9DqKgFsc6ibRYQnESPlr3XiaVG1Il4NK6Tj2k3iacS64YfXS3wJCvnjc8ybGhbsaOuO3ufoMh12btsnib112zPE9g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="RAID1"></p><h1 id="RAID5"><a href="#RAID5" class="headerlink" title="RAID5"></a>RAID5</h1><p>四个磁盘组成一个RAID5阵列，每个磁盘被分为四块，每个磁盘都有一个块是奇偶校验位。当某一个磁盘数据发生损坏时，利用剩下的数据和奇偶校验位恢复数据。那么，由这么推得，每个磁盘只有3/4的空间可以用。</p><p>这样的磁盘阵列性能较好，容灾性能也较好。但是这样将会由一个磁盘的空间进行奇偶校验。</p><p><img src="http://mmbiz.qpic.cn/mmbiz/W9DqKgFsc6ibRYQnESPlr3XiaVG1Il4NK6gZKttcmqibdVbl3O92RYibU6I77bc7NRD7BsT6htGyiblF7vCruJIiaYTg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="RAID5"></p><h1 id="RAID10"><a href="#RAID10" class="headerlink" title="RAID10"></a>RAID10</h1><p>RAID10是RAID0和RAID1结合的一种方案。四个磁盘组成一个储存阵列，两个磁盘为一个储存单元，这两个磁盘互为镜像。同时，这两个储存单元像RAID0一样进行数据分块储存。</p><p>这样的磁盘阵列读写性能较好，由你较高的容错性能。但是储存空间也会损耗一半。</p><p><img src="http://mmbiz.qpic.cn/mmbiz/W9DqKgFsc6ibRYQnESPlr3XiaVG1Il4NK6o2pUHZN4Swibo4Fopn0pJrF92JowAphia7W45QlZKSiczlAZRbmYH44IQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="RAID10"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;RAID是linux中常用的一种冗余储存方案。目前主要的RAID技术由RAID0、RAID1、RAID5和RAID10。下边对这些冗余方案做一下总结：&lt;/p&gt;
+&lt;h1 id=&quot;RAID0&quot;&gt;&lt;a href=&quot;#RAID0&quot; class=&quot;headerlink&quot; title=
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Go语言/数据切片</title>
+    <link href="http://39.97.232.17/2020/02/20/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E5%88%87%E7%89%87/"/>
+    <id>http://39.97.232.17/2020/02/20/Go%E8%AF%AD%E8%A8%80/%E6%95%B0%E6%8D%AE%E5%88%87%E7%89%87/</id>
+    <published>2020-02-20T06:17:21.045Z</published>
+    <updated>2020-02-20T06:27:46.852Z</updated>
+    
+    <content type="html"><![CDATA[<p>数组是一个数据的集合，有时候需要将数据拆分开来，或者对数组进行操作。</p><h1 id="创建切片"><a href="#创建切片" class="headerlink" title="创建切片"></a>创建切片</h1><p>创建切片，创建出的是一个空数组，使用</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s := <span class="built_in">make</span>(<span class="keyword">type</span>,length)</span><br></pre></td></tr></table></figure><p>进行输出可见，输出是一个空数组。</p><h1 id="向数组添加元素"><a href="#向数组添加元素" class="headerlink" title="向数组添加元素"></a>向数组添加元素</h1><p>和python一样，使用append向数组添加数据</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">append</span>(s,<span class="string">"a"</span>)</span><br></pre></td></tr></table></figure><p>这样就向数组的末尾添加了一个数据。</p><h1 id="切片复制"><a href="#切片复制" class="headerlink" title="切片复制"></a>切片复制</h1><p>切片会经常进行切片间的复制，使用copy方法。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">copy</span>(s,c)</span><br></pre></td></tr></table></figure><p>c中的内容被复制到了s上。</p><p><strong>需要注意：复制切片的时候，新切片的长度不会变。新切片不会因为旧切片的长度而变化。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;数组是一个数据的集合，有时候需要将数据拆分开来，或者对数组进行操作。&lt;/p&gt;
+&lt;h1 id=&quot;创建切片&quot;&gt;&lt;a href=&quot;#创建切片&quot; class=&quot;headerlink&quot; title=&quot;创建切片&quot;&gt;&lt;/a&gt;创建切片&lt;/h1&gt;&lt;p&gt;创建切片，创建出的是一个空数组，使用&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Go语言/函数</title>
+    <link href="http://39.97.232.17/2020/02/20/Go%E8%AF%AD%E8%A8%80/%E5%87%BD%E6%95%B0/"/>
+    <id>http://39.97.232.17/2020/02/20/Go%E8%AF%AD%E8%A8%80/%E5%87%BD%E6%95%B0/</id>
+    <published>2020-02-20T05:41:57.267Z</published>
+    <updated>2020-02-20T06:17:15.068Z</updated>
+    
+    <content type="html"><![CDATA[<p>函数和python中的定义都是相同的，是一个程序段的集合。其定义方法如下：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">name</span><span class="params">(value1 <span class="keyword">type</span>,value2 <span class="keyword">type</span>)</span> <span class="title">type</span></span> &#123;</span><br><span class="line">function;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这就是函数的基本形式。</p><p>下边是一个例子：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">( a ,b <span class="keyword">int</span>)</span>  <span class="title">int</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> result <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line">result = a</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">result = b</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">fmt.Println(max(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;函数和python中的定义都是相同的，是一个程序段的集合。其定义方法如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
