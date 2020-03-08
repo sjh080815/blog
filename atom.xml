@@ -268,11 +268,11 @@
   </entry>
   
   <entry>
-    <title>业务理论/灰度发布</title>
+    <title>灰度发布</title>
     <link href="http://39.97.232.17/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/"/>
     <id>http://39.97.232.17/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/</id>
     <published>2020-03-08T12:19:13.816Z</published>
-    <updated>2020-03-02T09:28:29.288Z</updated>
+    <updated>2020-03-08T15:24:50.119Z</updated>
     
     <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>灰度发布就是在黑和白之间发布网站。假设有一个黑区和白区。黑区使用旧版本的产品，白区发布新版本产品，然后对白区进行产品调研。如果白区没有什么意见，则可白区向黑区扩散。</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>beta和正式版。对特定用户推送beta版本产品，进行使用状况调研，然后根据调研逐渐将beta转化为正式版。</p>]]></content>
     
@@ -286,6 +286,10 @@
     </summary>
     
     
+      <category term="业务理论" scheme="http://39.97.232.17/categories/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/"/>
+    
+    
+      <category term="业务理论" scheme="http://39.97.232.17/tags/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/"/>
     
   </entry>
   
