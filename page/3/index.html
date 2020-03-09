@@ -360,6 +360,37 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/" >
+            
+                <span>基础服务/ssh配置</span>
+        </a>
+        <div class="abstract-content">
+            SSH服务是Linux的远程命令行服务。一般情况下，Linux系统默认会安装这个服务，我们只需要修改相关的配置。
+多网卡设置服务器通常不止有一个网卡，每个网卡的业务不同，所以就需要指定一个网卡做ssh服务。
+在/etc/ssh/下，修改sshd_config服务配置文件。
+添加ListenAddress，绑定到网卡的IP上。
+业务端口绑定在上述文件中添加Port参数。
+在默认情况下这个文件这个文件大部分是被注释掉的，所以我们需要手动进行配置。
+免密登录免密登录就是使用密钥进行登录。
+首先创建一下public_key
+12345678910111213141516171819202122[...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/" >
             
                 <span>基础服务/SAMBA服务</span>
@@ -680,36 +711,6 @@ DHCP服务器会发生冲突
 
 DHCP服务，常用在大型网络环境下（如果三四台主机，那就没必要了，手动一下就行了）。但是切记，在服务器网络不要用DHCP服务，因为DHCP是由租约期的，租约期到会重新分配IP，有可能发生IP改变。服务器需要稳定的IP支持，才能保证用户的正常访问，所以为了避免服务突然没法访问。DHCP一般不会用到这里。
 服务端配置...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/Apache/" >
-            
-                <span>基础服务/Apache</span>
-        </a>
-        <div class="abstract-content">
-            Apache是一种很常见的静态web服务器，常常被用作静态页面服务器。
-安装一般生产环境中都使用编译安装或者二进制安装，这里使用编译安装。
-首先安装一下依赖环境：
-1yum groupinstall -y "Development Tools" "Development Libraries"
-
-下载需要编译安装的依赖（在官网上都有，下载安装即可）
-下载httpd安装包，进行解压安装：
-12345wget http://mirror.bit.edu.cn/apache//httpd/httpd-2.4.41.tar.gztar -zxvf httpd-2.4.41.tar.gzcd htt...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2471,9 +2472,44 @@ DHCP服务，常用在大型网络环境下（如果三四台主机，那就没�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 112
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3248,6 +3284,11 @@ DHCP服务，常用在大型网络环境下（如果三四台主机，那就没�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >gzip模块</a>
+        </li>
     
     
         <li class="archive-post-item">

@@ -360,6 +360,45 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" >
+            
+                <span>Linux的进程</span>
+        </a>
+        <div class="abstract-content">
+            计算机运行是由多个进程（process）并行的，比如windows来说，可以从任务管理器查看当前的进程。Linux同样也有类似于任务管理器的工具。
+ps命令：
+ps可以列出当前进程，语法：ps [-aefl]
+-a 进程所有参数
+-e 所有进程
+-f 全格式
+-l 长格式
+bash#ps -al
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+4 S     0 10284 10242  0  80   0 - 11735 poll_s pts/17   00:00:00 vi
+0 S     0...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%A6%82%E8%AE%BA/" >
             
                 <span>网络概论</span>
@@ -646,38 +685,6 @@ Linux常...
 SSH是SecureShell的缩写，SSH 为建立在应用层基础上的安全协议。SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。
 在服务器中，常用的SSH端口为22，该端口可提供SSH和SFTP服务。SSH服务可以为我们提供远程服务器的远程连接，这样提高了我们的工作效率。我们可以在服务器上创建多条SSH连接，这样就可以同时执行多条命令（不要让命令撞车），缩短等待时间。
 SSH...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/shell%E7%AE%80%E8%BF%B0/" >
-            
-                <span>shell简述</span>
-        </a>
-        <div class="abstract-content">
-            shell的意思是壳，我也不知道为什么叫这个名字，咱们知道有这个东西就行了。shell是Linux命令行，与Windows的dos类似。Linux的定位是服务器系统，服务器的目的就是高性能运算，所以Linux发展至今，有桌面的发行版就那么几个，大部分发行版仍然只有shell命令行。
-在一般的发行版中，shell都运行在缺省bash中，bash的目录在/bin/bash，shell的作用就是将用户的命令转送给核心然后由核心进行相关操作。
-如果只做运维，那么这些知识已经足够了，如果做核心开发，那就得对shell进行深入研究和学习，因为我是做运维这部分的，所以就不在深入，知道是怎么一回事就行了。
-
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2445,9 +2452,44 @@ SSH...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 112
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3222,6 +3264,11 @@ SSH...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >gzip模块</a>
+        </li>
     
     
         <li class="archive-post-item">

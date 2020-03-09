@@ -360,6 +360,39 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" >
+            
+                <span>Nginx反向代理</span>
+        </a>
+        <div class="abstract-content">
+            Nginx的有一个主要功能就是反向代理。反向代理的原理就是将Nginx服务器收到的请求数据转发给其他服务器。反向代理就是将数据反向发给更多的机器，从而做到负载均衡。
+集群创建这里为了节省内存，运行两个docker容器作为站点服务器。这个后端服务器可以是Nginx，也可以是Apache，也可以是Tomcat。Nginx作为一个七层的代理服务器，只能转发HTTP协议的请求信息。
+代理服务器配置配置代理服务器就是在服务器上配置一个后端服务器的集群。
+在nginx.conf文件中，在server块中创建一个upstream块。这是一个后端服务器的集群块。在这个块写：
+1234upstream g...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/mysql/%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE/" >
             
                 <span>过滤数据</span>
@@ -648,45 +681,6 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" >
-            
-                <span>Linux的进程</span>
-        </a>
-        <div class="abstract-content">
-            计算机运行是由多个进程（process）并行的，比如windows来说，可以从任务管理器查看当前的进程。Linux同样也有类似于任务管理器的工具。
-ps命令：
-ps可以列出当前进程，语法：ps [-aefl]
--a 进程所有参数
--e 所有进程
--f 全格式
--l 长格式
-bash#ps -al
-F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
-4 S     0 10284 10242  0  80   0 - 11735 poll_s pts/17   00:00:00 vi
-0 S     0...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
     
 </div>
             
@@ -2443,9 +2437,44 @@ F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 112
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3220,6 +3249,11 @@ F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >gzip模块</a>
+        </li>
     
     
         <li class="archive-post-item">

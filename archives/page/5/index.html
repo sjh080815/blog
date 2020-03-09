@@ -347,6 +347,39 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/zabbix/nginx%E7%9B%91%E6%8E%A7/" >
+            
+                <span>nginx监控</span>
+        </a>
+        <div class="abstract-content">
+            nginx通常会留一个api接口，这个接口可以获取到nginx目前的工作状态。通常情况下，一台服务器的连接池资源是有限的，所以我们就需要用nginx做一下性能的监控，防止服务器因为访问量过大导致的崩溃。
+配置nginx api在nginx.conf的server块中添加一个location，如下：
+1234 location ~ &#x2F;nginx_status &#123;                stub_status on;                access_log off;&#125;
+
+这样就启动了nginx的api，我们可以使用浏览器进行访问查看这个api...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/saltstack/sls%E5%89%A7%E6%9C%AC/" >
             
                 <span>sls剧本</span>
@@ -673,31 +706,6 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
 我们来观察一下这个文件结构：
 项目目录：
 1234567mysite├── manage.py...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E9%82%AE%E7%AE%B1%E6%A8%A1%E5%9D%97/" >
-            
-                <span>python/邮箱模块</span>
-        </a>
-        <div class="abstract-content">
-            该模块是官方的标准库，所以不必重新安装
-使用模块：smtplib
-1234567import smtplibsmtp = smtplib.SMTP() #创建SMTP对象smtp.connect(Host,Port) #连接到SMTP服务器smtp.starttls() #开启TLS加密smtp.login(User,Password) #登录服务器smtp.send(From,To,Information) #发出邮件smtp.quit() #关闭连接
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2359,9 +2367,44 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 112
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3136,6 +3179,11 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >gzip模块</a>
+        </li>
     
     
         <li class="archive-post-item">

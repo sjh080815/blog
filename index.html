@@ -360,6 +360,37 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >
+            
+                <span>gzip模块</span>
+        </a>
+        <div class="abstract-content">
+            Gzip是nginx内置的一个压缩模块，对发送的数据进行压缩，在质量和速度上取得一个折中，提高服务的性能。
+Gzip通常被写到server块中，下边看一看这个模块的写法。
+123456789101112131415gzip off;gzip_min_length 1k;gzip_comp_level 1;gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;javascript app...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/09</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/" >
             
                 <span>Linux服务器性能指标</span>
@@ -651,50 +682,6 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
             playbook就是和saltstack类似的yaml部署描述文件。一个playbooks内包含一个或多个play，下面对play进行一下解析：
 下边是一个例子：
 123456789101112131415161718---- hosts: webservers  vars:    http_port: 80    max_clients: 200  remote_user: root  tasks:  - name: ensure apache is at the latest version    yum: pkg&#x3D;httpd state&#x3D;latest  - na...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/ansible/ansible%E5%AE%89%E8%A3%85/" >
-            
-                <span>ansible安装</span>
-        </a>
-        <div class="abstract-content">
-            ansible是一个基于SSH协议的自动化运维工具，通常使用的时候需要给其他主机配置免密登录，且只需要安装控制端。
-安装在控制端安装依赖及主程序
-1234yum install epel-releaseyum install ansible
-
-
-
-也可以使用pip安装
-12pip install ansible
-
-
-
-安装好后进行主机配置和远程配置。
-在控制端配置/etc/ansible/hosts文件，在这个文件里可以使用ip，也可以使用hostname（那就需要使用hosts文件对主机进行解析或者DNS能进行解析）。
-
-生成SSH公钥，将公钥信息下发给被控制主机。
-12ssh-key...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2462,9 +2449,44 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 112
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3239,6 +3261,11 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >gzip模块</a>
+        </li>
     
     
         <li class="archive-post-item">

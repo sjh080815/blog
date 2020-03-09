@@ -347,6 +347,50 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/ansible/ansible%E5%AE%89%E8%A3%85/" >
+            
+                <span>ansible安装</span>
+        </a>
+        <div class="abstract-content">
+            ansible是一个基于SSH协议的自动化运维工具，通常使用的时候需要给其他主机配置免密登录，且只需要安装控制端。
+安装在控制端安装依赖及主程序
+1234yum install epel-releaseyum install ansible
+
+
+
+也可以使用pip安装
+12pip install ansible
+
+
+
+安装好后进行主机配置和远程配置。
+在控制端配置/etc/ansible/hosts文件，在这个文件里可以使用ip，也可以使用hostname（那就需要使用hosts文件对主机进行解析或者DNS能进行解析）。
+
+生成SSH公钥，将公钥信息下发给被控制主机。
+12ssh-key...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >
             
                 <span>灰度发布</span>
@@ -627,37 +671,6 @@ crontab定义命令：
 第三个*：执行命令的日参数，表示几号执行。这个参数可以是多个，用逗号隔开。
 第四个*：执行命令的月参数，表示几月执行。这个参数可以是多个，用逗号隔开。
 第五个*：执行命令的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/" >
-            
-                <span>基础服务/ssh配置</span>
-        </a>
-        <div class="abstract-content">
-            SSH服务是Linux的远程命令行服务。一般情况下，Linux系统默认会安装这个服务，我们只需要修改相关的配置。
-多网卡设置服务器通常不止有一个网卡，每个网卡的业务不同，所以就需要指定一个网卡做ssh服务。
-在/etc/ssh/下，修改sshd_config服务配置文件。
-添加ListenAddress，绑定到网卡的IP上。
-业务端口绑定在上述文件中添加Port参数。
-在默认情况下这个文件这个文件大部分是被注释掉的，所以我们需要手动进行配置。
-免密登录免密登录就是使用密钥进行登录。
-首先创建一下public_key
-12345678910111213141516171819202122[...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2319,9 +2332,44 @@ crontab定义命令：
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 112
+        Total : 113
         </div>
         <!-- search  -->
         
@@ -3096,6 +3144,11 @@ crontab定义命令：
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >gzip模块</a>
+        </li>
     
     
         <li class="archive-post-item">
