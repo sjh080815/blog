@@ -347,6 +347,43 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/saltstack/sls%E5%89%A7%E6%9C%AC/" >
+            
+                <span>sls剧本</span>
+        </a>
+        <div class="abstract-content">
+            saltstack是一种自动化运维工具，主要体现出自动化就是使用剧本自动部署。下边引入几个概念：
+
+file_root 这表示文件根的地址。这个目录下存放工具使用的剧本文件。
+state模块 这是salt的状态模块，可以用来安装服务和获取服务状态。
+highstate 高级模式。通常在file_root下存放的是以目录存放的剧本，使用一个top.sls文件引导剧本的入口。
+
+编写一个简单的剧本在编写第一个剧本之前，先修改和创建一个剧本存放目录：
+在master的配置文件中，将file_root的配置字段取消注释。注意，这里一定要包含一个bash字段。这个此段表示文件基础地址。
+创建剧本目...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/saltstack/saltstack%E6%A8%A1%E5%9D%97/" >
             
                 <span>saltstack模块</span>
@@ -661,35 +698,6 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
             该模块是官方的标准库，所以不必重新安装
 使用模块：smtplib
 1234567import smtplibsmtp = smtplib.SMTP() #创建SMTP对象smtp.connect(Host,Port) #连接到SMTP服务器smtp.starttls() #开启TLS加密smtp.login(User,Password) #登录服务器smtp.send(From,To,Information) #发出邮件smtp.quit() #关闭连接
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E8%BF%9C%E7%A8%8B%E6%A8%A1%E5%9D%97/" >
-            
-                <span>python/远程模块</span>
-        </a>
-        <div class="abstract-content">
-            安装1pip intsall pexpect
-
-spawn方法spawn支持scp，ftp，ssh等协议。实例化spawn方法时传入连接的指令。
-expect方法侦测服务器返回的信息，侦测到以后代码向后执行。参数时侦测的关键字。
-sendline方法发送命令行。参数时要执行的命令。
-logfile参数pexpect方法的日志。及远程机返回信息保存的地方。
-
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2334,9 +2342,26 @@ logfile参数pexpect方法的日志。及远程机返回信息保存的地方。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 111
+        Total : 112
         </div>
         <!-- search  -->
         
@@ -3111,6 +3136,11 @@ logfile参数pexpect方法的日志。及远程机返回信息保存的地方。
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/" >Linux服务器性能指标</a>
+        </li>
     
     
         <li class="archive-post-item">

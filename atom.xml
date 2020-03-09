@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://39.97.232.17/"/>
-  <updated>2020-03-08T11:39:35.245Z</updated>
+  <updated>2020-03-09T08:31:48.819Z</updated>
   <id>http://39.97.232.17/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux服务器性能指标</title>
+    <link href="http://39.97.232.17/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/"/>
+    <id>http://39.97.232.17/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/</id>
+    <published>2020-03-09T07:39:25.000Z</published>
+    <updated>2020-03-09T08:31:48.819Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Linux服务器"><a href="#Linux服务器" class="headerlink" title="Linux服务器"></a>Linux服务器</h1><p>Linux服务器和大部分PC机一样，都有CPU、内存、硬盘和主板等部件构成。服务器特有阵列卡，是为冗余储存设计的，制约服务器性能的参数有一下几条：</p><h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p>CPU是服务器的核心。目前服务器CPU常用英特尔至强系列，英特尔E7系列服务器CPU是当前比较高性能的CPU了。服务器一般情况下是使用的双CPU，有的甚至使用多个CPU。一般的来说，服务器有一个CPU就可以完成运算了，但是为了追求算力的最大化和服务的稳定性，通常会使用到双CPU或者多CPU。主板搭载多CPU时，这些CPU会进行并行运算，从而获得最大的算力。</p><p>我们可以在/dev/cpu查看cpu硬件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># ll /dev/cpu</span></span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x 2 root root      80 Mar  3 18:09 0</span><br><span class="line">drwxr-xr-x 2 root root      80 Mar  3 18:09 1</span><br><span class="line">crw------- 1 root root 10, 184 Mar  3 18:09 microcode</span><br></pre></td></tr></table></figure><p>这里展现了cpu的硬件。</p><p>我们可以通过查看/proc/cpuinfo文件来查询CPU的具体情况。</p><p>下边介绍一下CPU的技术指标：</p><h3 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h3><p>CPU频率就是通常意义上的数据处理频率。一般情况下，CPU频率越高，CPU的运算能力越强。但是通常会因为温度问题制约CPU的性能。所以，CPU的降温非常重要。</p><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>一般情况下，CPU时会设计有三级缓存的，这三级缓存主要时用做内存和CPU之间的数据通信缓冲的。</p><p>那么，从这一点就不难得出，当CPU的频率较高时，一定有较大的缓存，一般的说，CPU频率越高，内存也会给的越大。</p><h3 id="虚拟化技术"><a href="#虚拟化技术" class="headerlink" title="虚拟化技术"></a>虚拟化技术</h3><p>虚拟化技术时服务器上最常用到的。目前各大厂商的云计算服务器都推崇虚拟化。虚拟化的依赖就是CPU的虚拟化技术。一般来说，英特尔至强系列的CPU都会支持intel-VT技术，保障虚拟化的实施。</p><h3 id="物理核和逻辑核"><a href="#物理核和逻辑核" class="headerlink" title="物理核和逻辑核"></a>物理核和逻辑核</h3><p>咱们经常会听到有人说几何几线程。这里的核就是物理核，线程就是逻辑核。通常来说，逻辑核是物理核的二倍。就这一点我们就可以得出一个结论，逻辑核是由物理核模拟出来的。</p><h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p>内存也是服务器的一个重要组成部分。根据冯诺依曼的结构理论来说，内存的大小和质量也直接的影响了设备对数据的处理能力。</p><p>我们的PC机，目前用的内存是常规没有ECC的内存，价格较高，频率也比较高，一般不会低于2000MHz。服务器用的内存条是ECC内存条，相比于PC机用的内存，更廉价，频率更低。单从稳定性和容量上，服务器就不可能选用普通内存。</p><p>下边是内存的几个技术指标：</p><h3 id="容量"><a href="#容量" class="headerlink" title="容量"></a>容量</h3><p>就是我们通常理解的容量。服务器的内存容量都是非常大的，一台主机可能都会由及时G的样子。</p><h3 id="频率-1"><a href="#频率-1" class="headerlink" title="频率"></a>频率</h3><p>内存的频率和CPU的有些类似，我就不单说了。</p><blockquote><p><strong>插入知识：swap</strong><br>swap叫内存交换区。这个交换区有点像一个缓冲区。当内存的性能不能匹配CPU的处理速度的时候，会使用swap来进行缓冲。<br>swap是基于硬盘的，所以数据的存储效率可能会低于内存。</p></blockquote><h2 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h2><p>通常的服务器集群中，都不会直接把数据存放到业务服务器上，都是将数据存放在数据存储集群的。数据存储集群也依赖于硬盘，硬盘的效率对服务器的快速性也由很大的影响。</p><h3 id="硬盘容量"><a href="#硬盘容量" class="headerlink" title="硬盘容量"></a>硬盘容量</h3><p>即为硬盘的大小，没有什么需要说的。</p><h3 id="硬盘缓存"><a href="#硬盘缓存" class="headerlink" title="硬盘缓存"></a>硬盘缓存</h3><p>和CPU缓存的原理一样，不多赘述。</p><h3 id="SAS和SATA"><a href="#SAS和SATA" class="headerlink" title="SAS和SATA"></a>SAS和SATA</h3><p>这是两种硬盘的接口方式。SAS硬盘常用于服务器上，SATA硬盘常用于PC机上，就稳定性而言，SAS略胜一筹。</p><h3 id="SSD和HDD"><a href="#SSD和HDD" class="headerlink" title="SSD和HDD"></a>SSD和HDD</h3><p>SSD被称为固态硬盘，HDD被称为机械硬盘。固态硬盘很少有用在服务器上，原因是企业级的SSD成本非常高，而且当数据丢失的时候不易于恢复，基本丢数据就是永久性的。</p><h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>数据吞吐量，即I/O。一般意义上I/O越大，效果就越好，服务器的处理速度就越快。</p><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>网络是体统服务的媒介，网络的速度直接影响客户的体验。目四七年机房采用的网络模式基本都是专线接入，超大带宽。下边是几个网络的技术参数：</p><h3 id="延迟"><a href="#延迟" class="headerlink" title="延迟"></a>延迟</h3><p>网络都会有延迟，这个延迟的时间取决于客户端和服务器之间网关的响应时间。如果是跨运营商访问，那么访问的延迟一般都会比较大。</p><h3 id="吞吐量-1"><a href="#吞吐量-1" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>就是广泛意义上的网速。</p><h3 id="百千万兆"><a href="#百千万兆" class="headerlink" title="百千万兆"></a>百千万兆</h3><p>这个表示的不是网络带宽，指的是网络的模式。这个单位是Mbps。网络模式要和网卡，网线，交换机设备都匹配才能体现出最佳性能。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Linux服务器&quot;&gt;&lt;a href=&quot;#Linux服务器&quot; class=&quot;headerlink&quot; title=&quot;Linux服务器&quot;&gt;&lt;/a&gt;Linux服务器&lt;/h1&gt;&lt;p&gt;Linux服务器和大部分PC机一样，都有CPU、内存、硬盘和主板等部件构成。服务器特有阵列卡
+      
+    
+    </summary>
+    
+    
+      <category term="业务理论" scheme="http://39.97.232.17/categories/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/"/>
+    
+    
+      <category term="业务理论" scheme="http://39.97.232.17/tags/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>镜像</title>
@@ -499,31 +525,6 @@
       
         &lt;p&gt;SSH服务是Linux的远程命令行服务。一般情况下，Linux系统默认会安装这个服务，我们只需要修改相关的配置。&lt;/p&gt;
 &lt;h1 id=&quot;多网卡设置&quot;&gt;&lt;a href=&quot;#多网卡设置&quot; class=&quot;headerlink&quot; title=&quot;多网卡设置&quot;&gt;&lt;/a&gt;多网卡设置&lt;/
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>基础服务/SAMBA服务</title>
-    <link href="http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/"/>
-    <id>http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/</id>
-    <published>2020-03-08T12:19:13.520Z</published>
-    <updated>2019-12-15T08:17:07.447Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>SAMBA服务可以搭建网上邻居服务器，可共享一些硬件设备。</p></blockquote><h1 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h1><p>安装必要软件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba samba-client samba-common</span><br></pre></td></tr></table></figure><p>配置一下samba的配置信息，位置/etc/samba/smb.conf</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">        workgroup &#x3D; SAMBA</span><br><span class="line">        security &#x3D; user</span><br><span class="line"></span><br><span class="line">        passdb backend &#x3D; tdbsam</span><br><span class="line"></span><br><span class="line">        printing &#x3D; cups</span><br><span class="line">        printcap name &#x3D; cups</span><br><span class="line">        load printers &#x3D; yes</span><br><span class="line">        cups options &#x3D; raw</span><br><span class="line">[print$]</span><br><span class="line">        comment &#x3D; Printer Drivers</span><br><span class="line">        path &#x3D; &#x2F;var&#x2F;lib&#x2F;samba&#x2F;drivers</span><br><span class="line">        write list &#x3D; @printadmin root</span><br><span class="line">        force group &#x3D; @printadmin</span><br><span class="line">        create mask &#x3D; 0664</span><br><span class="line">        directory mask &#x3D; 0775</span><br></pre></td></tr></table></figure><h1 id="global全局配置模块"><a href="#global全局配置模块" class="headerlink" title="global全局配置模块"></a>global全局配置模块</h1><p>workgroup：工作组</p><p>log file：日志文件，文件名可用变量。</p><p>max log size：最大日志大小。</p><p>security：</p><ul><li>share：无密码分享</li><li>user：使用服务器本地的账户密码</li><li>domain：使用外部密码数据库</li></ul><p>passdb backend：密码数据库格式。</p><h1 id="共享文件模块"><a href="#共享文件模块" class="headerlink" title="共享文件模块"></a>共享文件模块</h1><p>comment：目录说明。</p><p>path：共享目录位置。</p><p>browseable：可浏览。</p><p>writeable：可写。</p><h1 id="无密码共享"><a href="#无密码共享" class="headerlink" title="无密码共享"></a>无密码共享</h1><p>在samba 4.2.0 版本之后不再兼容3.0 的版本， 该参数无法兼容security=share，所以无法搭建无密码共享。</p><h1 id="需密码共享"><a href="#需密码共享" class="headerlink" title="需密码共享"></a>需密码共享</h1><p>security写user参数，认证密码是本地密码，</p><p>在配置文件创建共享目录，用<code>testparm -v</code>测试配置文件。没有问题之后启动服务。</p><p>进行本地测试,校验本地配置文件正确性。</p><h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><p>首先添加本地账户和密码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -G users smb1</span><br><span class="line"><span class="built_in">echo</span> 123456 | passwd --stdin smb1</span><br></pre></td></tr></table></figure><p>添加samba账户</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdbedit -a -u smb1</span><br></pre></td></tr></table></figure><p>会要求设置密码，密码是登录samba的密码。</p><p>创建号后重启服务，用本地测试一下连接。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bash# smbclient -L &#x2F;&#x2F;127.0.0.1  -U smb1</span><br><span class="line">Enter SAMBA\smb1&#39;s password:</span><br><span class="line"></span><br><span class="line">        Sharename       Type      Comment</span><br><span class="line">        ---------       ----      -------</span><br><span class="line">        temp            Disk      test</span><br><span class="line">        IPC$            IPC       IPC Service (Samba 4.9.1)</span><br><span class="line">Reconnecting with SMB1 for workgroup listing.</span><br><span class="line"></span><br><span class="line">        Server               Comment</span><br><span class="line">        ---------            -------</span><br><span class="line"></span><br><span class="line">        Workgroup            Master</span><br><span class="line">        ---------            -------</span><br></pre></td></tr></table></figure><p>服务端配置完成。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;SAMBA服务可以搭建网上邻居服务器，可共享一些硬件设备。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;服务端安装&quot;&gt;&lt;a href=&quot;#服务端安装&quot; class=&quot;headerlink&quot; title=&quot;服务端安装&quot;&gt;&lt;/a&gt;服务端安装&lt;/
       
     
     </summary>

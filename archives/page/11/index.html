@@ -347,6 +347,38 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod%E8%B0%83%E5%BA%A6/" >
+            
+                <span>Pod调度</span>
+        </a>
+        <div class="abstract-content">
+            Pod并非已成不变的，在应用场景中会经常进行容器添加、删除和调度。调度是一个很繁琐的活，不可能全由人工进行操作，所以有RC、Deployment和ReplicaSet，控制副本调度。
+自动调度使用deployment或RC。
+创建一个基于deployment的自动调度：
+12345678910111213141516171819apiVersion: apps/v1kind: Deploymentmetadata:  name: nginxspec:  replicas: 3  selector:    matchLabels:      app: nginx  template:   ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" >
             
                 <span>Pod生命周期</span>
@@ -657,42 +689,6 @@ switch判断用法和c语言类似，语法如下：
 c中的内容被复制到了s上。
 需要注意：复制切片的时候，新切片的长度不会变。新切片不会因为旧切片的长度而变化。
 
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "云计算开发技术">云计算开发技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%8F%98%E9%87%8F/" >
-            
-                <span>基础及变量</span>
-        </a>
-        <div class="abstract-content">
-            环境安装从官网上下载Go的安装包，进行手动安装，这里不进行赘述。
-配置工作环境在任意位置创建一个文件夹，在里边创建src，pkg和bin文件夹。src文件夹是源码文件夹，存放源码文件。bin是项目的扩展文件夹。pkg是封包的文件夹。
-在系统的系统变量中创建一个GOPATH系统环境变量，存放创建的文件夹的位置。
-第一个程序写一个hello world的程序。
-1234567package mainimport "fmt"func main()  &#123;	fmt.Print("test")&#125;
-
-分析一下这一块源码
-package是包。一个文件必须被包含到一个package，这...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2343,9 +2339,26 @@ package是包。一个文件必须被包含到一个package，这...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 111
+        Total : 112
         </div>
         <!-- search  -->
         
@@ -3120,6 +3133,11 @@ package是包。一个文件必须被包含到一个package，这...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/" >Linux服务器性能指标</a>
+        </li>
     
     
         <li class="archive-post-item">

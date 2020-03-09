@@ -360,6 +360,36 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/SAMBA%E6%9C%8D%E5%8A%A1/" >
+            
+                <span>基础服务/SAMBA服务</span>
+        </a>
+        <div class="abstract-content">
+            
+SAMBA服务可以搭建网上邻居服务器，可共享一些硬件设备。
+
+服务端安装安装必要软件
+1yum install samba samba-client samba-common
+
+配置一下samba的配置信息，位置/etc/samba/smb.conf
+1234567891011121314151617[global]        workgroup &#x3D; SAMBA        security &#x3D; user        passdb backend &#x3D; tdbsam        printing &#x3D; cups        printca...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/rabbitMQ/" >
             
                 <span>基础服务/rabbitMQ</span>
@@ -687,39 +717,6 @@ DHCP服务，常用在大型网络环境下（如果三四台主机，那就没�
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
             </div>
             <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/RAID/" >
-            
-                <span>RAID</span>
-        </a>
-        <div class="abstract-content">
-            RAID是linux中常用的一种冗余储存方案。目前主要的RAID技术由RAID0、RAID1、RAID5和RAID10。下边对这些冗余方案做一下总结：
-RAID0是一种条带化的储存冗余。将数据离散的分布到多个磁盘上。这样的优点在于性能高，读取速度快，高IO特性。但是，如果某一块磁盘发生了故障，那么对整个文件系统将会是灾难性的。
-RAID1是一种复制卷存储冗余。在磁盘阵列内，两块或多块磁盘进行文件复制，那么这几块磁盘的数据是相同的。这样的有点是数据的可用性更高（高容错），但是同时，磁盘阵列的容量下降，读性能由显著提高，写性能较低。适合做高可用数据阵列。
-
-RAID5四个磁盘组成一个RAID...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "存储技术">存储技术</a>
-    
-</div>
             
         </div>
     </article>
@@ -2457,9 +2454,26 @@ RAID5四个磁盘组成一个RAID...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 111
+        Total : 112
         </div>
         <!-- search  -->
         
@@ -3234,6 +3248,11 @@ RAID5四个磁盘组成一个RAID...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/" >Linux服务器性能指标</a>
+        </li>
     
     
         <li class="archive-post-item">

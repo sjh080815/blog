@@ -347,6 +347,35 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/xls%E8%A1%A8%E6%A0%BC/" >
+            
+                <span>python/xls表格</span>
+        </a>
+        <div class="abstract-content">
+            xls概念：
+workbook：工作薄。就是一个xls文件。
+worksheet：工作表。就是xls文件中的sheet。
+column:列。
+row：行。
+如下是一个demo：
+123456import xlsxwriterwork_book = xlsxwriter.Workbook('test.xls') #创建一个xls文件work_sheet = work_book.add_worksheet('test') #创建一个sheetwork_sheet.set_column('A:A',20) #调整列的宽度，如果将column换成row，则是修改行的行高work_sheet.wr...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/python/time%E6%A8%A1%E5%9D%97/" >
             
                 <span>python/time模块</span>
@@ -650,37 +679,6 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/mysql/%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE/" >
-            
-                <span>过滤数据</span>
-        </a>
-        <div class="abstract-content">
-            例：一个商品，由两个厂家生产，生产出相同的产品，但是两个厂家的售价不一样，那么，在购买的时候，一定要限定以下品牌才能准确得知自己需要花多少钱。
-WHERE子句WHERE子句对检索的信息进行筛选，将符合WHERE条件的信息输出。
-12345678910111213141516171819mysql&gt; select * from test;+----+--------+| id | demo   |+----+--------+|  1 | 11111  ||  2 | 11125  ||  3 | 11111  ||  4 | 111258 |+----+--------+4 row...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
     
 </div>
             
@@ -2320,9 +2318,26 @@ WHERE子句WHERE子句对检索的信息进行筛选，将符合WHERE条件的�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 111
+        Total : 112
         </div>
         <!-- search  -->
         
@@ -3097,6 +3112,11 @@ WHERE子句WHERE子句对检索的信息进行筛选，将符合WHERE条件的�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2020/03/09/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/" >Linux服务器性能指标</a>
+        </li>
     
     
         <li class="archive-post-item">
