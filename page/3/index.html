@@ -360,6 +360,44 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/" >
+            
+                <span>基础服务/定期执行命令</span>
+        </a>
+        <div class="abstract-content">
+            
+一般情况下，服务器需要定期执行一些命令。这些命令不可能每次都手动执行，所以咱们就要用到自动执行的工具。
+
+工具名：crontab
+crontab定义命令：
+1crontab -e
+
+此时会打开crontab的配置文件，文件格式如下：
+1* * * * * command
+
+配置文件解析：
+第一个：执行命令的时参数，若写成/2则表示每两个小时执行一次。
+第二个：执行命令的分参数，若写成/30则表示每30分钟执行一次。
+第三个*：执行命令的日参数，表示几号执行。这个参数可以是多个，用逗号隔开。
+第四个*：执行命令的月参数，表示几月执行。这个参数可以是多个，用逗号隔开。
+第五个*：执行命令的...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/ssh%E9%85%8D%E7%BD%AE/" >
             
                 <span>基础服务/ssh配置</span>
@@ -677,40 +715,6 @@ local_enable
 DNS服务器保存了解析的域名和IP，通常来说，这个解析是一一对应的。
 客户端发起请求，首先会在客户端的hosts文件中查询是否有相关的解析，如果没有，将包含有域名的请求头转发给DNS服务器上。当DNS服务器上也查不到相关的解析时，就会将数据转发给根服务器进行数据解析，也可以将数据转发给forward进行解析。
 权威DNS和非权威DNS权威DNS是指官方的DNS服务器，这种服务器的解析数量大，且更为稳定。非权威DNS是指自己搭建的D...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DHCP%E6%9C%8D%E5%8A%A1/" >
-            
-                <span>基础服务/DHCP服务</span>
-        </a>
-        <div class="abstract-content">
-            
-在家用的路由器上，一般都会集成DHCP这个功能。DHCP服务，负责给网络内的主机分配IP和netmask，更便于主机的联网操作。
-
-既然咱们要搭建DHCP服务，那么，咱们就不能让网络内有相关的服务存在，原因如下：
-
-主机不知道该向谁获取IP地址
-
-DHCP服务器会发生冲突
-
-
-DHCP服务，常用在大型网络环境下（如果三四台主机，那就没必要了，手动一下就行了）。但是切记，在服务器网络不要用DHCP服务，因为DHCP是由租约期的，租约期到会重新分配IP，有可能发生IP改变。服务器需要稳定的IP支持，才能保证用户的正常访问，所以为了避免服务突然没法访问。DHCP一般不会用到这里。
-服务端配置...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2517,9 +2521,24 @@ DHCP服务，常用在大型网络环境下（如果三四台主机，那就没�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3582,6 +3601,20 @@ DHCP服务，常用在大型网络环境下（如果三四台主机，那就没�
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>

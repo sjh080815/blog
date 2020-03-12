@@ -347,6 +347,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%AE%89%E8%A3%85/" >
+            
+                <span>Nginx安装</span>
+        </a>
+        <div class="abstract-content">
+            安装Nginx的依赖库
+1yum install gcc gcc-c++ automake pcre pcre-devel zlib zlib-devel open open-ssl
+
+这里的依赖库是Nginx的所有依赖，有部分是非必要的，所以可以进行部分安装，但是openssl、gcc和gcc-c++都是必要的。
+下载Nginx安装包：
+1wget http://nginx.org/download/nginx-1.14.2.tar.gz
+
+下载完成后解压文件。解压完成后进入目录进行编译。
+生成配置：
+1./configure --prefix=/Nginx
+
+这里生成配置是将Ngin...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" >
             
                 <span>Nginx反向代理</span>
@@ -620,43 +660,6 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
 因为服务器有限，所以我在docker上进行了环境的部署。
 数据库配置运行mysql容器，运行两次创建容器代码，创建两个mysql容器
 1docker run -itd -e MYSQL_ROOT_PASSWORD=123 mysql...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/mysql/MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" >
-            
-                <span>MySQL基础操作</span>
-        </a>
-        <div class="abstract-content">
-            任何文件在平时使用中用到最多的操作方式就是增删改查，数据库也一样。
-数据库操作基本思路数据库课其他文件操作有很多不同的思路。在一个数据库服务器中，通常保存的不止有一个数据库，不同的数据库对应不同的业务，那么就会有数据库选择的问题。
-当数据库选择后，可以认为当前的cli进入了这个数据库，所有操作的对象都是当前选中的库。
-选择数据库选择数据库通常是数据库操作的第一步，常用语法
-1USE data_base_name
-
-这里的选中了一个数据库，下边就可以进行操作了。
-显示数据表通过前边的学习我们知道了一个数据库由多个数据表构成，我们可以在选择数据库后查看数据库内包含那些数据表，通常使用：
-1S...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2369,9 +2372,24 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3434,6 +3452,20 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>

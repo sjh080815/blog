@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://39.97.232.17/"/>
-  <updated>2020-03-09T15:39:25.683Z</updated>
+  <updated>2020-03-12T12:13:00.390Z</updated>
   <id>http://39.97.232.17/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis/创建redis集群</title>
+    <link href="http://39.97.232.17/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/"/>
+    <id>http://39.97.232.17/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/</id>
+    <published>2020-03-12T11:11:56.850Z</published>
+    <updated>2020-03-12T12:13:00.390Z</updated>
+    
+    <content type="html"><![CDATA[<p>redis集群和哨兵的用途相似，但是集群更适合用于生产。其具有以下优势：</p><ol><li>数据自动切片分布到节点上</li><li>节点挂掉的适合，其他节点可以顶上</li></ol><p>节点内服务器分别负责处理不同hash端的数据。利用CRC16的算法，对key进行分发处理。</p><p>当创建完成一个集群后，集群负责处理的hash段的顶是固定的，所以当增加节点的时候，这个节点的hash段将分别从各个节点的底部去一部分，凑成一个新节点。</p><p>目前的集群架构，最低需要3Master和3Slave。这几个节点互相为主从结构，将数据分布储存，并进行主从复制。</p><h1 id="Redis节点一致性"><a href="#Redis节点一致性" class="headerlink" title="Redis节点一致性"></a>Redis节点一致性</h1><p>节点间的复制原理如下：</p><ol><li>cli向一台主机发送写指令</li><li>主机向cli发送一个状态</li><li>主机将请求分发给其他主机</li></ol><p>这是一种异步写操作，其他主机复制时候，可能会发生数据不一致的情况。</p><h1 id="redis集群搭建"><a href="#redis集群搭建" class="headerlink" title="redis集群搭建"></a>redis集群搭建</h1><h2 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h2><p>下载redis的源码文件，进行编译安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># wget http://download.redis.io/releases/redis-3.2.9.tar.gz</span></span><br><span class="line">bash<span class="comment"># tar -zxvf redis-3.2.9.tar.gz</span></span><br><span class="line">bash<span class="comment"># cd redis-3.2.9</span></span><br></pre></td></tr></table></figure><p>redis编译需要gcc和tcl的支持，手动安装一下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># yum install gcc tcl</span></span><br></pre></td></tr></table></figure><p>编译安装一下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># make &amp;&amp; make PREFIX=/usr/local/redis</span></span><br></pre></td></tr></table></figure><p>通常情况下，redis集群由多台服务器组成，每台服务器上也会跑多个数据节点。在这里，一个进程被看作了一个节点，只要节点监听的端口不发生冲突，那么就可以一台主机开多个节点了。</p><p>创建redis的配置文件（多节点）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># mkdir &#123;7000..7005&#125;</span></span><br><span class="line">bash<span class="comment"># touch &#123;7000..7005&#125;/redis.conf</span></span><br></pre></td></tr></table></figure><p>这里只是创建了一个空白的redis配置文件，当然，咱们也可以使用软件自带的配置文件进行修改。</p><p>在配置文件中，打开集群配置，修改pid、aof和rdb的位置，如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 端口号</span><br><span class="line">port 7000</span><br><span class="line"># 后台启动</span><br><span class="line">daemonize yes</span><br><span class="line"># 开启集群</span><br><span class="line">cluster-enabled yes</span><br><span class="line">#集群节点配置文件</span><br><span class="line">cluster-config-file nodes-7000.conf</span><br><span class="line"># 集群连接超时时间</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line"># 进程pid的文件位置</span><br><span class="line">pidfile &#x2F;var&#x2F;run&#x2F;redis-7000.pid</span><br><span class="line"># 开启aof</span><br><span class="line">appendonly yes</span><br><span class="line"># aof文件路径</span><br><span class="line">appendfilename &quot;appendonly-7005.aof&quot;</span><br><span class="line"># rdb文件路径</span><br><span class="line">dbfilename dump-7000.rdb</span><br></pre></td></tr></table></figure><p>启动集群内节点：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># bin/redis-server cluster/7000/redis.conf</span></span><br></pre></td></tr></table></figure><p>使用官方的redis-trib.rb工具生成集群，但是这个工具使用了ruby的环境，我们先配置好ruby的环境：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># yum install ruby rubygems -y</span></span><br><span class="line">bash<span class="comment"># gem install redis</span></span><br></pre></td></tr></table></figure><p>创建集群：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># redis-trib.rb create --replicas 1 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005</span></span><br></pre></td></tr></table></figure><p>自动创建集群。</p><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>使用redis-cli进行节点验证</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">./redis-cli -c -p 7000</span><br><span class="line">127.0.0.1:7000&gt; <span class="built_in">set</span> a 5</span><br><span class="line">-&gt; Redirected to slot [15495] located at 127.0.0.1:7005</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:7005&gt; get a</span><br><span class="line"><span class="string">"5"</span></span><br><span class="line">127.0.0.1:7005&gt; <span class="built_in">set</span> szac sa </span><br><span class="line">-&gt; Redirected to slot [8894] located at 127.0.0.1:7001</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:7001&gt; get szac</span><br><span class="line"><span class="string">"sa"</span></span><br></pre></td></tr></table></figure><p>可以看出来，发生了节点漂移，就是集群成功了。</p><h1 id="模拟宕机检验"><a href="#模拟宕机检验" class="headerlink" title="模拟宕机检验"></a>模拟宕机检验</h1><p>我们先看一下redis的健康监测工具：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># ./redis-trib.rb check 127.0.0.1:7001</span></span><br></pre></td></tr></table></figure><p>redis-trib.rb不仅提供了集群组件方案，也提供了集群的健康监测方案。这一段就是进行了健康监测。</p><p>这一段命令会返回当前的所有在线的节点，我们先挂掉7000节点看看。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># ./redis-trib.rb check 127.0.0.1:7001</span></span><br><span class="line">&gt;&gt;&gt; Performing Cluster Check (using node 127.0.0.1:7001)</span><br><span class="line">M: 315e2abf264b2437b0ba859483adcc7fd81d2655 127.0.0.1:7001</span><br><span class="line">   slots:5461-10922 (5462 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">M: 68ba481a27f25ef8eecc15bfd6e32fbd579fda79 127.0.0.1:7003</span><br><span class="line">   slots:0-5460 (5461 slots) master</span><br><span class="line">   0 additional replica(s)</span><br><span class="line">M: 3ac136984eb0d24dfcb057da36f39a0fa71752a0 127.0.0.1:7005</span><br><span class="line">   slots:10923-16383 (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">S: 5b5385b9885c1116dd956dc393909d9eabcbfe10 127.0.0.1:7004</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 315e2abf264b2437b0ba859483adcc7fd81d2655</span><br><span class="line">S: 63f3ee573957e786cf1395cb21086ed445afd5ca 127.0.0.1:7002</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 3ac136984eb0d24dfcb057da36f39a0fa71752a0</span><br><span class="line">[OK] All nodes agree about slots configuration.</span><br><span class="line">&gt;&gt;&gt; Check <span class="keyword">for</span> open slots...</span><br><span class="line">&gt;&gt;&gt; Check slots coverage...</span><br><span class="line">[OK] All 16384 slots covered.</span><br></pre></td></tr></table></figure><p>这里的集群自动割除了那个挂掉的节点，当前的服务器工作仍然正常，这就保证了数据的高可用。</p><p>重新启动刚才挂掉的服务，在进行监测，会发现集群内又出现了这个节点。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;redis集群和哨兵的用途相似，但是集群更适合用于生产。其具有以下优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据自动切片分布到节点上&lt;/li&gt;
+&lt;li&gt;节点挂掉的适合，其他节点可以顶上&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;节点内服务器分别负责处理不同hash端的数据。利用CRC16的算法，
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>gzip模块</title>
@@ -504,33 +531,6 @@
       
         &lt;h1 id=&quot;Nginx&quot;&gt;&lt;a href=&quot;#Nginx&quot; class=&quot;headerlink&quot; title=&quot;Nginx&quot;&gt;&lt;/a&gt;Nginx&lt;/h1&gt;&lt;p&gt;Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。&lt;/p&gt;
 &lt;h2 id=&quot;
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>基础服务/定期执行命令</title>
-    <link href="http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/"/>
-    <id>http://39.97.232.17/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/%E5%AE%9A%E6%9C%9F%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4/</id>
-    <published>2020-03-08T12:19:13.537Z</published>
-    <updated>2019-12-15T08:17:07.457Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>一般情况下，服务器需要定期执行一些命令。这些命令不可能每次都手动执行，所以咱们就要用到自动执行的工具。</p></blockquote><p>工具名：crontab</p><p>crontab定义命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure><p>此时会打开crontab的配置文件，文件格式如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure><p>配置文件解析：</p><p>第一个<em>：执行命令的时参数，若写成</em>/2则表示每两个小时执行一次。</p><p>第二个<em>：执行命令的分参数，若写成</em>/30则表示每30分钟执行一次。</p><p>第三个*：执行命令的日参数，表示几号执行。这个参数可以是多个，用逗号隔开。</p><p>第四个*：执行命令的月参数，表示几月执行。这个参数可以是多个，用逗号隔开。</p><p>第五个*：执行命令的星期参数，表示周几执行。这个参数可以是多个，用逗号隔开。</p><p>如果这里是五个*，则表示这个命令一直执行。</p><p>command参数：即是命令参数。参数可以是shell脚本，但是要写成bash命令。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;一般情况下，服务器需要定期执行一些命令。这些命令不可能每次都手动执行，所以咱们就要用到自动执行的工具。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;工具名：crontab&lt;/p&gt;
-&lt;p&gt;crontab定义命令：&lt;/p&gt;
-&lt;figure class=&quot;
       
     
     </summary>

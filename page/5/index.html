@@ -360,6 +360,38 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >
+            
+                <span>zabbix环境搭建</span>
+        </a>
+        <div class="abstract-content">
+            zabbix是一种常用的监控平台。监控在集群中是很有必要的，监控的存在能及时通知相关的工程师进行技术处理。
+zabbix分为三部分。第一部分是server，第二部分是web，第三部分是agent。分别是系统中的服务端，dashbroad和客户端，这些部分都是缺一不可的。
+部署服务端首先在服务器上进行yum配置，添加阿里云的镜像源：
+123456789101112131415161718192021222324252627282930[root@localhost yum.repos.d]# cat zabbix.repo [zabbix]name=Zabbix Official Repo...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/zabbix/nginx%E7%9B%91%E6%8E%A7/" >
             
                 <span>nginx监控</span>
@@ -687,38 +719,6 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
 调用数据库的时候，需要import相关的类。
 增下面是在test表中插入数据的方法。
 123456def add_stu(request):  ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/django/%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/" >
-            
-                <span>python/django/基本应用</span>
-        </a>
-        <div class="abstract-content">
-            安装推荐使用虚拟环境进行安装，这里为了开发方便直接在系统上安装了django框架。
-使用pip安装
-1pip install django
-
-安装完成后可以通过pip list查看是否安装成功。
-安装完成后，创建一个django项目。
-进入想要创建项目的位置，使用django-admin startproject ***创建一个项目。通常意义上，一个项目就是一个站点，一个站点可能会包含多个子站，也可以理解为应用，这里使用django-admin startapp ***添加一个APP（应用）。
-我们来观察一下这个文件结构：
-项目目录：
-1234567mysite├── manage.py...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2525,9 +2525,24 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3590,6 +3605,20 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>

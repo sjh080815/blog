@@ -360,6 +360,40 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >
+            
+                <span>redis/创建redis集群</span>
+        </a>
+        <div class="abstract-content">
+            redis集群和哨兵的用途相似，但是集群更适合用于生产。其具有以下优势：
+
+数据自动切片分布到节点上
+节点挂掉的适合，其他节点可以顶上
+
+节点内服务器分别负责处理不同hash端的数据。利用CRC16的算法，对key进行分发处理。
+当创建完成一个集群后，集群负责处理的hash段的顶是固定的，所以当增加节点的时候，这个节点的hash段将分别从各个节点的底部去一部分，凑成一个新节点。
+目前的集群架构，最低需要3Master和3Slave。这几个节点互相为主从结构，将数据分布储存，并进行主从复制。
+Redis节点一致性节点间的复制原理如下：
+
+cli向一台主机发送写指令
+主机向cli发送一个状态...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/12</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/09/Nginx%E8%B0%83%E4%BC%98/gzip%E6%A8%A1%E5%9D%97/" >
             
                 <span>gzip模块</span>
@@ -651,37 +685,6 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
 需要注意，ansible是基于ssh的集群管理工具，默认的链接端口是22，如果主机的ssh端口被修改过，则在声明hosts的时候著名ssh的端口。
 有时候服务器的使用账户并非root，那就需要进行指定：
 12[group]host ansible_connection&#x3D;connect_method ansible_ssh_u...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/ansible/playbook/" >
-            
-                <span>playbook</span>
-        </a>
-        <div class="abstract-content">
-            playbook就是和saltstack类似的yaml部署描述文件。一个playbooks内包含一个或多个play，下面对play进行一下解析：
-下边是一个例子：
-123456789101112131415161718---- hosts: webservers  vars:    http_port: 80    max_clients: 200  remote_user: root  tasks:  - name: ensure apache is at the latest version    yum: pkg&#x3D;httpd state&#x3D;latest  - na...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2494,9 +2497,24 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3559,6 +3577,20 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>

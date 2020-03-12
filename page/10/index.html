@@ -360,6 +360,38 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/SSH%E6%A6%82%E5%BF%B5/" >
+            
+                <span>SSH概念</span>
+        </a>
+        <div class="abstract-content">
+            咱们运维在工作中，可能会同时管理上千台服务器，甚至更多。咱们设想一下，超级大的机房，咱们天天抱着一台笔记本跑来跑去，给服务器该配置或者配环境，那还不得累死。SSH的应用就可以为咱们解决这些问题。
+SSH是SecureShell的缩写，SSH 为建立在应用层基础上的安全协议。SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。
+在服务器中，常用的SSH端口为22，该端口可提供SSH和SFTP服务。SSH服务可以为我们提供远程服务器的远程连接，这样提高了我们的工作效率。我们可以在服务器上创建多条SSH连接，这样就可以同时执行多条命令（不要让命令撞车），缩短等待时间。
+SSH...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/shell%E7%AE%80%E8%BF%B0/" >
             
                 <span>shell简述</span>
@@ -628,40 +660,6 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
         <div class="abstract-content">
             分析一下环境
 123456789101112131415161718192021222324252627282930313233apiVersion: v1kind: ReplicationController    #定义RC副本控制器metadata:  name: mysql   #RC名，版本控制器spec:     #属性  replicas: 1  #副本数  selector:    app: mysql  template:   #创建pod的模板    metadata:      labels:        app: mysql    spec:      cont...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/%E4%B8%80%E9%94%AE%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/" >
-            
-                <span>一键搭建k8s集群</span>
-        </a>
-        <div class="abstract-content">
-            本次部署使用kkitdeploy一键脚本，下来将这个脚本进行分析：
-首先看一下base.config文件
-123456aliyun&#x3D;&quot;1&quot;changsHostname&#x3D;&quot;2&quot;hostname&#x3D;&quot;kkitdeploy&quot;ip_segment&#x3D;&quot;192.168.1&quot;masterip&#x3D;&quot;192.168.1.118&quot;root_passwd&#x3D;&quot;root123.&quot;
-
-这里定义了是否更换yum源和网络配置
-1234567891...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2474,9 +2472,24 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3539,6 +3552,20 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>

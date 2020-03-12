@@ -347,6 +347,40 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DHCP%E6%9C%8D%E5%8A%A1/" >
+            
+                <span>基础服务/DHCP服务</span>
+        </a>
+        <div class="abstract-content">
+            
+在家用的路由器上，一般都会集成DHCP这个功能。DHCP服务，负责给网络内的主机分配IP和netmask，更便于主机的联网操作。
+
+既然咱们要搭建DHCP服务，那么，咱们就不能让网络内有相关的服务存在，原因如下：
+
+主机不知道该向谁获取IP地址
+
+DHCP服务器会发生冲突
+
+
+DHCP服务，常用在大型网络环境下（如果三四台主机，那就没必要了，手动一下就行了）。但是切记，在服务器网络不要用DHCP服务，因为DHCP是由租约期的，租约期到会重新分配IP，有可能发生IP改变。服务器需要稳定的IP支持，才能保证用户的正常访问，所以为了避免服务突然没法访问。DHCP一般不会用到这里。
+服务端配置...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/Apache/" >
             
                 <span>基础服务/Apache</span>
@@ -643,38 +677,6 @@ SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMT
 作为监控平台，zabbix还能对服务器的性能进行监控。则有一下术语：
 图像即为监控的图像。这个图像就是通过监控项生成的，这个图像可以是折线图，也可以是hi饼图。
 这...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >
-            
-                <span>zabbix环境搭建</span>
-        </a>
-        <div class="abstract-content">
-            zabbix是一种常用的监控平台。监控在集群中是很有必要的，监控的存在能及时通知相关的工程师进行技术处理。
-zabbix分为三部分。第一部分是server，第二部分是web，第三部分是agent。分别是系统中的服务端，dashbroad和客户端，这些部分都是缺一不可的。
-部署服务端首先在服务器上进行yum配置，添加阿里云的镜像源：
-123456789101112131415161718192021222324252627282930[root@localhost yum.repos.d]# cat zabbix.repo [zabbix]name=Zabbix Official Repo...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2387,9 +2389,24 @@ zabbix分为三部分。第一部分是server，第二部分是web，第三部�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3452,6 +3469,20 @@ zabbix分为三部分。第一部分是server，第二部分是web，第三部�
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>

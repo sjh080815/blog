@@ -347,6 +347,42 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C/" >
+            
+                <span>python/列表操作</span>
+        </a>
+        <div class="abstract-content">
+            列表的定义列表相当于C语言的数组，用以储存数据组。内存分配和C语言相同，分配连续的内存空间。
+语法列表名 = [元素1，元素2``````]
+用法列表和C语言用法有一些不同，可以对列表进行遍历打印，也可以一次性打印。
+1234a = [1,2,3]print(a)for i in a:    print(i)
+输出
+1234[1, 2, 3]123
+第一列是直接打印列表，下边是使用轮询进行输出。
+索引列表索引方法和C语言相同，使用列表名[索引]。
+12a = [1,2,3]print(a[2])
+
+输出：
+13
+注意：索引是从0开始的，第一个元素索引是0
+修改、添加和删除元素修改：直接取...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/python/%E5%87%BD%E6%95%B0/" >
             
                 <span>python/函数</span>
@@ -624,46 +660,6 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
         <div class="abstract-content">
             查看Nginx的配置目录，发现有很多东西，如下：
 1234567891011121314151617[root@master conf]# ll总用量 68-rw-r--r--. 1 root root 1077 12月 26 10:09 fastcgi.conf-rw-r--r--. 1 root root 1077 12月 26 10:09 fastcgi.conf.default-rw-r--r--. 1 root root 1007 12月 26 10:09 fastcgi_params-rw-r--r--. 1 root root 1007 12月 26 10:09 fastc...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E5%AE%89%E8%A3%85/" >
-            
-                <span>Nginx安装</span>
-        </a>
-        <div class="abstract-content">
-            安装Nginx的依赖库
-1yum install gcc gcc-c++ automake pcre pcre-devel zlib zlib-devel open open-ssl
-
-这里的依赖库是Nginx的所有依赖，有部分是非必要的，所以可以进行部分安装，但是openssl、gcc和gcc-c++都是必要的。
-下载Nginx安装包：
-1wget http://nginx.org/download/nginx-1.14.2.tar.gz
-
-下载完成后解压文件。解压完成后进入目录进行编译。
-生成配置：
-1./configure --prefix=/Nginx
-
-这里生成配置是将Ngin...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2376,9 +2372,24 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 113
+        Total : 114
         </div>
         <!-- search  -->
         
@@ -3441,6 +3452,20 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/08/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/" >灰度发布</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >redis/创建redis集群</a>
         </li>
     
     </div>
