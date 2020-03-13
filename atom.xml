@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://39.97.232.17/"/>
-  <updated>2020-03-12T12:13:00.390Z</updated>
+  <updated>2020-03-13T12:24:29.599Z</updated>
   <id>http://39.97.232.17/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>发版业务</title>
+    <link href="http://39.97.232.17/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/"/>
+    <id>http://39.97.232.17/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/</id>
+    <published>2020-03-13T11:27:07.000Z</published>
+    <updated>2020-03-13T12:24:29.599Z</updated>
+    
+    <content type="html"><![CDATA[<p>在生产环境中，产品往往都会净多多次修改，迭代，测试。特别是在进行产品测试的时候还需要频繁的进行部署。部署的工作在职能划分上属于运维的工作范畴，那么，我们总不可能每天等着开发那边的源码过来部署吗？这里就会牵扯到一个发版流程问题。</p><p>通常的来说，产品发版一般会经历以下几步：</p><ol><li>产品确定需求</li><li>开发进行编码</li><li>测试进行测试</li><li>运维进行上线</li><li>渠道对接</li></ol><p>这里我们需要了解发版的2，3和4过程。</p><p>2是开发，通常开发环境是程序员的虚拟机环境。这个虚拟机环境，可能每个程序员的使用习惯不同，环境也不同，和生产、测试环境也不同。这里不会用到自动化构建。</p><p>3是测试。测试要进行测试的环境一般是专用的测试环境，这个环境非常接近于生产环境，开发把源码推送到Git或者SVN上进行项目托管，运维负责把开发推过来的产品部署出来，让测试人员进行测试。</p><p>通常的，开发会向我们频繁的推送版本。根据git的相关知识可以知道，git在上传新版本后，老版本会被一定的覆盖掉，相当于说，旧版本就不存在了。那么，我们发版的时候就需要进行正常发版和版本滚回。那么，我们就使用以下的方案进行解决：</p><p>我们通常需要在创建流水线的时候创建一个选项参数。这个选项参数在编写jenkins自动部署脚本的时候可以作为一个变量来使用。</p><p>创建一个tag的字符参数。</p><p>这里引入新发版jenkins需要做的几个重要过程。</p><ol><li>勾子程序获取更新</li><li>打tag，就是把上一版的程序进行备份</li><li>将新的版本放入环境</li></ol><p>同样，tag也可以在创建pipeline的时候以变量的方式使用。</p><p>由上的思路可以知道，编写脚本的时候，写两个函数，然后使用case的方式对创建的选项参数进行选择执行。先cp旧版产品文件到tag下，然后将新版的产品cp到环境下。rollback是恢复参数，思路是将备份目录中的版本放入环境目录。</p><p>运维上线大概就是使用灰度发布了。对指定的用户进行发布测试，如果产品的效果不好，可以按以上的方式进行部署的滚回。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在生产环境中，产品往往都会净多多次修改，迭代，测试。特别是在进行产品测试的时候还需要频繁的进行部署。部署的工作在职能划分上属于运维的工作范畴，那么，我们总不可能每天等着开发那边的源码过来部署吗？这里就会牵扯到一个发版流程问题。&lt;/p&gt;
+&lt;p&gt;通常的来说，产品发版一般会经历以
+      
+    
+    </summary>
+    
+    
+      <category term="jenkins" scheme="http://39.97.232.17/categories/jenkins/"/>
+    
+    
+      <category term="自动化运维技术" scheme="http://39.97.232.17/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>redis/创建redis集群</title>
@@ -508,29 +535,6 @@
       
         &lt;h1 id=&quot;rsync和scp&quot;&gt;&lt;a href=&quot;#rsync和scp&quot; class=&quot;headerlink&quot; title=&quot;rsync和scp&quot;&gt;&lt;/a&gt;rsync和scp&lt;/h1&gt;&lt;p&gt;rsync是一种常见的征粮备份工具，scp常被用做文件传输。&lt;/p&gt;
 &lt;h2 id=
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</title>
-    <link href="http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
-    <published>2020-03-08T12:19:13.557Z</published>
-    <updated>2020-02-21T06:21:32.414Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol><li>工作在七层，对http协议做分流</li><li>对网络依赖较小</li><li>安装和配置简单</li><li>抗压</li><li>适合做web应用服务器</li><li>做中层反向代理服务器</li></ol><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol><li>仅支持http和https及邮箱协议</li><li>对于后端服务器稳定性要求较高。上传数据时如果后端服务器宕机，Nginx会直接切换后端服务器。</li></ol><h1 id="LVS"><a href="#LVS" class="headerlink" title="LVS"></a>LVS</h1><p>LVS时一种运行在四层协议上的调度器。</p><h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><ol><li>抗高压</li><li>配置简单</li><li>工作在四层，基本可以转发所有数据</li><li>工作更稳定</li><li>LVS只负责分发</li></ol><h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><ol><li>不支持正则，不能做web动静分离</li><li>网站系统过于庞大</li></ol><h1 id="Haproxy"><a href="#Haproxy" class="headerlink" title="Haproxy"></a>Haproxy</h1><p>这是一种工作在四/七层的代理软件。</p><h2 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h2><ol><li>支持虚拟主机</li><li>可以保持session和cookie</li><li>速度更快</li><li>可对MySQL做读写负载均衡</li><li>策略更多</li></ol><h2 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h2><ol><li>不支持POP/SMTP协议</li><li>不支持SPDY协议</li><li>不支持HTTP cache</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Nginx&quot;&gt;&lt;a href=&quot;#Nginx&quot; class=&quot;headerlink&quot; title=&quot;Nginx&quot;&gt;&lt;/a&gt;Nginx&lt;/h1&gt;&lt;p&gt;Nginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。&lt;/p&gt;
-&lt;h2 id=&quot;
       
     
     </summary>

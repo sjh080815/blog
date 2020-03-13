@@ -360,6 +360,40 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/mysql/mysql%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8F%8A%E7%8B%AC%E5%86%99%E5%88%86%E7%A6%BB/" >
+            
+                <span>MySQL数据集群主从复制及读写分离</span>
+        </a>
+        <div class="abstract-content">
+            
+在大型生产环境中，往往都有较高的并发量，一个数据库服务器顶不下来，一般的解决方案就是做一个数据集群。在数据集群中，所有数据库的数据要保持实时同步（总不能同一时间访问数据库，得到两个不同的数据吧）。而且，数据库在读和写的时候，用的资源不一样多，就需要给读和写做一下分离（读的资源需求较小，写的资源需求较大，所以常把读的服务器给的性能可以比写的服务器低一点）。
+
+因为服务器有限，所以我在docker上进行了环境的部署。
+数据库配置运行mysql容器，运行两次创建容器代码，创建两个mysql容器
+1docker run -itd -e MYSQL_ROOT_PASSWORD=123 mysql...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/mysql/MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" >
             
                 <span>MySQL基础操作</span>
@@ -660,36 +694,6 @@ bz2格式：
 加压：bzip2 -z FileName
 解压：bzip2 -d FileName.bz2或者bunzip2 FileName.bz2
 Linux常...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/vi%E7%BC%96%E8%BE%91%E5%99%A8/" >
-            
-                <span>vi编辑器</span>
-        </a>
-        <div class="abstract-content">
-            所有文件都归结于文本文件，那么，所有文件都可以进行文本格式下的编辑。在windows中，我们常用记事本对文本进行操作。在Linux中，我们常用非常好用（用的我一脸懵逼）的文本编辑软件vi。vi编辑器内置于系统中，vi有一个“高级版”——vim编辑器，这个编辑器常不被预置在系统，需要自己进行安装（yum，apt，二进制编译安装都可以，只要你不怕麻烦）。
-在说vi编辑器前，我有必要提及一个工具——cat。cat在字面意思是猫，在Linux中，cat是用来查看文本文件的，再根据前面我说过的，一切文件归结于文本，所以cat基本可以查看所有文件在文本格式下的数据。cat的语法为cat filena...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2517,9 +2521,46 @@ Linux常...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 114
+        Total : 115
         </div>
         <!-- search  -->
         
@@ -3294,6 +3335,11 @@ Linux常...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >发版业务</a>
+        </li>
     
     
         <li class="archive-post-item">

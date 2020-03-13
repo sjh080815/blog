@@ -347,6 +347,32 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DNS%E6%9C%8D%E5%8A%A1/" >
+            
+                <span>基础服务/DNS服务</span>
+        </a>
+        <div class="abstract-content">
+            DNS服务器原理DNS服务器是对域名进行解析的服务器。当浏览器访问网页时，首先会给DNS服务器发送一个请求，解析到域名对应的IP上，然后浏览器对IP进行访问。
+DNS服务器保存了解析的域名和IP，通常来说，这个解析是一一对应的。
+客户端发起请求，首先会在客户端的hosts文件中查询是否有相关的解析，如果没有，将包含有域名的请求头转发给DNS服务器上。当DNS服务器上也查不到相关的解析时，就会将数据转发给根服务器进行数据解析，也可以将数据转发给forward进行解析。
+权威DNS和非权威DNS权威DNS是指官方的DNS服务器，这种服务器的解析数量大，且更为稳定。非权威DNS是指自己搭建的D...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DHCP%E6%9C%8D%E5%8A%A1/" >
             
                 <span>基础服务/DHCP服务</span>
@@ -642,41 +668,6 @@ SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMT
 
 这里的参数都很简单，按照运营商提供的服务器和密码进行配置就好了，不多做赘述。
 创建动作一般情况下zabbix会默认生成一个动作，我们可以直接修改这...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/" >
-            
-                <span>几个重要术语</span>
-        </a>
-        <div class="abstract-content">
-            zabbix是一种监控平台，这个监控和咱们常见的视频监控不太一样。zabbix会自动进行报警，咱们常见的视频系统需要进行人工报警，那么这里肯定就会牵扯到一下几个元素：
-监控项监控项就是监控的项目，是一个由key:value组成的东西。服务端向监控端发生key，监控端向服务端发送数据。
-触发器触发器就是出发报警的条件，监控项常被用做触发器的前提条件。当监控项触及触发器设置的阈值时发生报警。
-这样就构成了一个简单的监控报警平台。
-作为监控平台，zabbix还能对服务器的性能进行监控。则有一下术语：
-图像即为监控的图像。这个图像就是通过监控项生成的，这个图像可以是折线图，也可以是hi饼图。
-这...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2404,9 +2395,46 @@ SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMT
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 114
+        Total : 115
         </div>
         <!-- search  -->
         
@@ -3181,6 +3209,11 @@ SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMT
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >发版业务</a>
+        </li>
     
     
         <li class="archive-post-item">

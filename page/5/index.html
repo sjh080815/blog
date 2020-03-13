@@ -360,6 +360,41 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/" >
+            
+                <span>几个重要术语</span>
+        </a>
+        <div class="abstract-content">
+            zabbix是一种监控平台，这个监控和咱们常见的视频监控不太一样。zabbix会自动进行报警，咱们常见的视频系统需要进行人工报警，那么这里肯定就会牵扯到一下几个元素：
+监控项监控项就是监控的项目，是一个由key:value组成的东西。服务端向监控端发生key，监控端向服务端发送数据。
+触发器触发器就是出发报警的条件，监控项常被用做触发器的前提条件。当监控项触及触发器设置的阈值时发生报警。
+这样就构成了一个简单的监控报警平台。
+作为监控平台，zabbix还能对服务器的性能进行监控。则有一下术语：
+图像即为监控的图像。这个图像就是通过监控项生成的，这个图像可以是折线图，也可以是hi饼图。
+这...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/zabbix/zabbix%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" >
             
                 <span>zabbix环境搭建</span>
@@ -688,37 +723,6 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
 静态操作for循环1234&#123;% for foo in test %&#125;    &#123;&#123; foo &#125;&#125;    &lt;br&gt;&#123;% endfor %&#125;
 
 这循环输出了...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/django/%E6%95%B0%E6%8D%AE%E5%BA%93/" >
-            
-                <span>python/django/数据库</span>
-        </a>
-        <div class="abstract-content">
-            创建APP后自动生成了models文件，在这里编写数据库模板
-在文件中创建class就是创建了一个表，格式如下：
-123class test(models.Model):    name = models.CharField(max_length=30)    age = models.IntegerField()
-
-这里用了sqllite的数据库，无需配置账号密码等信息。
-这里继承了models.Model类,生成了一个数据库类，既是一个表。
-调用数据库的时候，需要import相关的类。
-增下面是在test表中插入数据的方法。
-123456def add_stu(request):  ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2540,9 +2544,46 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 114
+        Total : 115
         </div>
         <!-- search  -->
         
@@ -3317,6 +3358,11 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >发版业务</a>
+        </li>
     
     
         <li class="archive-post-item">

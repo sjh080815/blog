@@ -360,6 +360,37 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/django/%E6%95%B0%E6%8D%AE%E5%BA%93/" >
+            
+                <span>python/django/数据库</span>
+        </a>
+        <div class="abstract-content">
+            创建APP后自动生成了models文件，在这里编写数据库模板
+在文件中创建class就是创建了一个表，格式如下：
+123class test(models.Model):    name = models.CharField(max_length=30)    age = models.IntegerField()
+
+这里用了sqllite的数据库，无需配置账号密码等信息。
+这里继承了models.Model类,生成了一个数据库类，既是一个表。
+调用数据库的时候，需要import相关的类。
+增下面是在test表中插入数据的方法。
+123456def add_stu(request):  ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/python/django/%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/" >
             
                 <span>python/django/基本应用</span>
@@ -611,31 +642,6 @@ for循环常用方法：
 同理，咱们在访问键值的时候可以进行重新赋值，则原value就被改变了。
 添加键值对没有特殊的语句，和访问键值的方法类似，但是传入key应该是新的key。
 123&gt;&g...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" >
-            
-                <span>python/多线程</span>
-        </a>
-        <div class="abstract-content">
-            当前主流的服务器和电脑都是多核机器。多核的定义就是多个核心，可以同时独立的进行多个工作。如果使用常规方法的话，程序就会排队进行执行。如果有了多线程，那么程序就会同时进行相关操作，提高程序的效率。
-多进行多进行就是启动多个进程（process）来运行一段方法，比如这样：
-12345678910111213141516171819202122from multiprocessing import Processfrom os import getpidfrom random import randintfrom time import sleepdef download(file):    ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2457,9 +2463,46 @@ for循环常用方法：
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 114
+        Total : 115
         </div>
         <!-- search  -->
         
@@ -3234,6 +3277,11 @@ for循环常用方法：
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >发版业务</a>
+        </li>
     
     
         <li class="archive-post-item">

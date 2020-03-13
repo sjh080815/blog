@@ -347,6 +347,42 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/" >
+            
+                <span>主机管理</span>
+        </a>
+        <div class="abstract-content">
+            分组管理在大型集群里，机器会分为多个可用域，每个可用域做的业务也不相同，执行的命令和在集群中承担的角色也不同，那就需要进行分组管理。
+创建分组：在/etc/ansible/hosts文件下创建之际和组
+12[group]host
+
+这样就创建了一个管理组。
+需要注意，ansible是基于ssh的集群管理工具，默认的链接端口是22，如果主机的ssh端口被修改过，则在声明hosts的时候著名ssh的端口。
+有时候服务器的使用账户并非root，那就需要进行指定：
+12[group]host ansible_connection&#x3D;connect_method ansible_ssh_u...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/ansible/playbook/" >
             
                 <span>playbook</span>
@@ -616,54 +652,6 @@ scpscp不支持连接的传输。传输方式是复制。
 使用跳板机（这里可以使用jumpserver，开源），对集群进行统一管理
 使用自动化工具（ansible）
 运维安全：一般关闭selinux和firewalld，使用物...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/" >
-            
-                <span>面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</span>
-        </a>
-        <div class="abstract-content">
-            NginxNginx服务器常被用做静态web服务器和反向代理服务器，这种代理在web环境中用的较多。
-优点
-工作在七层，对http协议做分流
-对网络依赖较小
-安装和配置简单
-抗压
-适合做web应用服务器
-做中层反向代理服务器
-
-缺点
-仅支持http和https及邮箱协议
-对于后端服务器稳定性要求较高。上传数据时如果后端服务器宕机，Nginx会直接切换后端服务器。
-
-LVSLVS时一种运行在四层协议上的调度器。
-优点
-抗高压
-配置简单
-工作在四层，基本可以转发所有数据
-工作更稳定
-LVS只负责分发
-
-缺点
-不支持正则，不能做web动静分离
-网站系统过于庞大
-
-Haproxy这是一种工作在四...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2385,9 +2373,46 @@ Haproxy这是一种工作在四...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 114
+        Total : 115
         </div>
         <!-- search  -->
         
@@ -3162,6 +3187,11 @@ Haproxy这是一种工作在四...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >发版业务</a>
+        </li>
     
     
         <li class="archive-post-item">

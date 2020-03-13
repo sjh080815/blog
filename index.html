@@ -360,6 +360,46 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >
+            
+                <span>发版业务</span>
+        </a>
+        <div class="abstract-content">
+            在生产环境中，产品往往都会净多多次修改，迭代，测试。特别是在进行产品测试的时候还需要频繁的进行部署。部署的工作在职能划分上属于运维的工作范畴，那么，我们总不可能每天等着开发那边的源码过来部署吗？这里就会牵扯到一个发版流程问题。
+通常的来说，产品发版一般会经历以下几步：
+
+产品确定需求
+开发进行编码
+测试进行测试
+运维进行上线
+渠道对接
+
+这里我们需要了解发版的2，3和4过程。
+2是开发，通常开发环境是程序员的虚拟机环境。这个虚拟机环境，可能每个程序员的使用习惯不同，环境也不同，和生产、测试环境也不同。这里不会用到自动化构建。
+3是测试。测试要进行测试的环境一般是专用的测试环境，这个环境非...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/12/redis/%E5%88%9B%E5%BB%BAredis%E9%9B%86%E7%BE%A4/" >
             
                 <span>redis/创建redis集群</span>
@@ -649,42 +689,6 @@ Docker是目前容器化的常用软件，它可以隔离真是主机环境，�
 这里调用模块的方法和 saltstack 不同，需要使用 -m 参数进行调用。
 ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试的，检查群内主机是否在线。
 123456789101112131415[root@k8s1 log]# ansible all -m ping 192.168.89.130 | SUCCESS &#x3D;&gt; &#123;    &quot;ansible_facts&quot;: &#123;        &quot;discove...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/ansible/%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86/" >
-            
-                <span>主机管理</span>
-        </a>
-        <div class="abstract-content">
-            分组管理在大型集群里，机器会分为多个可用域，每个可用域做的业务也不相同，执行的命令和在集群中承担的角色也不同，那就需要进行分组管理。
-创建分组：在/etc/ansible/hosts文件下创建之际和组
-12[group]host
-
-这样就创建了一个管理组。
-需要注意，ansible是基于ssh的集群管理工具，默认的链接端口是22，如果主机的ssh端口被修改过，则在声明hosts的时候著名ssh的端口。
-有时候服务器的使用账户并非root，那就需要进行指定：
-12[group]host ansible_connection&#x3D;connect_method ansible_ssh_u...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2512,9 +2516,46 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 114
+        Total : 115
         </div>
         <!-- search  -->
         
@@ -3289,6 +3330,11 @@ ping 模块和广义上的 ping 意义相似，都是进行主机连通性测试
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/jenkins/%E5%8F%91%E7%89%88%E4%B8%9A%E5%8A%A1/" >发版业务</a>
+        </li>
     
     
         <li class="archive-post-item">
