@@ -347,6 +347,43 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/zabbix/%E5%8A%A8%E4%BD%9C/" >
+            
+                <span>动作</span>
+        </a>
+        <div class="abstract-content">
+            zabbix监控触发警报时，不仅会在web上进行显示，也会触发相关的动作，比如发送email，这里就需要对报警介质和动作进行配置。
+创建报警媒介报警媒介我们常用的是email。这里需要引入一个知识点：
+
+SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMTP。每个邮箱运营商都会提供一个SMTP的服务器。SMTP发送邮件的原理就是登录SMTP服务器，然后通过运营商的SMTP服务器发送一个邮件。
+
+使用SMTP配置媒介：
+
+这里的参数都很简单，按照运营商提供的服务器和密码进行配置就好了，不多做赘述。
+创建动作一般情况下zabbix会默认生成一个动作，我们可以直接修改这...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/zabbix/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%9C%AF%E8%AF%AD/" >
             
                 <span>几个重要术语</span>
@@ -680,36 +717,6 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
 这样就创建了一个子路由。这里需要注意，所有的路由只能解析urlpatterns。
 在根路由上注册子路由：
 123456789from django....
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/django/%E6%A8%A1%E6%9D%BF/" >
-            
-                <span>python/django/模板</span>
-        </a>
-        <div class="abstract-content">
-            模板就是静态模板，存放的是静态资源。
-动态静态交互交互的主要方法就是做静态渲染，做静态渲染的时候传送一个字典给静态模板，模板对数据进行解析。
-1return render(request, 'home.html', &#123;'string': string&#125;)
-
-这就是返回了一个字典给了静态模板。模板要输出这个字典，使用输出这个字典。
-静态操作for循环1234&#123;% for foo in test %&#125;    &#123;&#123; foo &#125;&#125;    &lt;br&gt;&#123;% endfor %&#125;
-
-这循环输出了...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2468,9 +2475,28 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3245,6 +3271,11 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

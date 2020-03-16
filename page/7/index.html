@@ -360,6 +360,36 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/%E5%AD%97%E5%85%B8/" >
+            
+                <span>python/字典</span>
+        </a>
+        <div class="abstract-content">
+            字典定义字典类似于C语言的指针的集合，及一个键值对的集合。一个键对应一个内存空间，内存空间内的数据可以读写，但是键不能更改。
+定义方法1字典名 = &#123;key:value,......&#125;
+
+访问字典键值访问的语法：字典名[key]。返回key对应的value。
+123&gt;&gt;&gt; a = &#123;'b':1,'c':2&#125;&gt;&gt;&gt; print(a['b'])1
+同理，咱们在访问键值的时候可以进行重新赋值，则原value就被改变了。
+添加键值对没有特殊的语句，和访问键值的方法类似，但是传入key应该是新的key。
+123&gt;&g...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/python/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" >
             
                 <span>python/多线程</span>
@@ -613,61 +643,6 @@ error_log:这是Nginx的错误日志配置，默认会生成以下参数。
 
 pid：在Linux中，每运行一个软件都会产生一个pid。这里的参数是pid放置位置。
 序列化进程：添加参数accept_mute...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/server%E5%9D%97%E5%92%8Clocation%E5%9D%97/" >
-            
-                <span>server块和location块</span>
-        </a>
-        <div class="abstract-content">
-            多网卡服务器一般情况下，生产环境的服务器会有多张网卡，有些网卡是非业务网卡，为了给网卡减小负荷，我们就不能给这些网卡配置http服务。
-例：
-
-
-
-网卡
-IP
-
-
-
-eth0
-10.20.0.2
-
-
-eth1
-192.168.1.2
-
-
-eth2
-172.18.0.2
-
-
-eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证网络，无需配置http网络，那么在server块添加
-12listen 10.20.0.2:80listen 192.168.1.2:80
-
-尝试访问服务。发现前两个地址都能访问到，但是第三个网络无法访问。
-这种配置叫监听，就是让服务守候在指定I...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2532,9 +2507,28 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3309,6 +3303,11 @@ eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

@@ -347,6 +347,38 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/16/kubernetes/Ingress/" >
+            
+                <span>Ingress</span>
+        </a>
+        <div class="abstract-content">
+            在真实环境做生产环境的时候，我们常常会用到七层代理来解决以些像跨域代理这样的问题。在k8s中，容器只有一个ip，通常被绑定到service上，service上通常只有一个ip，不能进行http请求头转发。这时候就需要引入一个技术叫Ingress。
+Ingress是用在k8s集群中非常常用的一种七层转发技术，向深处剖析，可以看到，Ingress其实就是Nginx进行了七层代理转发。我们来看看这个技术的架构。
+
+这个架构里最主要的一部分就是Ingress Controller。从上图可以看出，controller在这里对客户的请求进行了转发，转发到了相应的Service上，Service再通...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/" >
             
                 <span>术语和概念</span>
@@ -619,36 +651,6 @@ Never：不关注容器状态直接重启。
 存活检测（LivenessProbe）k8s中提供了三种容器生存检测，分别是文件检测、TCP检测、HTTP检测
 文件检测使用命令检测容器内的文件是否存在，不存在则重新创建容器。
 1234567livenessProbe:      exec: ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod/" >
-            
-                <span>Pod</span>
-        </a>
-        <div class="abstract-content">
-            Pod基本用法Pod时一个根容器，多个容器同时存在于Pod内。在定义Pod时候定义业务容器内容，语法如下：
-12345678910111213141516apiVersion: v1kind: Podmetadata:  name: myapp  labels:    name: myappspec:  containers:  - name: myapp    image: &lt;Image&gt;    resources:      limits:        memory: "128Mi"        cpu: "500m"    ports:      - contain...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2413,9 +2415,28 @@ Never：不关注容器状态直接重启。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3190,6 +3211,11 @@ Never：不关注容器状态直接重启。
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

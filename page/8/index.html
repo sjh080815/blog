@@ -360,6 +360,61 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/server%E5%9D%97%E5%92%8Clocation%E5%9D%97/" >
+            
+                <span>server块和location块</span>
+        </a>
+        <div class="abstract-content">
+            多网卡服务器一般情况下，生产环境的服务器会有多张网卡，有些网卡是非业务网卡，为了给网卡减小负荷，我们就不能给这些网卡配置http服务。
+例：
+
+
+
+网卡
+IP
+
+
+
+eth0
+10.20.0.2
+
+
+eth1
+192.168.1.2
+
+
+eth2
+172.18.0.2
+
+
+eth1和eth2是业务网卡，都需要配置上http服务，eth3是内网认证网络，无需配置http网络，那么在server块添加
+12listen 10.20.0.2:80listen 192.168.1.2:80
+
+尝试访问服务。发现前两个地址都能访问到，但是第三个网络无法访问。
+这种配置叫监听，就是让服务守候在指定I...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "http服务器">http服务器</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/Nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" >
             
                 <span>Nginx配置文件结构</span>
@@ -635,40 +690,6 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
 
 多列排序主要排序条件是第一个排序列，次要排序条件是剩下的排序列。
 升序和降序一般情况下ORDER的排序方式是升序...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" >
-            
-                <span>数据库基础</span>
-        </a>
-        <div class="abstract-content">
-            数据库的定义数据库（Database）定义：保存有组织的数据的容器。
-表数据库是由多张表组成的，表就相当于excel中的sheet。一个数据库由多个数据表构成，数据表之间可能会存在某种逻辑上的关系。
-行和列及数据类型行：行就是广义的行，和excel中行的定义是相似的。一个行通常是一条记录。
-列：列定义与excel的定义也相似，每个列表示数据表的一个键。
-数据类型：由编程经验的人应该都会知道，所有的变量都是有数据类型的，在数据库中也有这个定义（针对于列）。
-主键一个表有多条记录，那么，可能有某两条记录的某一键值是相等的，这会对检索有一定的影响，那么，我们在这里通常使用主键来限制这个键值，使...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2533,9 +2554,28 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3310,6 +3350,11 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

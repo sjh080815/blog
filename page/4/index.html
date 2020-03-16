@@ -360,6 +360,57 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/FTP%E6%9C%8D%E5%8A%A1/" >
+            
+                <span>基础服务/FTP服务</span>
+        </a>
+        <div class="abstract-content">
+            FTP介绍在生产环境的架设中，常常会有开发部门上传一些页面文件到服务器。有些开发的程序员可能Linux基础不是特别好，所以咱们就需要给他们留一个传输文件的接口。通常使用sftp和ftp协议。
+安装需要的软件：vsftpd
+安装方法：sudo apt install vsftpd
+启动方法：systemctl start vsftpd
+配置文件解析乌班图下，配置文件在/etc/vsftpd.conf
+配置功能表：
+
+
+
+参数
+功能
+
+
+
+listen
+监听
+
+
+anonymous_enable
+匿名登录
+
+
+anon_root
+匿名登陆目录
+
+
+local_enable
+允许本地用户登录
+...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/DNS%E6%9C%8D%E5%8A%A1/" >
             
                 <span>基础服务/DNS服务</span>
@@ -644,43 +695,6 @@ RAID5四个磁盘组成一个RAID...
 
 这里有几个基本的参数需要设置
 名称，一定要定义...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/zabbix/%E5%8A%A8%E4%BD%9C/" >
-            
-                <span>动作</span>
-        </a>
-        <div class="abstract-content">
-            zabbix监控触发警报时，不仅会在web上进行显示，也会触发相关的动作，比如发送email，这里就需要对报警介质和动作进行配置。
-创建报警媒介报警媒介我们常用的是email。这里需要引入一个知识点：
-
-SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMTP。每个邮箱运营商都会提供一个SMTP的服务器。SMTP发送邮件的原理就是登录SMTP服务器，然后通过运营商的SMTP服务器发送一个邮件。
-
-使用SMTP配置媒介：
-
-这里的参数都很简单，按照运营商提供的服务器和密码进行配置就好了，不多做赘述。
-创建动作一般情况下zabbix会默认生成一个动作，我们可以直接修改这...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2545,9 +2559,28 @@ SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMT
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3322,6 +3355,11 @@ SMTP和POPSMTP和POP是两种邮件的传输协议，咱们常用的方式是SMT
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

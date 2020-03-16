@@ -347,6 +347,47 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >
+            
+                <span>压缩文件操作</span>
+        </a>
+        <div class="abstract-content">
+            在Linux系统中，常用的压缩文件格式有tar，tar.gz，zip三种格式，其加压解压方式如下。
+tar格式：
+加压：tar -zcf filename dir
+解压：tar -zxf filename
+tar.gz格式：方式与tar格式相同，但是需要加参数-v。
+tar.bz2格式：和tar方式相同，参数为-jxvf。
+zip格式：
+加压：zip dir filename.zip
+解压：unzip filename.zip
+bz2格式：
+加压：bzip2 -z FileName
+解压：bzip2 -d FileName.bz2或者bunzip2 FileName.bz2
+Linux常...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/vi%E7%BC%96%E8%BE%91%E5%99%A8/" >
             
                 <span>vi编辑器</span>
@@ -617,36 +658,6 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
 在运行一些容器的时候，需要有前置的环境配置，使用初始化容器对pod配置，初始化值执行一次。
 初始化容器需要先于应用容器执行。
 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566apiVersion: v1kind: Podmetadata:  name: nginx  labels:    name: nginxspec:  initCont...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/" >
-            
-                <span>容器网络</span>
-        </a>
-        <div class="abstract-content">
-            Node内Pod通信Pod被控制器调配到了Node上，每个Node上都由一个虚拟的Docker网卡。Pod之间可以通过Node上的虚拟网关进行通信。
-
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2411,9 +2422,28 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3188,6 +3218,11 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

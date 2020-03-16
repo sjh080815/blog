@@ -360,6 +360,38 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/rsync%E5%92%8Cscp/" >
+            
+                <span>面试常见问题/rsync和scp</span>
+        </a>
+        <div class="abstract-content">
+            rsync和scprsync是一种常见的征粮备份工具，scp常被用做文件传输。
+rsync可以进行软硬连接的拷贝。这个文件传输的方式是同步。
+同步的过程中，如果从机的相关目录存在，那reync会惊醒数据比较，对数据不同的进行更新。
+scpscp不支持连接的传输。传输方式是复制。
+复制的过程中，如果从机存在相关的目录，会直接进行覆盖复制。
+从上边综合考虑，rsync更适合于文件同步，scp更适合于文件传输。
+大集群管理方案
+使用跳板机（这里可以使用jumpserver，开源），对集群进行统一管理
+使用自动化工具（ansible）
+运维安全：一般关闭selinux和firewalld，使用物...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/LVS%E3%80%81Haproxy%E5%92%8CNginx%E7%94%A8%E4%BD%9Cproxy%E6%9C%8D%E5%8A%A1%E5%99%A8/" >
             
                 <span>面试常见问题/LVS、Haproxy和Nginx用作proxy服务器</span>
@@ -686,57 +718,6 @@ group
 负载均衡负载均衡的原理就是使用反向代理，利用轮询等算法进行服务器访问。
 在配置文件创建listen模块。语法：
 1234listen SL_name *:port ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/FTP%E6%9C%8D%E5%8A%A1/" >
-            
-                <span>基础服务/FTP服务</span>
-        </a>
-        <div class="abstract-content">
-            FTP介绍在生产环境的架设中，常常会有开发部门上传一些页面文件到服务器。有些开发的程序员可能Linux基础不是特别好，所以咱们就需要给他们留一个传输文件的接口。通常使用sftp和ftp协议。
-安装需要的软件：vsftpd
-安装方法：sudo apt install vsftpd
-启动方法：systemctl start vsftpd
-配置文件解析乌班图下，配置文件在/etc/vsftpd.conf
-配置功能表：
-
-
-
-参数
-功能
-
-
-
-listen
-监听
-
-
-anonymous_enable
-匿名登录
-
-
-anon_root
-匿名登陆目录
-
-
-local_enable
-允许本地用户登录
-...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2595,9 +2576,28 @@ local_enable
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3372,6 +3372,11 @@ local_enable
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">

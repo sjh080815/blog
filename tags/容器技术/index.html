@@ -347,6 +347,38 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/16/kubernetes/Ingress/" >
+            
+                <span>Ingress</span>
+        </a>
+        <div class="abstract-content">
+            在真实环境做生产环境的时候，我们常常会用到七层代理来解决以些像跨域代理这样的问题。在k8s中，容器只有一个ip，通常被绑定到service上，service上通常只有一个ip，不能进行http请求头转发。这时候就需要引入一个技术叫Ingress。
+Ingress是用在k8s集群中非常常用的一种七层转发技术，向深处剖析，可以看到，Ingress其实就是Nginx进行了七层代理转发。我们来看看这个技术的架构。
+
+这个架构里最主要的一部分就是Ingress Controller。从上图可以看出，controller在这里对客户的请求进行了转发，转发到了相应的Service上，Service再通...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/docker/%E9%95%9C%E5%83%8F/" >
             
                 <span>镜像</span>
@@ -632,36 +664,6 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
         <div class="abstract-content">
             Node内Pod通信Pod被控制器调配到了Node上，每个Node上都由一个虚拟的Docker网卡。Pod之间可以通过Node上的虚拟网关进行通信。
 
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/%E5%85%B8%E5%9E%8B%E7%8E%AF%E5%A2%83%E5%88%86%E6%9E%90/" >
-            
-                <span>典型环境分析</span>
-        </a>
-        <div class="abstract-content">
-            分析一下环境
-123456789101112131415161718192021222324252627282930313233apiVersion: v1kind: ReplicationController    #定义RC副本控制器metadata:  name: mysql   #RC名，版本控制器spec:     #属性  replicas: 1  #副本数  selector:    app: mysql  template:   #创建pod的模板    metadata:      labels:        app: mysql    spec:      cont...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2426,9 +2428,28 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 115
+        Total : 116
         </div>
         <!-- search  -->
         
@@ -3203,6 +3224,11 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/Ingress/" >Ingress</a>
+        </li>
     
     
         <li class="archive-post-item">
