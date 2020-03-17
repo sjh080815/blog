@@ -404,7 +404,7 @@ height:50vh;
     <article class="article-entry">
         <p>在真实环境做生产环境的时候，我们常常会用到七层代理来解决以些像跨域代理这样的问题。在k8s中，容器只有一个ip，通常被绑定到service上，service上通常只有一个ip，不能进行http请求头转发。这时候就需要引入一个技术叫Ingress。</p>
 <p>Ingress是用在k8s集群中非常常用的一种七层转发技术，向深处剖析，可以看到，Ingress其实就是Nginx进行了七层代理转发。我们来看看这个技术的架构。</p>
-<p><img src="https://pics0.baidu.com/feed/77c6a7efce1b9d16eb1febda136be0898e5464e8.jpeg?token=f608d1ff8ad0d03054abe1e1dc545fa7&s=C0AA3C724B5040CA44412857000070B1" alt=""></p>
+<p><img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/199230/1582465418798-afdfa4c2-02a2-4c9a-bace-75f271052c5b.png" alt=""></p>
 <p>这个架构里最主要的一部分就是Ingress Controller。从上图可以看出，controller在这里对客户的请求进行了转发，转发到了相应的Service上，Service再通过负载均衡转发到Pod上。构成一条完整的转发链。</p>
 <h1 id="Ingress的简单环境配置"><a href="#Ingress的简单环境配置" class="headerlink" title="Ingress的简单环境配置"></a>Ingress的简单环境配置</h1><p>下来看一下这个架构的搭建：</p>
 <h2 id="安装Ingress-Controller"><a href="#安装Ingress-Controller" class="headerlink" title="安装Ingress-Controller"></a>安装Ingress-Controller</h2><p>这里通常使用k8s自动部署。yaml脚本如下（官方提供的方案或多或少有一些问题，不建议使用）：</p>
@@ -443,7 +443,7 @@ height:50vh;
             <p>Author：<a href="http://www.huckops.xyz">Huck</a>
             <p>原文链接：<a href="http://www.huckops.xyz/2020/03/16/kubernetes/Ingress/">http://www.huckops.xyz/2020/03/16/kubernetes/Ingress/</a>
             <p>发表日期：<a href="http://www.huckops.xyz/2020/03/16/kubernetes/Ingress/">March 16th 2020, 6:14:26 pm</a>
-            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/16/kubernetes/Ingress/">March 16th 2020, 8:55:11 pm</a>
+            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/16/kubernetes/Ingress/">March 17th 2020, 11:00:24 am</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
