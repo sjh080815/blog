@@ -360,6 +360,35 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/django/%E8%B7%AF%E7%94%B1%E5%8F%8AURL/" >
+            
+                <span>python/django/路由及URL</span>
+        </a>
+        <div class="abstract-content">
+            在写项目的时候，会有多个APP，如果都使用项目文件夹下的urls文件的话，文件会非常赘余，所以常会使用多级路由。
+在APP中创建urls.py文件，作为子路由，定义路由
+12345678from django.contrib import adminfrom django.urls import path,includefrom . import viewsurlpatterns = [    path('',views.index),]
+
+这样就创建了一个子路由。这里需要注意，所有的路由只能解析urlpatterns。
+在根路由上注册子路由：
+123456789from django....
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/python/django/%E6%A8%A1%E6%9D%BF/" >
             
                 <span>python/django/模板</span>
@@ -616,43 +645,6 @@ logfile参数pexpect方法的日志。及远程机返回信息保存的地方。
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" >
-            
-                <span>python/循环结构</span>
-        </a>
-        <div class="abstract-content">
-            while循环语法：
-12while 测试条件：    条件语句
-
-这个语句没有变量自加法，所以有时候遍历需要自行设置循环变量。
-这个语句的执行原理是先进行判断，再执行后边的语句。如果条件不成立则跳出循环。
-测试条件可以是Boolean型，也可以是测试条件。
-循环内常用语句：
-break，可以直接跳出循环。
-
-continue，直接跳过后边的语句，到循环头重新执行。遍历列表列表是有长度的。如果把列表放到测试条件，则执行和长度相同的循环次数。
-for循环常用方法：
-12for 循环量 in 循环列表：    循环语句
-
-循环量是从循环列表依次取出的数据，可以再循环语句使用。
-注意：这里循环...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -842,6 +834,7 @@ for循环常用方法：
 		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
 			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
 			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span>
+			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
 			<div style="margin: 0 auto;text-align: center;">
 				<p>
 					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
@@ -2519,9 +2512,30 @@ for循环常用方法：
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 116
+        Total : 117
         </div>
         <!-- search  -->
         
@@ -3296,6 +3310,11 @@ for循环常用方法：
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/" >初始化容器</a>
+        </li>
     
     
         <li class="archive-post-item">

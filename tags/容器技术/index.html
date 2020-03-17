@@ -347,6 +347,38 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/" >
+            
+                <span>初始化容器</span>
+        </a>
+        <div class="abstract-content">
+            容器再生成的时候是什么都没有的，相当于一个空白的环境。通常情况下，容器内都是要运行相关的服务器的，需要对这个生产容器传递一些项目文件或者一些配置文件，这就需要引入一个中间过程，initContrainer。
+这是初始化容器。初始化容器会在生成生产容器的时候，先构建一个过渡容器，在这个容器完成一些文件生成或者文件下载（比如git clone，或者wget）等命令，把数据存放到volume中，实现容器中共享。
+下边是一个例子：
+12345678910111213141516171819202122232425262728293031323334apiVersion: v1kind: Podm...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/16</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/16/kubernetes/Ingress/" >
             
                 <span>Ingress</span>
@@ -651,36 +683,6 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/" >
-            
-                <span>容器网络</span>
-        </a>
-        <div class="abstract-content">
-            Node内Pod通信Pod被控制器调配到了Node上，每个Node上都由一个虚拟的Docker网卡。Pod之间可以通过Node上的虚拟网关进行通信。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -770,6 +772,7 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
 		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
 			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
 			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span>
+			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
 			<div style="margin: 0 auto;text-align: center;">
 				<p>
 					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
@@ -2447,9 +2450,30 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 116
+        Total : 117
         </div>
         <!-- search  -->
         
@@ -3224,6 +3248,11 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/" >初始化容器</a>
+        </li>
     
     
         <li class="archive-post-item">

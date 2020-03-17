@@ -347,6 +347,45 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" >
+            
+                <span>docker的安装和配置</span>
+        </a>
+        <div class="abstract-content">
+            
+Docker是目前容器化的常用软件，它可以隔离真是主机环境，且上线环境部署容易，容灾性高。
+
+安装环境docker可以通过yum进行安装，安装方法
+1yum install docker-ce
+
+安装后，咱们最好更改一下docker的加速源，修改/etc/docker/daemon.json，添加以下内容：
+123&#123;&quot;registry-mirrors&quot;: [&quot;http:&#x2F;&#x2F;hub-mirror.c.163.com&quot;]&#125;
+
+重启以下docker服务就行了。
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/ansible/%E6%A8%A1%E5%9D%97/" >
             
                 <span>模块</span>
@@ -635,34 +674,6 @@ NUMA技术这是最常见的虚拟化技术，CPU直接通信自己所属的内�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/" >
-            
-                <span>面试常见问题/uniq和sort</span>
-        </a>
-        <div class="abstract-content">
-            sort和uniq是两个查看文件时候经常会用到的筛选工具。
-sort：升序输出，将输入的文本以升序的方式进行输出。
-uniq：降重输出。把输入文本里的重复数据剔除然后输出。
-面试常见问题查看nginx的PV地址：
-nginx一般会配置access.log日志文件，查询这个日志文件。
-1234bash# cat access.log111.20.59.9 - - [25/Feb/2020:17:29:04 +0800] "GET /zabbix/favicon.ico HTTP/1.1" 200 32988 "http://39.97.232.17/zabbix/zabbix.php?ac...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -752,6 +763,7 @@ nginx一般会配置access.log日志文件，查询这个日志文件。
 		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
 			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
 			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span>
+			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
 			<div style="margin: 0 auto;text-align: center;">
 				<p>
 					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
@@ -2429,9 +2441,30 @@ nginx一般会配置access.log日志文件，查询这个日志文件。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 116
+        Total : 117
         </div>
         <!-- search  -->
         
@@ -3206,6 +3239,11 @@ nginx一般会配置access.log日志文件，查询这个日志文件。
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/16</span><a class="archive-post-title" href= "/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/" >初始化容器</a>
+        </li>
     
     
         <li class="archive-post-item">

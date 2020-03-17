@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://39.97.232.17/"/>
-  <updated>2020-03-16T12:55:11.213Z</updated>
+  <updated>2020-03-16T16:14:37.502Z</updated>
   <id>http://39.97.232.17/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>初始化容器</title>
+    <link href="http://39.97.232.17/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/"/>
+    <id>http://39.97.232.17/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/</id>
+    <published>2020-03-16T15:54:21.000Z</published>
+    <updated>2020-03-16T16:14:37.502Z</updated>
+    
+    <content type="html"><![CDATA[<p>容器再生成的时候是什么都没有的，相当于一个空白的环境。通常情况下，容器内都是要运行相关的服务器的，需要对这个生产容器传递一些项目文件或者一些配置文件，这就需要引入一个中间过程，initContrainer。</p><p>这是初始化容器。初始化容器会在生成生产容器的时候，先构建一个过渡容器，在这个容器完成一些文件生成或者文件下载（比如git clone，或者wget）等命令，把数据存放到volume中，实现容器中共享。</p><p>下边是一个例子：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">initContainers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">make-index</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">buxybox</span></span><br><span class="line">      <span class="attr">command:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">wget</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">"-O"</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">"/dir/index.html"</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">"http://39.97.232.17/index.html"</span></span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">vol</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/dir</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">volumeMounts:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">vol</span></span><br><span class="line">        <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html</span></span><br><span class="line">    <span class="attr">resources:</span></span><br><span class="line">      <span class="attr">limits:</span></span><br><span class="line">        <span class="attr">memory:</span> <span class="string">"128Mi"</span></span><br><span class="line">        <span class="attr">cpu:</span> <span class="string">"500m"</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">vol</span></span><br><span class="line">      <span class="attr">emptyDir:</span> <span class="string">&#123;&#125;</span></span><br></pre></td></tr></table></figure><p>对这个yaml进行技术分析。</p><p>这里使用了初始化容器，使用的是busybox的环境。在busybox容器中下载了我的博客主页，放到了volume中。然后把数据卷再挂给生产容器。</p><p>这里没有给nginx容器添加service，所以就不能进行nodeport访问，这里就不多做赘述了。通过curl命令来请求nginx的pod，返回可以看出数据变了。</p><p>我们看一下构建过程。</p><p>获取nginx Pod的describe：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># kubectl describe pod nginx</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason     Age   From               Message</span><br><span class="line">  ----    ------     ----  ----               -------</span><br><span class="line">  Normal  Scheduled  23m   default-scheduler  Successfully assigned default/nginx to k8s2</span><br><span class="line">  Normal  Pulling    23m   kubelet, k8s2      Pulling image <span class="string">"busybox"</span></span><br><span class="line">  Normal  Pulled     23m   kubelet, k8s2      Successfully pulled image <span class="string">"busybox"</span></span><br><span class="line">  Normal  Created    23m   kubelet, k8s2      Created container make-index</span><br><span class="line">  Normal  Started    23m   kubelet, k8s2      Started container make-index</span><br><span class="line">  Normal  Pulling    23m   kubelet, k8s2      Pulling image <span class="string">"nginx"</span></span><br><span class="line">  Normal  Pulled     23m   kubelet, k8s2      Successfully pulled image <span class="string">"nginx"</span></span><br><span class="line">  Normal  Created    23m   kubelet, k8s2      Created container nginx</span><br><span class="line">  Normal  Started    23m   kubelet, k8s2      Started container nginx</span><br></pre></td></tr></table></figure><p>events罗列了构建这个pod的详细过程。可以看出来，先进性了拉取busybox容器，然后才创建的nginx容器。</p><p>这也就从时间上理清楚了业务的顺序：先生成（获取），再部署。</p><p>那么，当nginx容器建成了，busybox容器改何去何从，我们可以查一下docker的正在运行的容器：</p><p>再node上运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># docker ps -a</span></span><br><span class="line">0200b6db1930        busybox                <span class="string">"wget -O /dir/index.…"</span>   27 minutes ago      Exited (0) 27 minutes ago                         k8s_make-index_nginx_default_1476fcdd-2bb3-448e-a587-3861d731ddb7_0</span><br></pre></td></tr></table></figure><p>查到如上的一段记录。</p><p>很明显的我们可以看到，这条记录中有Exited（0），就是容器退出了。</p><p>再创建完成主容器后，初始化容器将不会被直接删除，但是会被以停止的状态放到服务器上。当主容器删除的时候，这个容器也会跟着一起删除。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;容器再生成的时候是什么都没有的，相当于一个空白的环境。通常情况下，容器内都是要运行相关的服务器的，需要对这个生产容器传递一些项目文件或者一些配置文件，这就需要引入一个中间过程，initContrainer。&lt;/p&gt;
+&lt;p&gt;这是初始化容器。初始化容器会在生成生产容器的时候，先
+      
+    
+    </summary>
+    
+    
+      <category term="kubernetes" scheme="http://39.97.232.17/categories/kubernetes/"/>
+    
+    
+      <category term="容器技术" scheme="http://39.97.232.17/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>Ingress</title>
@@ -514,31 +541,6 @@
       
       
         &lt;h1 id=&quot;硬件虚拟化（CPU和内存）&quot;&gt;&lt;a href=&quot;#硬件虚拟化（CPU和内存）&quot; class=&quot;headerlink&quot; title=&quot;硬件虚拟化（CPU和内存）&quot;&gt;&lt;/a&gt;硬件虚拟化（CPU和内存）&lt;/h1&gt;&lt;h2 id=&quot;常用CPU架构&quot;&gt;&lt;a href=&quot;#常用
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>面试常见问题/uniq和sort</title>
-    <link href="http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/"/>
-    <id>http://39.97.232.17/2020/03/08/%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/uniq%E5%92%8Csort/</id>
-    <published>2020-03-08T12:19:13.566Z</published>
-    <updated>2020-02-27T06:30:16.811Z</updated>
-    
-    <content type="html"><![CDATA[<p>sort和uniq是两个查看文件时候经常会用到的筛选工具。</p><p>sort：升序输出，将输入的文本以升序的方式进行输出。</p><p>uniq：降重输出。把输入文本里的重复数据剔除然后输出。</p><h1 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h1><p>查看nginx的PV地址：</p><p>nginx一般会配置access.log日志文件，查询这个日志文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat access.log</span></span><br><span class="line"></span><br><span class="line">111.20.59.9 - - [25/Feb/2020:17:29:04 +0800] <span class="string">"GET /zabbix/favicon.ico HTTP/1.1"</span> 200 32988 <span class="string">"http://39.97.232.17/zabbix/zabbix.php?action=dashboard.view&amp;ddreset=1"</span> <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.1</span></span><br><span class="line"><span class="string">112</span></span><br></pre></td></tr></table></figure><p>分析日志结构，发现第一列是用户的RealIP，也就是这里的PV，后边是http请求头的一些参数。</p><p>按要求进行排序并降重：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash<span class="comment"># cat access.log | awk '&#123;print $1&#125;' | sort | uniq</span></span><br></pre></td></tr></table></figure><p>分析命令：第二段使用了awk进行了正则筛选，选中了第一列数据。将选中的数据进行升序和降重。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;sort和uniq是两个查看文件时候经常会用到的筛选工具。&lt;/p&gt;
-&lt;p&gt;sort：升序输出，将输入的文本以升序的方式进行输出。&lt;/p&gt;
-&lt;p&gt;uniq：降重输出。把输入文本里的重复数据剔除然后输出。&lt;/p&gt;
-&lt;h1 id=&quot;面试常见问题&quot;&gt;&lt;a href=&quot;#面试常见问题
       
     
     </summary>
