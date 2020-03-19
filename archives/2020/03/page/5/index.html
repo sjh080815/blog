@@ -347,6 +347,42 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/zabbix/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/" >
+            
+                <span>资产管理</span>
+        </a>
+        <div class="abstract-content">
+            资产管理对于一个大型企业来说，生产环境服务器会有成百上千台，组成一个计算集群。通常目前都用的Openstack的虚拟化架构，能管理虚拟主机资产，但是没有专用的物理机资产管理工具。zabbix就解决了这个问题。
+给主机添加资产标签在主机中添加主机资产记录，添加相关的字段。
+这个字段优点类似于target，在做资产管理的适合会使用到。
+
+这里边的字段自行进行区分，尽量让服务器管理的时候不会发生误解。
+管理主机资产在资产记录-&gt;主机中可以看到刚才添加的资产。
+主机的可用性主机的可用性是服务器稳定性的一种指标，业内常用9的个数进行衡量。通常来说，服务能做到五个9就已经很不错了。
+在zabb...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/zabbix/%E7%9B%91%E6%8E%A7%E6%A8%A1%E6%9D%BF/" >
             
                 <span>监控模板</span>
@@ -704,39 +740,6 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/redis/redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8F%8A%E5%93%A8%E5%85%B5/" >
-            
-                <span>redis主从复制及哨兵</span>
-        </a>
-        <div class="abstract-content">
-            redis安装一定记得，安装运行redis的时候一定要放行相关的端口，或者直接关闭防火墙，否则会发生各种奇奇怪怪的错误，度娘那都问不到。
-我这里所有服务器都使用了Centos的操作系统，这个软件对发行版的要求比较低，所以可以随意。
-要做主从复制，咱们肯定要在主机和从机上安装redis。所以，一下操作，所有redis集群内的主机都要进行。
-下载redis。我用的是redis 5.0.7，下载地址http://download.redis.io/releases/redis-5.0.7.tar.gz，使用wget进行下载。下载完成后，进行解压，使用tar -zxvf。
-解压完成后，我们可以看...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -823,20 +826,44 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     </div>
     
     <!-- powered by Hexo  -->
-		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
-			<div style="margin: 0 auto;text-align: center;">
-				<p>
-					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
-						<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
-						<span style="">为了无法计算的价值</span>
-					</a>
-					
-				</p>
-			</div>
+	<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
+		<div style="text-align: center;margin: 0 auto;font-size: 16px;color: #9C9C9C;">
+			<p>网站已稳定运行<span id="time"></span></p>
 		</div>
+	
+	
+		<script language="javascript">
+			function get_time(){
+				window.setTimeout("get_time()",500);
+				start = new Date('3/3/2020 10:30:00');
+				date = new Date();
+				val = Math.floor((date.getTime() - start.getTime())/1000);
+				day_sec = 24 * 60 * 60;
+				day = Math.floor(val / day_sec);
+				new_sec = val % day_sec;
+				hou_sec = 60*60;
+				hour = Math.floor(new_sec / hou_sec);
+				new_sec = new_sec % hou_sec;
+				mint = Math.floor(new_sec / 60);
+				sec = Math.floor(new_sec % 60);
+				time = document.getElementById('time');
+				time.innerHTML =  day + '天' +  hour + '时' + mint + '分' + sec + '秒' ;
+			}
+			get_time();
+		</script>	
+		<div style="margin: 0 auto;text-align: center;">
+			<p>
+				<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
+					<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
+					<span style="">为了无法计算的价值</span>
+				</a>
+					
+			</p>
+		</div>
+	</div>
     <!-- 不蒜子  -->
     
     <div class="busuanzi-container">
@@ -2525,9 +2552,26 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 117
+        Total : 118
         </div>
         <!-- search  -->
         
@@ -3302,6 +3346,11 @@ salt会收集所有的节点的所有信息，这个信息类似于k8s中的targ
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >PV和PVC</a>
+        </li>
     
     
         <li class="archive-post-item">

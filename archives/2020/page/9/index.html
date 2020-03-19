@@ -347,6 +347,32 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D/" >
+            
+                <span>mysql/数据模糊匹配</span>
+        </a>
+        <div class="abstract-content">
+            
+title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们在用搜索引擎的时候，输入关键字到一半的时候搜索框下会返回一些类似关键字，在MySQL中也经常会用到这个东西。
+%通配符使用通配符时，不能使用等号筛选，需要使用LIKE关键字。
+12345678910mysql&gt; SELECT * FROM demo    -&gt; WHERE name LIKE &quot;demo%&quot;;+----+-------+| id | name  |+----+-------+|  1 | demo1 ||  2 | demo2 ||  3 | de...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E6%8E%92%E5%88%97/" >
             
                 <span>数据排列</span>
@@ -660,41 +686,6 @@ df命令：
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%94%A8%E6%88%B7%E7%9A%84%E6%9D%83%E9%99%90/" >
-            
-                <span>用户的权限</span>
-        </a>
-        <div class="abstract-content">
-            用户在系统中的操作是受到系统约束的，系统管理员可以对任何用户的权限进行控制，下来我就简单说一下权限。
-在Linux中，权限的表示方式分为两种，一种是数字式，一种是字母式。在字母式中，由rwx分别表示读、写、执行。我们在使用ls -al命令时，会输出以下内容：
-bash# ll -a
-总用量 2852
-dr-xr-x---.  5 root root     272 7月  27 13:42 .
-dr-xr-xr-x. 17 root root     224 7月  17 15:13 ..
--rw-------.  1 root root    1257 7月  17 15:14 ana...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -781,20 +772,44 @@ dr-xr-xr-x. 17 root root     224 7月  17 15:13 ..
     </div>
     
     <!-- powered by Hexo  -->
-		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
-			<div style="margin: 0 auto;text-align: center;">
-				<p>
-					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
-						<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
-						<span style="">为了无法计算的价值</span>
-					</a>
-					
-				</p>
-			</div>
+	<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
+		<div style="text-align: center;margin: 0 auto;font-size: 16px;color: #9C9C9C;">
+			<p>网站已稳定运行<span id="time"></span></p>
 		</div>
+	
+	
+		<script language="javascript">
+			function get_time(){
+				window.setTimeout("get_time()",500);
+				start = new Date('3/3/2020 10:30:00');
+				date = new Date();
+				val = Math.floor((date.getTime() - start.getTime())/1000);
+				day_sec = 24 * 60 * 60;
+				day = Math.floor(val / day_sec);
+				new_sec = val % day_sec;
+				hou_sec = 60*60;
+				hour = Math.floor(new_sec / hou_sec);
+				new_sec = new_sec % hou_sec;
+				mint = Math.floor(new_sec / 60);
+				sec = Math.floor(new_sec % 60);
+				time = document.getElementById('time');
+				time.innerHTML =  day + '天' +  hour + '时' + mint + '分' + sec + '秒' ;
+			}
+			get_time();
+		</script>	
+		<div style="margin: 0 auto;text-align: center;">
+			<p>
+				<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
+					<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
+					<span style="">为了无法计算的价值</span>
+				</a>
+					
+			</p>
+		</div>
+	</div>
     <!-- 不蒜子  -->
     
     <div class="busuanzi-container">
@@ -2483,9 +2498,26 @@ dr-xr-xr-x. 17 root root     224 7月  17 15:13 ..
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 117
+        Total : 118
         </div>
         <!-- search  -->
         
@@ -3260,6 +3292,11 @@ dr-xr-xr-x. 17 root root     224 7月  17 15:13 ..
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >PV和PVC</a>
+        </li>
     
     
         <li class="archive-post-item">

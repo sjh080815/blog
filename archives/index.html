@@ -347,6 +347,40 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >
+            
+                <span>PV和PVC</span>
+        </a>
+        <div class="abstract-content">
+            在生产环境中，服务器一般跑的都是业务环境，这样的服务器一般不会有过大的硬盘，数据不能直接存放在本服务器上，需要把数据储存在其他位置。在容器环境中，通常会使用gluster、nfs或者ceph来解决这个问题。
+以上的存储方式都不是直接挂给容器的，通常都是先生成一个pv，然后由pv划出pvc，将存储块以数据卷的形式挂给容器。
+概念这里引入两个概念
+PVPV是一个资源池，把我们前边说到的资源放在一个类似于盒子一样的东西。这样的盒子大小容量全都是由用户自己设定的。
+PVCPVC是资源。可以理解为把PV进行了实例化，把PV变成了一个可以被容器直接调用的东西。
+主要操作nfs和其他的存储服务器搭建我...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/" >
             
                 <span>初始化容器</span>
@@ -655,37 +689,6 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/docker/%E5%AE%B9%E5%99%A8/" >
-            
-                <span>容器</span>
-        </a>
-        <div class="abstract-content">
-            容器就是镜像跑起来之后的东西。容器之间可以互相访问，但是和实环境隔离。
-咱们看一下运行的容器：
-123bash# docker ps -aCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMESd24f69f87efb        0f3e07c0138f        "/bin/bash"         6 hours ago         Up 6 seconds           ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -772,20 +775,44 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
     </div>
     
     <!-- powered by Hexo  -->
-		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
-			<div style="margin: 0 auto;text-align: center;">
-				<p>
-					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
-						<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
-						<span style="">为了无法计算的价值</span>
-					</a>
-					
-				</p>
-			</div>
+	<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
+		<div style="text-align: center;margin: 0 auto;font-size: 16px;color: #9C9C9C;">
+			<p>网站已稳定运行<span id="time"></span></p>
 		</div>
+	
+	
+		<script language="javascript">
+			function get_time(){
+				window.setTimeout("get_time()",500);
+				start = new Date('3/3/2020 10:30:00');
+				date = new Date();
+				val = Math.floor((date.getTime() - start.getTime())/1000);
+				day_sec = 24 * 60 * 60;
+				day = Math.floor(val / day_sec);
+				new_sec = val % day_sec;
+				hou_sec = 60*60;
+				hour = Math.floor(new_sec / hou_sec);
+				new_sec = new_sec % hou_sec;
+				mint = Math.floor(new_sec / 60);
+				sec = Math.floor(new_sec % 60);
+				time = document.getElementById('time');
+				time.innerHTML =  day + '天' +  hour + '时' + mint + '分' + sec + '秒' ;
+			}
+			get_time();
+		</script>	
+		<div style="margin: 0 auto;text-align: center;">
+			<p>
+				<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
+					<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
+					<span style="">为了无法计算的价值</span>
+				</a>
+					
+			</p>
+		</div>
+	</div>
     <!-- 不蒜子  -->
     
     <div class="busuanzi-container">
@@ -2474,9 +2501,26 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 117
+        Total : 118
         </div>
         <!-- search  -->
         
@@ -3251,6 +3295,11 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >PV和PVC</a>
+        </li>
     
     
         <li class="archive-post-item">

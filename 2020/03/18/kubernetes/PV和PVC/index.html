@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>典型环境分析 · Huck Blog</title>
+    <title>PV和PVC · Huck Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -218,7 +218,7 @@
                 <a href="/" >Huck Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">典型环境分析</a>
+                <a href="#" class="post-name">PV和PVC</a>
             </div>
     </div>
     
@@ -248,7 +248,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            典型环境分析
+            PV和PVC
             <!-- 404 -->
             
         </h1>
@@ -273,12 +273,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">516</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">574</span>Reading time: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/03/08</span>
+                    <span class="post-intro-time">2020/03/18</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -402,41 +402,42 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>分析一下环境</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ReplicationController</span>    <span class="comment">#定义RC副本控制器</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mysql</span>   <span class="comment">#RC名，版本控制器</span></span><br><span class="line"><span class="attr">spec:</span>     <span class="comment">#属性</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span>  <span class="comment">#副本数</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">mysql</span></span><br><span class="line">  <span class="attr">template:</span>   <span class="comment">#创建pod的模板</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">mysql</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">mysql</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">3306</span></span><br><span class="line">          <span class="attr">env:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">MYSQL_ROOT_PASSWORD</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"123456"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">3306</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">mysql</span></span><br></pre></td></tr></table></figure>
+        <p>在生产环境中，服务器一般跑的都是业务环境，这样的服务器一般不会有过大的硬盘，数据不能直接存放在本服务器上，需要把数据储存在其他位置。在容器环境中，通常会使用gluster、nfs或者ceph来解决这个问题。</p>
+<p>以上的存储方式都不是直接挂给容器的，通常都是先生成一个pv，然后由pv划出pvc，将存储块以数据卷的形式挂给容器。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>这里引入两个概念</p>
+<h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PV是一个资源池，把我们前边说到的资源放在一个类似于盒子一样的东西。这样的盒子大小容量全都是由用户自己设定的。</p>
+<h2 id="PVC"><a href="#PVC" class="headerlink" title="PVC"></a>PVC</h2><p>PVC是资源。可以理解为把PV进行了实例化，把PV变成了一个可以被容器直接调用的东西。</p>
+<h1 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h1><p>nfs和其他的存储服务器搭建我就不多说了，这个前边已经学过。</p>
+<h1 id="创建一个PV"><a href="#创建一个PV" class="headerlink" title="创建一个PV"></a>创建一个PV</h1><p>PV（PersistentVolume）以一下方式定义：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">manual</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">1Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.207</span><span class="number">.121</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">"/nas/dg_vd"</span></span><br></pre></td></tr></table></figure>
 
-<p>这是简易的MySQL容器环境的部署文件。</p>
-<p>这是两个块揉杂在一起了，从代码可以看出有RC控制器和Service两个块。两个块使用后—分开，create这一个yaml文件相当于create了RC和Service。</p>
-<p>从头开始看代码：</p>
-<p>apiVersion：api是k8s留出来的接口，这也就是我们写yaml的入口，有这条语句后边的语句才能被解析。</p>
-<p>kind：种类。就是说这个文件要创建什么东西，是RC还是Service。</p>
-<p>metadata：RC的元数据，生成控制器的时候会按这些数据生成。</p>
-<p>spec：属性，存放这个块的所有数据。</p>
-<p>replicas： 副本数量，副本会根据负载状况进行pod分配.</p>
-<p>这里边有一个template，这里边的数据是模板元数据。在RC控制器运行的时候，会控制生成多个pod副本，那么，既要生成副本就得有生成副本的模板。在这个模板块里，定义了将要生成的pod的属性和一切参数。</p>
-<p><strong>注意：spec里的选择器selector和template中的labels必须是相同的</strong></p>
-<p>template中的label表示pod的标签，这是个非必要参数，但是使用这个参数可以帮助我们进行环境管理。</p>
-<p>这个整体思路是这样的：</p>
-<ol>
-<li><p>定义好一个副本控制器</p>
-</li>
-<li><p>为副本控制器制定好参数</p>
-</li>
-<li><p>创建副本模板</p>
-</li>
-<li><p>副本控制器开始“侦听”（只是类似并非侦听）副本是否生存（通过选择器“监听”），如果副本挂掉的话就重新按照模板创建副本</p>
-</li>
-</ol>
-<p>那么，从以上思路可以看出，副本创建后的labels的重要性，它供给让k8s侦测pod是否创建成功。所以labels和selector必须是统一的。</p>
+<p>这个yaml文件下有一些重要配置，如下：</p>
+<ul>
+<li>storageClassName： 储存类名。按字面意思理解就行了</li>
+<li>capacity： 划分储存快大小</li>
+<li>accessModes： 访问模式，常用的访问模式有RWO（可读写，只被挂载到一个node）、ROX（只读，多node）、和RWX（读写，多主机）</li>
+<li>功能模块： 这里使用了nfs，所以这里就使用了nfs模块。</li>
+</ul>
+<h1 id="创建一个PVC"><a href="#创建一个PVC" class="headerlink" title="创建一个PVC"></a>创建一个PVC</h1><p>PVC（PersistentVolumeClaim）用法如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">manual</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">storage:</span> <span class="string">1Gi</span></span><br></pre></td></tr></table></figure>
+
+<p>这里边的配置主要的部分就是进行资源的申请。</p>
+<p>PVC和PV是一个整体。当PV构建完成的时候，PVC才可以向PV申请一个块出来共给容器使用。</p>
+<p>这里只说一点。resources是资源的意思，这里request申请了资源，存储容量1G。</p>
+<h1 id="Pod使用"><a href="#Pod使用" class="headerlink" title="Pod使用"></a>Pod使用</h1><p>这里使用的是volume的方式进行存储挂载的，所以，肯定是不会支持RC和deployment的。只能以Pod建立的时候才能使用。</p>
+<p>在创建Pod的时候，使用如下语法：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">volumes:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> </span><br><span class="line">	  <span class="attr">persistenVolumeClaim:</span></span><br><span class="line">      	<span class="attr">claimName:</span></span><br></pre></td></tr></table></figure>
+
+<p>其余挂载的时候，都是以volumeMounts的方式挂载的，就不多说了。</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://www.huckops.xyz">Huck</a>
-            <p>原文链接：<a href="http://www.huckops.xyz/2020/03/08/kubernetes/%E5%85%B8%E5%9E%8B%E7%8E%AF%E5%A2%83%E5%88%86%E6%9E%90/">http://www.huckops.xyz/2020/03/08/kubernetes/%E5%85%B8%E5%9E%8B%E7%8E%AF%E5%A2%83%E5%88%86%E6%9E%90/</a>
-            <p>发表日期：<a href="http://www.huckops.xyz/2020/03/08/kubernetes/%E5%85%B8%E5%9E%8B%E7%8E%AF%E5%A2%83%E5%88%86%E6%9E%90/">March 8th 2020, 8:19:12 pm</a>
-            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/08/kubernetes/%E5%85%B8%E5%9E%8B%E7%8E%AF%E5%A2%83%E5%88%86%E6%9E%90/">March 8th 2020, 8:34:00 pm</a>
+            <p>原文链接：<a href="http://www.huckops.xyz/2020/03/18/kubernetes/PV%E5%92%8CPVC/">http://www.huckops.xyz/2020/03/18/kubernetes/PV%E5%92%8CPVC/</a>
+            <p>发表日期：<a href="http://www.huckops.xyz/2020/03/18/kubernetes/PV%E5%92%8CPVC/">March 18th 2020, 8:34:51 pm</a>
+            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/18/kubernetes/PV%E5%92%8CPVC/">March 18th 2020, 9:27:57 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -444,17 +445,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/03/08/kubernetes/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/" title= "容器网络">
-                    <div class="nextTitle">容器网络</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/03/08/kubernetes/%E4%B8%80%E9%94%AE%E6%90%AD%E5%BB%BAk8s%E9%9B%86%E7%BE%A4/" title= "一键搭建k8s集群">
-                    <div class="prevTitle">一键搭建k8s集群</div>
+                <a href= "/2020/03/16/kubernetes/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/" title= "初始化容器">
+                    <div class="prevTitle">初始化容器</div>
                 </a>
             
         </li>
@@ -623,7 +619,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概念"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PV"><span class="toc-number">1.1.</span> <span class="toc-text">PV</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PVC"><span class="toc-number">1.2.</span> <span class="toc-text">PVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主要操作"><span class="toc-number">2.</span> <span class="toc-text">主要操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个PV"><span class="toc-number">3.</span> <span class="toc-text">创建一个PV</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建一个PVC"><span class="toc-number">4.</span> <span class="toc-text">创建一个PVC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pod使用"><span class="toc-number">5.</span> <span class="toc-text">Pod使用</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

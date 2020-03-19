@@ -360,6 +360,37 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/docker/%E5%AE%B9%E5%99%A8/" >
+            
+                <span>容器</span>
+        </a>
+        <div class="abstract-content">
+            容器就是镜像跑起来之后的东西。容器之间可以互相访问，但是和实环境隔离。
+咱们看一下运行的容器：
+123bash# docker ps -aCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMESd24f69f87efb        0f3e07c0138f        "/bin/bash"         6 hours ago         Up 6 seconds           ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/docker/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" >
             
                 <span>docker的安装和配置</span>
@@ -658,35 +689,6 @@ KVM是虚拟机软件，那么运行这个软件则要有CPU虚拟化选项打�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/" >
-            
-                <span>虚拟化（KVM）/CPU虚拟及内存虚拟</span>
-        </a>
-        <div class="abstract-content">
-            硬件虚拟化（CPU和内存）常用CPU架构SMP技术这种架构CPU共同访问所有内存，速率比较低，且效率也低。
-NUMA技术这是最常见的虚拟化技术，CPU直接通信自己所属的内存，直接调用，效率较高。
-这里需要用到numactl插件，需手动安装一下
-看以下代码：
-12345678bash$ numactl --hardwareavailable: 1 nodes (0)node 0 cpus: 0 1 2 3 4 5 6 7node 0 size: 7850 MBnode 0 free: 4704 MBnode distances:node   0   0:  10
-
-从以上代码得，这台电脑是...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -782,6 +784,10 @@ NUMA技术这是最常见的虚拟化技术，CPU直接通信自己所属的内�
             <div>FRIENDS</div>
             
                 
+                    <span>
+                        <a href= //www.csdn.net/ target="_black">CSDN</a>
+                    </span>
+                
             
                 
             
@@ -873,20 +879,44 @@ NUMA技术这是最常见的虚拟化技术，CPU直接通信自己所属的内�
     </div>
     
     <!-- powered by Hexo  -->
-		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
-			<div style="margin: 0 auto;text-align: center;">
-				<p>
-					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
-						<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
-						<span style="">为了无法计算的价值</span>
-					</a>
-					
-				</p>
-			</div>
+	<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
+		<div style="text-align: center;margin: 0 auto;font-size: 16px;color: #9C9C9C;">
+			<p>网站已稳定运行<span id="time"></span></p>
 		</div>
+	
+	
+		<script language="javascript">
+			function get_time(){
+				window.setTimeout("get_time()",500);
+				start = new Date('3/3/2020 10:30:00');
+				date = new Date();
+				val = Math.floor((date.getTime() - start.getTime())/1000);
+				day_sec = 24 * 60 * 60;
+				day = Math.floor(val / day_sec);
+				new_sec = val % day_sec;
+				hou_sec = 60*60;
+				hour = Math.floor(new_sec / hou_sec);
+				new_sec = new_sec % hou_sec;
+				mint = Math.floor(new_sec / 60);
+				sec = Math.floor(new_sec % 60);
+				time = document.getElementById('time');
+				time.innerHTML =  day + '天' +  hour + '时' + mint + '分' + sec + '秒' ;
+			}
+			get_time();
+		</script>	
+		<div style="margin: 0 auto;text-align: center;">
+			<p>
+				<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
+					<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
+					<span style="">为了无法计算的价值</span>
+				</a>
+					
+			</p>
+		</div>
+	</div>
     <!-- 不蒜子  -->
     
     <div class="busuanzi-container">
@@ -2575,9 +2605,26 @@ NUMA技术这是最常见的虚拟化技术，CPU直接通信自己所属的内�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 117
+        Total : 118
         </div>
         <!-- search  -->
         
@@ -3352,6 +3399,11 @@ NUMA技术这是最常见的虚拟化技术，CPU直接通信自己所属的内�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >PV和PVC</a>
+        </li>
     
     
         <li class="archive-post-item">

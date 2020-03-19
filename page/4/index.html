@@ -360,6 +360,34 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/lvs%E5%8E%9F%E7%90%86/" >
+            
+                <span>基础服务/lvs原理</span>
+        </a>
+        <div class="abstract-content">
+            LVS全称是Linux Virtual Server，即Linux虚拟服务器。这是一个具有三种工作模式，十种调度算法的代理服务器软件。
+这是一种常见的反向代理案例
+
+这是LVS组成了一个负载均衡集群，LVS服务器将接收到的请求转发给了群内主机上。因为LVS在这里进行了数据的分发，像一个中转，所以我们叫做“调度器”。
+在生产环境中，服务器一般都是要发布在公网的。因为backend的特殊性不便于直接暴露在公网上，那么LVS服务器就起了很大的作用。
+LVS被配置了一个公网IP，这个IP将被客户进行访问，这个IP通常称为VIP。LVS服务器一般都是使用了双网卡，另一张网卡要连接到内网，那么这张内...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/haproxy/" >
             
                 <span>基础服务/haproxy</span>
@@ -702,42 +730,6 @@ RAID5四个磁盘组成一个RAID...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/zabbix/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/" >
-            
-                <span>资产管理</span>
-        </a>
-        <div class="abstract-content">
-            资产管理对于一个大型企业来说，生产环境服务器会有成百上千台，组成一个计算集群。通常目前都用的Openstack的虚拟化架构，能管理虚拟主机资产，但是没有专用的物理机资产管理工具。zabbix就解决了这个问题。
-给主机添加资产标签在主机中添加主机资产记录，添加相关的字段。
-这个字段优点类似于target，在做资产管理的适合会使用到。
-
-这里边的字段自行进行区分，尽量让服务器管理的时候不会发生误解。
-管理主机资产在资产记录-&gt;主机中可以看到刚才添加的资产。
-主机的可用性主机的可用性是服务器稳定性的一种指标，业内常用9的个数进行衡量。通常来说，服务能做到五个9就已经很不错了。
-在zabb...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -833,6 +825,10 @@ RAID5四个磁盘组成一个RAID...
             <div>FRIENDS</div>
             
                 
+                    <span>
+                        <a href= //www.csdn.net/ target="_black">CSDN</a>
+                    </span>
+                
             
                 
             
@@ -924,20 +920,44 @@ RAID5四个磁盘组成一个RAID...
     </div>
     
     <!-- powered by Hexo  -->
-		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
-			<div style="margin: 0 auto;text-align: center;">
-				<p>
-					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
-						<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
-						<span style="">为了无法计算的价值</span>
-					</a>
-					
-				</p>
-			</div>
+	<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
+		<div style="text-align: center;margin: 0 auto;font-size: 16px;color: #9C9C9C;">
+			<p>网站已稳定运行<span id="time"></span></p>
 		</div>
+	
+	
+		<script language="javascript">
+			function get_time(){
+				window.setTimeout("get_time()",500);
+				start = new Date('3/3/2020 10:30:00');
+				date = new Date();
+				val = Math.floor((date.getTime() - start.getTime())/1000);
+				day_sec = 24 * 60 * 60;
+				day = Math.floor(val / day_sec);
+				new_sec = val % day_sec;
+				hou_sec = 60*60;
+				hour = Math.floor(new_sec / hou_sec);
+				new_sec = new_sec % hou_sec;
+				mint = Math.floor(new_sec / 60);
+				sec = Math.floor(new_sec % 60);
+				time = document.getElementById('time');
+				time.innerHTML =  day + '天' +  hour + '时' + mint + '分' + sec + '秒' ;
+			}
+			get_time();
+		</script>	
+		<div style="margin: 0 auto;text-align: center;">
+			<p>
+				<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
+					<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
+					<span style="">为了无法计算的价值</span>
+				</a>
+					
+			</p>
+		</div>
+	</div>
     <!-- 不蒜子  -->
     
     <div class="busuanzi-container">
@@ -2626,9 +2646,26 @@ RAID5四个磁盘组成一个RAID...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 117
+        Total : 118
         </div>
         <!-- search  -->
         
@@ -3403,6 +3440,11 @@ RAID5四个磁盘组成一个RAID...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >PV和PVC</a>
+        </li>
     
     
         <li class="archive-post-item">

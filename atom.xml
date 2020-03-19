@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.huckops.xyz/"/>
-  <updated>2020-03-16T16:14:37.502Z</updated>
+  <updated>2020-03-18T13:27:57.287Z</updated>
   <id>http://www.huckops.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PV和PVC</title>
+    <link href="http://www.huckops.xyz/2020/03/18/kubernetes/PV%E5%92%8CPVC/"/>
+    <id>http://www.huckops.xyz/2020/03/18/kubernetes/PV%E5%92%8CPVC/</id>
+    <published>2020-03-18T12:34:51.000Z</published>
+    <updated>2020-03-18T13:27:57.287Z</updated>
+    
+    <content type="html"><![CDATA[<p>在生产环境中，服务器一般跑的都是业务环境，这样的服务器一般不会有过大的硬盘，数据不能直接存放在本服务器上，需要把数据储存在其他位置。在容器环境中，通常会使用gluster、nfs或者ceph来解决这个问题。</p><p>以上的存储方式都不是直接挂给容器的，通常都是先生成一个pv，然后由pv划出pvc，将存储块以数据卷的形式挂给容器。</p><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>这里引入两个概念</p><h2 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h2><p>PV是一个资源池，把我们前边说到的资源放在一个类似于盒子一样的东西。这样的盒子大小容量全都是由用户自己设定的。</p><h2 id="PVC"><a href="#PVC" class="headerlink" title="PVC"></a>PVC</h2><p>PVC是资源。可以理解为把PV进行了实例化，把PV变成了一个可以被容器直接调用的东西。</p><h1 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h1><p>nfs和其他的存储服务器搭建我就不多说了，这个前边已经学过。</p><h1 id="创建一个PV"><a href="#创建一个PV" class="headerlink" title="创建一个PV"></a>创建一个PV</h1><p>PV（PersistentVolume）以一下方式定义：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">manual</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">1Gi</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">nfs:</span></span><br><span class="line">    <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.207</span><span class="number">.121</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">"/nas/dg_vd"</span></span><br></pre></td></tr></table></figure><p>这个yaml文件下有一些重要配置，如下：</p><ul><li>storageClassName： 储存类名。按字面意思理解就行了</li><li>capacity： 划分储存快大小</li><li>accessModes： 访问模式，常用的访问模式有RWO（可读写，只被挂载到一个node）、ROX（只读，多node）、和RWX（读写，多主机）</li><li>功能模块： 这里使用了nfs，所以这里就使用了nfs模块。</li></ul><h1 id="创建一个PVC"><a href="#创建一个PVC" class="headerlink" title="创建一个PVC"></a>创建一个PVC</h1><p>PVC（PersistentVolumeClaim）用法如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfs</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">manual</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">storage:</span> <span class="string">1Gi</span></span><br></pre></td></tr></table></figure><p>这里边的配置主要的部分就是进行资源的申请。</p><p>PVC和PV是一个整体。当PV构建完成的时候，PVC才可以向PV申请一个块出来共给容器使用。</p><p>这里只说一点。resources是资源的意思，这里request申请了资源，存储容量1G。</p><h1 id="Pod使用"><a href="#Pod使用" class="headerlink" title="Pod使用"></a>Pod使用</h1><p>这里使用的是volume的方式进行存储挂载的，所以，肯定是不会支持RC和deployment的。只能以Pod建立的时候才能使用。</p><p>在创建Pod的时候，使用如下语法：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> </span><br><span class="line">  <span class="attr">persistenVolumeClaim:</span></span><br><span class="line">      <span class="attr">claimName:</span></span><br></pre></td></tr></table></figure><p>其余挂载的时候，都是以volumeMounts的方式挂载的，就不多说了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在生产环境中，服务器一般跑的都是业务环境，这样的服务器一般不会有过大的硬盘，数据不能直接存放在本服务器上，需要把数据储存在其他位置。在容器环境中，通常会使用gluster、nfs或者ceph来解决这个问题。&lt;/p&gt;
+&lt;p&gt;以上的存储方式都不是直接挂给容器的，通常都是先生成一
+      
+    
+    </summary>
+    
+    
+      <category term="kubernetes" scheme="http://www.huckops.xyz/categories/kubernetes/"/>
+    
+    
+      <category term="容器技术" scheme="http://www.huckops.xyz/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>初始化容器</title>
@@ -519,28 +546,6 @@
         &lt;p&gt;目前各大云计算厂商都在使用虚拟化云服务，大部分以VMware、Xen和KVM（Openstack）等架构，KVM是使用最广的虚拟化方案。&lt;/p&gt;
 &lt;p&gt;虚拟化是将空闲的硬件资源分配到虚拟计算机中，使服务器的性能能达到最好，发挥到极致。&lt;/p&gt;
 &lt;p&gt;KVM是内核加强虚拟机，
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>虚拟化（KVM）/CPU虚拟及内存虚拟</title>
-    <link href="http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/"/>
-    <id>http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/CPU%E8%99%9A%E6%8B%9F%E5%8F%8A%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F/</id>
-    <published>2020-03-08T12:19:13.583Z</published>
-    <updated>2020-01-13T11:22:49.313Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="硬件虚拟化（CPU和内存）"><a href="#硬件虚拟化（CPU和内存）" class="headerlink" title="硬件虚拟化（CPU和内存）"></a>硬件虚拟化（CPU和内存）</h1><h2 id="常用CPU架构"><a href="#常用CPU架构" class="headerlink" title="常用CPU架构"></a>常用CPU架构</h2><h3 id="SMP技术"><a href="#SMP技术" class="headerlink" title="SMP技术"></a>SMP技术</h3><p>这种架构CPU共同访问所有内存，速率比较低，且效率也低。</p><h3 id="NUMA技术"><a href="#NUMA技术" class="headerlink" title="NUMA技术"></a>NUMA技术</h3><p>这是最常见的虚拟化技术，CPU直接通信自己所属的内存，直接调用，效率较高。</p><p><strong>这里需要用到numactl插件，需手动安装一下</strong></p><p>看以下代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bash$ numactl --hardware</span><br><span class="line">available: 1 nodes (0)</span><br><span class="line">node 0 cpus: 0 1 2 3 4 5 6 7</span><br><span class="line">node 0 size: 7850 MB</span><br><span class="line">node 0 free: 4704 MB</span><br><span class="line">node distances:</span><br><span class="line">node   0 </span><br><span class="line">  0:  10</span><br></pre></td></tr></table></figure><p>从以上代码得，这台电脑是单CPU，是多核的CPU。内存一共7850M，空余4704M。</p><p>查看NUMA使用的内存</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">bash# numasat -c qemu-kvm</span><br><span class="line">Per-node numastat info (in MBs):</span><br><span class="line">                Node 0 Total</span><br><span class="line">                ------ -----</span><br><span class="line">Numa_Hit         19365 19365</span><br><span class="line">Numa_Miss            0     0</span><br><span class="line">Numa_Foreign         0     0</span><br><span class="line">Interleave_Hit     175   175</span><br><span class="line">Local_Node       19365 19365</span><br><span class="line">Other_Node           0     0</span><br><span class="line">Local_Node       19365 19365</span><br><span class="line">Other_Node           0     0</span><br></pre></td></tr></table></figure><p>可以看到内存的占用状况。</p><h1 id="KSM技术："><a href="#KSM技术：" class="headerlink" title="KSM技术："></a>KSM技术：</h1><p>虚拟主句和宿主主机内存合并。</p><h2 id="内存气球技术"><a href="#内存气球技术" class="headerlink" title="内存气球技术"></a>内存气球技术</h2><p>需要virt balloon插件调节内存。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;硬件虚拟化（CPU和内存）&quot;&gt;&lt;a href=&quot;#硬件虚拟化（CPU和内存）&quot; class=&quot;headerlink&quot; title=&quot;硬件虚拟化（CPU和内存）&quot;&gt;&lt;/a&gt;硬件虚拟化（CPU和内存）&lt;/h1&gt;&lt;h2 id=&quot;常用CPU架构&quot;&gt;&lt;a href=&quot;#常用
       
     
     </summary>

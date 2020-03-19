@@ -347,6 +347,37 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/IPy%E6%A8%A1%E5%9D%97/" >
+            
+                <span>python/IPy模块</span>
+        </a>
+        <div class="abstract-content">
+            安装1pip install IPy
+
+该模块一般情况只用上IP类，导入方法：from IPy import IP
+IP类保存ip对象，可以解析出IP的一些参数。
+reverseName()方法返回反向解析地址格式。
+iptype()方法返回IP类型。
+int(),strHex(),strBin()方法转换IP为整形，十六进制，二进制
+netmask()方法返回子网掩码。
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Nginx%E8%B0%83%E4%BC%98/%E5%85%A8%E5%B1%80%E5%9D%97%E5%92%8Chttp%E5%9D%97/" >
             
                 <span>全局块和http块</span>
@@ -669,32 +700,6 @@ SELECT语句select语句和英语的翻译是相同的。就是选择需要哪�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/mysql/%E6%95%B0%E6%8D%AE%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D/" >
-            
-                <span>mysql/数据模糊匹配</span>
-        </a>
-        <div class="abstract-content">
-            
-title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们在用搜索引擎的时候，输入关键字到一半的时候搜索框下会返回一些类似关键字，在MySQL中也经常会用到这个东西。
-%通配符使用通配符时，不能使用等号筛选，需要使用LIKE关键字。
-12345678910mysql&gt; SELECT * FROM demo    -&gt; WHERE name LIKE &quot;demo%&quot;;+----+-------+| id | name  |+----+-------+|  1 | demo1 ||  2 | demo2 ||  3 | de...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -781,20 +786,44 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     </div>
     
     <!-- powered by Hexo  -->
-		<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
-			<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
-			<div style="margin: 0 auto;text-align: center;">
-				<p>
-					<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
-						<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
-						<span style="">为了无法计算的价值</span>
-					</a>
-					
-				</p>
-			</div>
+	<div style="text-align: center;margin: 0 auto;padding: 40px;padding-bottom:5px ;">
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">Powered by Huck</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;">From ZYPC Studio,XUPT</span><br />
+		<span style="text-align: center;font-size: 16px;color: #9C9C9C;"><a style="color: #9c9c9c;" href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">陕ICP备19022300号-3</a></span>
+		<div style="text-align: center;margin: 0 auto;font-size: 16px;color: #9C9C9C;">
+			<p>网站已稳定运行<span id="time"></span></p>
 		</div>
+	
+	
+		<script language="javascript">
+			function get_time(){
+				window.setTimeout("get_time()",500);
+				start = new Date('3/3/2020 10:30:00');
+				date = new Date();
+				val = Math.floor((date.getTime() - start.getTime())/1000);
+				day_sec = 24 * 60 * 60;
+				day = Math.floor(val / day_sec);
+				new_sec = val % day_sec;
+				hou_sec = 60*60;
+				hour = Math.floor(new_sec / hou_sec);
+				new_sec = new_sec % hou_sec;
+				mint = Math.floor(new_sec / 60);
+				sec = Math.floor(new_sec % 60);
+				time = document.getElementById('time');
+				time.innerHTML =  day + '天' +  hour + '时' + mint + '分' + sec + '秒' ;
+			}
+			get_time();
+		</script>	
+		<div style="margin: 0 auto;text-align: center;">
+			<p>
+				<a href="https://www.aliyun.com/" target="_blank" rel="noopener" style="color: #9c9c9c;text-decoration: none;">
+					<img src="https://img.alicdn.com/tfs/TB1Ly5oS3HqK1RjSZFPXXcwapXa-238-54.png" style="height: 16px;">
+					<span style="">为了无法计算的价值</span>
+				</a>
+					
+			</p>
+		</div>
+	</div>
     <!-- 不蒜子  -->
     
     <div class="busuanzi-container">
@@ -2483,9 +2512,26 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 117
+        Total : 118
         </div>
         <!-- search  -->
         
@@ -3260,6 +3306,11 @@ title: 数据模糊匹配categories: MySQLtags: 数据库技术—比如我们�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >PV和PVC</a>
+        </li>
     
     
         <li class="archive-post-item">
