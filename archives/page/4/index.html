@@ -347,6 +347,36 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/NTP%E6%9C%8D%E5%8A%A1/" >
+            
+                <span>基础服务/NTP服务</span>
+        </a>
+        <div class="abstract-content">
+            
+通常情况下，服务器的授时服务都是连接至网络上的授时服务器的。但是有的时候，服务器进行异地容灾，特别在国外的时候，需要生成日志，日志时间要求是主服务的时间基准，那么就需要架设NTP服务进行授时了。
+
+服务端安装安装必要的软件
+1yum install ntp tzdata
+
+下来进行文件配置。ntp的配置文件只有一个，/etc/ntp.conf。我们看一下这个文件
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657# For mo...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/nfs/" >
             
                 <span>基础服务/nfs</span>
@@ -675,42 +705,6 @@ RAID5四个磁盘组成一个RAID...
 
 下载并解压源码文件，进入目录：
 12wget https:/...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "存储技术">存储技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/LVM/" >
-            
-                <span>LVM</span>
-        </a>
-        <div class="abstract-content">
-            LVM是Linux下逻辑磁盘管理器。在使用LVM时，多块磁盘共同构成一个VG，然后VG（类似于k8s中的PV）又被分成多个lv（逻辑卷，类似于k8s中的PVC）
-通常情况LVM是默认被安装在系统里的，我们可以通过rpm -qa查看lvm是否被正确的安装。
-查看一下由多少块数据盘
-1bash# ll /dev | grep sd
-
-这样就可以看到服务器上安装的数据盘。
-对各个数据盘进行分区：
-123456789# fdisk /etc/sdbbash# fdisk /dev/sdb欢迎使用 fdisk (util-linux 2.23.2)。更改将停留在内存中，直到您决定将更改写入磁盘。使...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2578,9 +2572,28 @@ RAID5四个磁盘组成一个RAID...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 119
+        Total : 120
         </div>
         <!-- search  -->
         
@@ -3359,6 +3372,11 @@ RAID5四个磁盘组成一个RAID...
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" >维护和自动发现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/zabbix/zabbix-proxy/" >zabbix-proxy</a>
         </li>
     
     

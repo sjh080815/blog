@@ -347,6 +347,36 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/python/%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5/" >
+            
+                <span>python/用户输入</span>
+        </a>
+        <div class="abstract-content">
+            常用输入方法输入和C语言的定义相同，就不赘述了。python使用input方法获取输入。
+12a = input('please enter')print(a)
+输出
+12please enter123123
+
+123是输入，但是这需要注意的是，input获取的是string型数据，所以不能用作数学运算。
+可以将输入的数据进行隐式转换，代码如下：
+123a = input('please enter')a = int(a)print(a)
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/python/%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/" >
             
                 <span>python/条件语句</span>
@@ -599,39 +629,6 @@ gmtime()方法当前时间转换为struct_time对象。
 localtime()方法将元组格式的时间转换为秒数代表的时间。
 strftime()方法格式化输出时间。参数是输出格式。
 
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/psutil%E6%A8%A1%E5%9D%97/" >
-            
-                <span>python/psutil模块</span>
-        </a>
-        <div class="abstract-content">
-            安装使用pip安装。直接执行
-1pip install psutil
-
-CPU信息使用方法：cpu_times()
-cpu信息以元组的方式传出。可以分别访问元素。
-内存和swap信息使用方法：virtual_memory()和swap_memory()
-返回内存和swap的信息。返回的参数都是以B为单位的。
-磁盘信息使用方法：disk_*()
-psutil.disk_partitions():返回所有磁盘。在windows中返回的是硬盘分区。
-psutil.disk_usage()：返回硬盘的信息。参数为硬盘的使用量和容量。
-psutil.disk_io_counters()：返回磁盘的...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2493,9 +2490,28 @@ psutil.disk_io_counters()：返回磁盘的...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 119
+        Total : 120
         </div>
         <!-- search  -->
         
@@ -3274,6 +3290,11 @@ psutil.disk_io_counters()：返回磁盘的...
     
         <li class="archive-post-item">
             <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" >维护和自动发现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/zabbix/zabbix-proxy/" >zabbix-proxy</a>
         </li>
     
     

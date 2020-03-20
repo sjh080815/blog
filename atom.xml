@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.huckops.xyz/"/>
-  <updated>2020-03-20T08:31:27.279Z</updated>
+  <updated>2020-03-20T08:56:51.726Z</updated>
   <id>http://www.huckops.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>zabbix-proxy</title>
+    <link href="http://www.huckops.xyz/2020/03/20/zabbix/zabbix-proxy/"/>
+    <id>http://www.huckops.xyz/2020/03/20/zabbix/zabbix-proxy/</id>
+    <published>2020-03-20T08:34:46.000Z</published>
+    <updated>2020-03-20T08:56:51.726Z</updated>
+    
+    <content type="html"><![CDATA[<p>在生产环境中会遇到一种情况。服务组由多个集群构成，这些集群不使用同一个局域网，集群之间不能进行相互通信。那么，这个时候proxy就是一个很好的解决策略。</p><p>每个集群里，有一台主机留出一个网卡来做集群间通信。将这个主机作为proxy主机，所有监控数据都从一个主机上转发出来。</p><h1 id="proxy端部署"><a href="#proxy端部署" class="headerlink" title="proxy端部署"></a>proxy端部署</h1><p>这个proxy节点并非一个简单的转发节点。zabbix的proxy模式类似于master-slave模式，proxy会收集储存数据，所以，这个proxy节点同样也需要使用到数据库。</p><h2 id="安装proxy"><a href="#安装proxy" class="headerlink" title="安装proxy"></a>安装proxy</h2><p>和安装server一样，先配置一下镜像库。</p><p>安装proxy软件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zabbix-proxy</span><br></pre></td></tr></table></figure><p>安装数据库软件，这里推荐使用mariadb：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum insatll mariadb mariadb-server</span><br><span class="line">systemctl start mariadb &amp;&amp; systemctl <span class="built_in">enable</span> mariadb</span><br><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure><p>初始化数据库成功。</p><h2 id="配置proxy基础环境"><a href="#配置proxy基础环境" class="headerlink" title="配置proxy基础环境"></a>配置proxy基础环境</h2><p>进入mysql-cli，创建一个数据库并授权：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create database zabbix_proxy character set utf8 collate utf8_bin;</span><br><span class="line"></span><br><span class="line">grant all privileges on zabbix_proxy.* to zabbix_proxy@localhost identified by &#39;zabbix&#39;;</span><br></pre></td></tr></table></figure><p>将数据库文件导入到数据库中：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use zabbix_proxy</span><br><span class="line">source &#x2F;usr&#x2F;share&#x2F;doc&#x2F;zabbix-proxy-mysql-3.2.0&#x2F;*</span><br></pre></td></tr></table></figure><p>配置proxy配置文件：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Server=192.168.89.160</span><br><span class="line">DBName=zabbix_proxy</span><br><span class="line">DBUser=zabbix_proxy</span><br><span class="line">DBPassword=zabbix</span><br></pre></td></tr></table></figure><p>这里的server不是本机的ip，是zabbix-server的ip。</p><p>启动服务：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start zabbix-proxy</span><br></pre></td></tr></table></figure><h1 id="Server端配置"><a href="#Server端配置" class="headerlink" title="Server端配置"></a>Server端配置</h1><p>在dashboard中，进入管理-&gt;agent代理程序选项卡创建代理。这里有一个重要参数是系统代理程序模式。</p><h2 id="主动式和被动式"><a href="#主动式和被动式" class="headerlink" title="主动式和被动式"></a>主动式和被动式</h2><p>主动式表示proxy主动向server报送数据，不需要server时proxy也正常报送数据。</p><p>被动式表示当server向proxy端发出一个请求，proxy端向server端返回一个数据。</p><h2 id="proxy的应用"><a href="#proxy的应用" class="headerlink" title="proxy的应用"></a>proxy的应用</h2><p>在创建主机时，填写主机的ip，但是在由agent代理程序监测选项中选择刚才创建的proxy就可以了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在生产环境中会遇到一种情况。服务组由多个集群构成，这些集群不使用同一个局域网，集群之间不能进行相互通信。那么，这个时候proxy就是一个很好的解决策略。&lt;/p&gt;
+&lt;p&gt;每个集群里，有一台主机留出一个网卡来做集群间通信。将这个主机作为proxy主机，所有监控数据都从一个主机上
+      
+    
+    </summary>
+    
+    
+      <category term="zabbix" scheme="http://www.huckops.xyz/categories/zabbix/"/>
+    
+    
+      <category term="分布式监控" scheme="http://www.huckops.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9B%91%E6%8E%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>维护和自动发现</title>
@@ -525,29 +552,6 @@
         &lt;p&gt;虚拟机，我们常叫做实例。一个实例就含一个最基本的服务器的最小系统，包括虚拟硬件系统和软件系统。&lt;/p&gt;
 &lt;p&gt;通常生产环节的服务器不适用GUI界面，但是再做KVM的时候，需要GUI界面做辅助管理，所以再安装KVM之前务必先安装桌面。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;KVM最终
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>虚拟化（KVM）/网络虚拟化</title>
-    <link href="http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    <id>http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/</id>
-    <published>2020-03-08T12:19:13.591Z</published>
-    <updated>2020-01-13T11:22:49.358Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="虚拟化分类"><a href="#虚拟化分类" class="headerlink" title="虚拟化分类"></a>虚拟化分类</h1><p>虚拟化可分为半虚拟化和全虚拟化。半虚拟化和全虚拟化的本质区别在于虚拟化层。</p><h1 id="半虚拟化网络（Virtio驱动）"><a href="#半虚拟化网络（Virtio驱动）" class="headerlink" title="半虚拟化网络（Virtio驱动）"></a>半虚拟化网络（Virtio驱动）</h1><p>半虚拟化主机需要对客户机操作系统进行一定的修改才能使用。半虚拟化宿主机和虚拟机都需要安装Virtio的虚拟工具。</p><h2 id="半虚拟化安装过程"><a href="#半虚拟化安装过程" class="headerlink" title="半虚拟化安装过程"></a>半虚拟化安装过程</h2><p>目前主流操作系统都默认带有Virtio的网络驱动，只需要再内核中看看是否支持。</p><p>在启动虚拟机的时候加入参数virtio-net-oci，指定网卡if=virtio（网卡类型）。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;虚拟化分类&quot;&gt;&lt;a href=&quot;#虚拟化分类&quot; class=&quot;headerlink&quot; title=&quot;虚拟化分类&quot;&gt;&lt;/a&gt;虚拟化分类&lt;/h1&gt;&lt;p&gt;虚拟化可分为半虚拟化和全虚拟化。半虚拟化和全虚拟化的本质区别在于虚拟化层。&lt;/p&gt;
-&lt;h1 id=&quot;半虚拟化网络（V
       
     
     </summary>

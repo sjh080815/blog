@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>术语和概念 · Huck Blog</title>
+    <title>zabbix-proxy · Huck Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -218,7 +218,7 @@
                 <a href="/" >Huck Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">术语和概念</a>
+                <a href="#" class="post-name">zabbix-proxy</a>
             </div>
     </div>
     
@@ -248,7 +248,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            术语和概念
+            zabbix-proxy
             <!-- 404 -->
             
         </h1>
@@ -267,18 +267,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.4k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                        <span>Word count: <span class="post-count word-count">475</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/03/08</span>
+                    <span class="post-intro-time">2020/03/20</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -402,55 +402,43 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Master和Node"><a href="#Master和Node" class="headerlink" title="Master和Node"></a>Master和Node</h1><p>和别的服务集群一样，k8s集群也主从结构的。Master负责对集群内的资源进行控制和调度，Node是计算节点，提供服务计算。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"> kubectl describe node k8s1</span><br><span class="line">Name:               k8s1</span><br><span class="line">Roles:              master</span><br><span class="line">Labels:             beta.kubernetes.io&#x2F;arch&#x3D;amd64</span><br><span class="line">                    beta.kubernetes.io&#x2F;os&#x3D;linux</span><br><span class="line">                    kubernetes.io&#x2F;arch&#x3D;amd64</span><br><span class="line">                    kubernetes.io&#x2F;hostname&#x3D;k8s1</span><br><span class="line">                    kubernetes.io&#x2F;os&#x3D;linux</span><br><span class="line">                    node-role.kubernetes.io&#x2F;master&#x3D;</span><br><span class="line">Annotations:        flannel.alpha.coreos.com&#x2F;backend-data: &#123;&quot;VtepMAC&quot;:&quot;ca:de:28:9f:ca:15&quot;&#125;</span><br><span class="line">                    flannel.alpha.coreos.com&#x2F;backend-type: vxlan</span><br><span class="line">                    flannel.alpha.coreos.com&#x2F;kube-subnet-manager: true</span><br><span class="line">                    flannel.alpha.coreos.com&#x2F;public-ip: 192.168.183.134</span><br><span class="line">                    kubeadm.alpha.kubernetes.io&#x2F;cri-socket: &#x2F;var&#x2F;run&#x2F;dockershim.sock</span><br><span class="line">                    node.alpha.kubernetes.io&#x2F;ttl: 0</span><br><span class="line">                    volumes.kubernetes.io&#x2F;controller-managed-attach-detach: true</span><br><span class="line">CreationTimestamp:  Mon, 13 Jan 2020 17:53:41 +0800</span><br><span class="line">Taints:             node-role.kubernetes.io&#x2F;master:NoSchedule</span><br><span class="line">Unschedulable:      false</span><br><span class="line">Conditions:</span><br><span class="line">  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message</span><br><span class="line">  ----             ------  -----------------                 ------------------                ------                       -------</span><br><span class="line">  MemoryPressure   False   Wed, 15 Jan 2020 10:38:47 +0800   Mon, 13 Jan 2020 17:53:38 +0800   KubeletHasSufficientMemory   kubelet has sufficient memory available</span><br><span class="line">  DiskPressure     False   Wed, 15 Jan 2020 10:38:47 +0800   Mon, 13 Jan 2020 17:53:38 +0800   KubeletHasNoDiskPressure     kubelet has no disk pressure</span><br><span class="line">  PIDPressure      False   Wed, 15 Jan 2020 10:38:47 +0800   Mon, 13 Jan 2020 17:53:38 +0800   KubeletHasSufficientPID      kubelet has sufficient PID available</span><br><span class="line">  Ready            True    Wed, 15 Jan 2020 10:38:47 +0800   Wed, 15 Jan 2020 10:28:46 +0800   KubeletReady                 kubelet is posting ready status</span><br><span class="line">Addresses:</span><br><span class="line">  InternalIP:  192.168.183.134</span><br><span class="line">  Hostname:    k8s1</span><br><span class="line">Capacity:</span><br><span class="line"> cpu:                2</span><br><span class="line"> ephemeral-storage:  17394Mi</span><br><span class="line"> hugepages-1Gi:      0</span><br><span class="line"> hugepages-2Mi:      0</span><br><span class="line"> memory:             1863104Ki</span><br><span class="line"> pods:               110</span><br><span class="line">Allocatable:</span><br><span class="line"> cpu:                2</span><br><span class="line"> ephemeral-storage:  16415037823</span><br><span class="line"> hugepages-1Gi:      0</span><br><span class="line"> hugepages-2Mi:      0</span><br><span class="line"> memory:             1760704Ki</span><br><span class="line"> pods:               110</span><br><span class="line">System Info:</span><br><span class="line"> Machine ID:                 bd98425295694d03b1b4021be7e0e5cd</span><br><span class="line"> System UUID:                5AC54D56-D2F1-9417-63C8-59EFCDEC9375</span><br><span class="line"> Boot ID:                    322a7718-a6e4-4240-9729-eadaaad877e5</span><br><span class="line"> Kernel Version:             3.10.0-1062.el7.x86_64</span><br><span class="line"> OS Image:                   CentOS Linux 7 (Core)</span><br><span class="line"> Operating System:           linux</span><br><span class="line"> Architecture:               amd64</span><br><span class="line"> Container Runtime Version:  docker:&#x2F;&#x2F;18.9.4</span><br><span class="line"> Kubelet Version:            v1.15.4</span><br><span class="line"> Kube-Proxy Version:         v1.15.4</span><br><span class="line">PodCIDR:                     10.244.0.0&#x2F;24</span><br><span class="line">Non-terminated Pods:         (8 in total)</span><br><span class="line">  Namespace                  Name                            CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE</span><br><span class="line">  ---------                  ----                            ------------  ----------  ---------------  -------------  ---</span><br><span class="line">  kube-system                coredns-5c98db65d4-pb5nr        100m (5%)     0 (0%)      70Mi (4%)        170Mi (9%)     40h</span><br><span class="line">  kube-system                coredns-5c98db65d4-ts5tb        100m (5%)     0 (0%)      70Mi (4%)        170Mi (9%)     40h</span><br><span class="line">  kube-system                etcd-k8s1                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         40h</span><br><span class="line">  kube-system                kube-apiserver-k8s1             250m (12%)    0 (0%)      0 (0%)           0 (0%)         40h</span><br><span class="line">  kube-system                kube-controller-manager-k8s1    200m (10%)    0 (0%)      0 (0%)           0 (0%)         40h</span><br><span class="line">  kube-system                kube-flannel-ds-amd64-qhpb7     100m (5%)     100m (5%)   50Mi (2%)        50Mi (2%)      40h</span><br><span class="line">  kube-system                kube-proxy-7kkvr                0 (0%)        0 (0%)      0 (0%)           0 (0%)         40h</span><br><span class="line">  kube-system                kube-scheduler-k8s1             100m (5%)     0 (0%)      0 (0%)           0 (0%)         40h</span><br><span class="line">Allocated resources:</span><br><span class="line">  (Total limits may be over 100 percent, i.e., overcommitted.)</span><br><span class="line">  Resource           Requests     Limits</span><br><span class="line">  --------           --------     ------</span><br><span class="line">  cpu                850m (42%)   100m (5%)</span><br><span class="line">  memory             190Mi (11%)  390Mi (22%)</span><br><span class="line">  ephemeral-storage  0 (0%)       0 (0%)</span><br><span class="line">Events:</span><br><span class="line">  Type     Reason                   Age                From              Message</span><br><span class="line">  ----     ------                   ----               ----              -------</span><br><span class="line">  Normal   Starting                 12m                kubelet, k8s1     Starting kubelet.</span><br><span class="line">  Normal   NodeHasSufficientMemory  12m (x7 over 12m)  kubelet, k8s1     Node k8s1 status is now: NodeHasSufficientMemory</span><br><span class="line">  Normal   NodeHasNoDiskPressure    12m (x7 over 12m)  kubelet, k8s1     Node k8s1 status is now: NodeHasNoDiskPressure</span><br><span class="line">  Normal   NodeHasSufficientPID     12m (x6 over 12m)  kubelet, k8s1     Node k8s1 status is now: NodeHasSufficientPID</span><br><span class="line">  Normal   NodeAllocatableEnforced  12m                kubelet, k8s1     Updated Node Allocatable limit across pods</span><br><span class="line">  Normal   NodeHasNoDiskPressure    10m                kubelet, k8s1     Node k8s1 status is now: NodeHasNoDiskPressure</span><br><span class="line">  Normal   NodeHasSufficientMemory  10m                kubelet, k8s1     Node k8s1 status is now: NodeHasSufficientMemory</span><br><span class="line">  Normal   Starting                 10m                kubelet, k8s1     Starting kubelet.</span><br><span class="line">  Normal   NodeHasSufficientPID     10m                kubelet, k8s1     Node k8s1 status is now: NodeHasSufficientPID</span><br><span class="line">  Warning  Rebooted                 10m                kubelet, k8s1     Node k8s1 has been rebooted, boot id: 322a7718-a6e4-4240-9729-eadaaad877e5</span><br><span class="line">  Normal   NodeNotReady             10m                kubelet, k8s1     Node k8s1 status is now: NodeNotReady</span><br><span class="line">  Normal   NodeAllocatableEnforced  10m                kubelet, k8s1     Updated Node Allocatable limit across pods</span><br><span class="line">  Normal   NodeReady                10m                kubelet, k8s1     Node k8s1 status is now: NodeReady</span><br><span class="line">  Normal   Starting                 10m                kube-proxy, k8s1  Starting kube-proxy.</span><br></pre></td></tr></table></figure>
+        <p>在生产环境中会遇到一种情况。服务组由多个集群构成，这些集群不使用同一个局域网，集群之间不能进行相互通信。那么，这个时候proxy就是一个很好的解决策略。</p>
+<p>每个集群里，有一台主机留出一个网卡来做集群间通信。将这个主机作为proxy主机，所有监控数据都从一个主机上转发出来。</p>
+<h1 id="proxy端部署"><a href="#proxy端部署" class="headerlink" title="proxy端部署"></a>proxy端部署</h1><p>这个proxy节点并非一个简单的转发节点。zabbix的proxy模式类似于master-slave模式，proxy会收集储存数据，所以，这个proxy节点同样也需要使用到数据库。</p>
+<h2 id="安装proxy"><a href="#安装proxy" class="headerlink" title="安装proxy"></a>安装proxy</h2><p>和安装server一样，先配置一下镜像库。</p>
+<p>安装proxy软件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zabbix-proxy</span><br></pre></td></tr></table></figure>
 
-<p>使用命令<code>kubectl describe node k8s1</code>可以查看群内主机k8s1的状态。</p>
-<h1 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h1><p>Pod是一个特殊的根容器，每个Pod包含一个或多个业务容器。</p>
-<p>Pod的IP是群内IP，被称为Pod IP，Pod内的业务容器公用同一个Pod IP，各Pod之间进行通信需要依赖于k8s的网络插件，我们常用的是fannel（虚拟网络交换技术）。</p>
-<p>yaml定义kind为Pod的时候，可以在spec里直接定义container。</p>
-<p>在使用docker的时候有docker数据卷，为了达到文件的交互，Pod也有数据卷，可被各个容器挂载。</p>
-<h1 id="Label"><a href="#Label" class="headerlink" title="Label"></a>Label</h1><p>标签，就是Pod或者Service的标记符，参数较多。但是常用<code>app:</code>参数。</p>
-<p>Label通常被selector使用，取操作的对象。</p>
-<h1 id="ReplicationController"><a href="#ReplicationController" class="headerlink" title="ReplicationController"></a>ReplicationController</h1><p>版本控制器，也叫副本控制器。顾名思义，这是控制Pod副本生成的。</p>
-<p>有RC可以完成以下动作：</p>
-<ol>
-<li>生成指定数量的Pod副本</li>
-<li>当有副本挂掉的时候，RC控制Node生成心得Pod副本</li>
-</ol>
-<p>在写RC的yaml时需定义以下参数：</p>
-<ul>
-<li>replicas：生成副本数</li>
-<li>label：生成Pod的标签，用于RC识别新生成的Pod</li>
-<li>template：生成新Pod副本的模板</li>
-</ul>
-<p>以上三要素缺一不可，负责就不会正常生成Pod副本。</p>
-<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><p>Deployment和RC的用法相似，但是Deployment能查看到容器部署的进程。</p>
-<h1 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h1><p>Service是k8s的服务。一个容器被创建，一般情况都是给群内使用的，无法通过外部网络进行访问。但是Service解决了这个问题，Service将端口进行了端口映射，使外部网络能访问到容器。这就是一个完整的服务。</p>
-<p>Service通常适用于多个Pod，所以生成Service的时候通常用selector进行Pod选择。</p>
-<p>在创建端口映射服务的时候，spec中添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type: NodePort</span><br><span class="line">ports: </span><br><span class="line">    - port :</span><br><span class="line">      nodePort:</span><br><span class="line">selector:</span><br></pre></td></tr></table></figure>
+<p>安装数据库软件，这里推荐使用mariadb：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum insatll mariadb mariadb-server</span><br><span class="line">systemctl start mariadb &amp;&amp; systemctl <span class="built_in">enable</span> mariadb</span><br><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
 
-<p>这里将属性赋给了selector选中的Pod。</p>
-<h1 id="Job"><a href="#Job" class="headerlink" title="Job"></a>Job</h1><p>Job就是工作处理Pod的特殊事件。</p>
-<h1 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h1><p>数据卷。分为非永久储存、主机挂载储存、永久储存。</p>
-<p>非永久储存：这种储存方式和Pod的关系比较大，Pod生成时挂载这个数据卷（是空的），当Pod删除时，数据卷里的数据也跟着删除。</p>
-<p>主机挂载储存：将数据存放在运行Pod的Node上。</p>
-<p>永久储存：无论是删除Pod还是删除RC，数据卷里的数据都会被保留。</p>
-<h1 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h1><p>命名空间。Namespace将群内的资源进行分组。通常情况下，k8s会自动创建以下namespace:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NAME              STATUS   AGE</span><br><span class="line">default           Active   41h</span><br><span class="line">kube-node-lease   Active   41h</span><br><span class="line">kube-public       Active   41h</span><br><span class="line">kube-system       Active   41h</span><br></pre></td></tr></table></figure>
+<p>初始化数据库成功。</p>
+<h2 id="配置proxy基础环境"><a href="#配置proxy基础环境" class="headerlink" title="配置proxy基础环境"></a>配置proxy基础环境</h2><p>进入mysql-cli，创建一个数据库并授权：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create database zabbix_proxy character set utf8 collate utf8_bin;</span><br><span class="line"></span><br><span class="line">grant all privileges on zabbix_proxy.* to zabbix_proxy@localhost identified by &#39;zabbix&#39;;</span><br></pre></td></tr></table></figure>
 
-<p>如果我们在生成RC时没有选择namespace，那么就会默认运行在default中。</p>
-<p>如果需要定义namespace，那么在metadata中添加<code>namespace:</code>参数就好了。</p>
+<p>将数据库文件导入到数据库中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use zabbix_proxy</span><br><span class="line">source &#x2F;usr&#x2F;share&#x2F;doc&#x2F;zabbix-proxy-mysql-3.2.0&#x2F;*</span><br></pre></td></tr></table></figure>
+
+<p>配置proxy配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Server=192.168.89.160</span><br><span class="line">DBName=zabbix_proxy</span><br><span class="line">DBUser=zabbix_proxy</span><br><span class="line">DBPassword=zabbix</span><br></pre></td></tr></table></figure>
+
+<p>这里的server不是本机的ip，是zabbix-server的ip。</p>
+<p>启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start zabbix-proxy</span><br></pre></td></tr></table></figure>
+
+<h1 id="Server端配置"><a href="#Server端配置" class="headerlink" title="Server端配置"></a>Server端配置</h1><p>在dashboard中，进入管理-&gt;agent代理程序选项卡创建代理。这里有一个重要参数是系统代理程序模式。</p>
+<h2 id="主动式和被动式"><a href="#主动式和被动式" class="headerlink" title="主动式和被动式"></a>主动式和被动式</h2><p>主动式表示proxy主动向server报送数据，不需要server时proxy也正常报送数据。</p>
+<p>被动式表示当server向proxy端发出一个请求，proxy端向server端返回一个数据。</p>
+<h2 id="proxy的应用"><a href="#proxy的应用" class="headerlink" title="proxy的应用"></a>proxy的应用</h2><p>在创建主机时，填写主机的ip，但是在由agent代理程序监测选项中选择刚才创建的proxy就可以了。</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://www.huckops.xyz">Huck</a>
-            <p>原文链接：<a href="http://www.huckops.xyz/2020/03/08/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/">http://www.huckops.xyz/2020/03/08/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/</a>
-            <p>发表日期：<a href="http://www.huckops.xyz/2020/03/08/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/">March 8th 2020, 8:19:12 pm</a>
-            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/08/kubernetes/%E6%9C%AF%E8%AF%AD%E5%92%8C%E6%A6%82%E5%BF%B5/">March 8th 2020, 8:35:36 pm</a>
+            <p>原文链接：<a href="http://www.huckops.xyz/2020/03/20/zabbix/zabbix-proxy/">http://www.huckops.xyz/2020/03/20/zabbix/zabbix-proxy/</a>
+            <p>发表日期：<a href="http://www.huckops.xyz/2020/03/20/zabbix/zabbix-proxy/">March 20th 2020, 4:34:46 pm</a>
+            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/20/zabbix/zabbix-proxy/">March 20th 2020, 4:56:51 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -458,17 +446,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/Linux%E6%98%AF%E5%A4%9A%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title= "Linux是多用户操作系统">
-                    <div class="nextTitle">Linux是多用户操作系统</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/03/08/kubernetes/%E6%8E%A7%E5%88%B6%E5%99%A8/" title= "控制器">
-                    <div class="prevTitle">控制器</div>
+                <a href= "/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" title= "维护和自动发现">
+                    <div class="prevTitle">维护和自动发现</div>
                 </a>
             
         </li>
@@ -653,7 +636,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Master和Node"><span class="toc-number">1.</span> <span class="toc-text">Master和Node</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pod"><span class="toc-number">2.</span> <span class="toc-text">Pod</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Label"><span class="toc-number">3.</span> <span class="toc-text">Label</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ReplicationController"><span class="toc-number">4.</span> <span class="toc-text">ReplicationController</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Deployment"><span class="toc-number">5.</span> <span class="toc-text">Deployment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Service"><span class="toc-number">6.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Job"><span class="toc-number">7.</span> <span class="toc-text">Job</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Volume"><span class="toc-number">8.</span> <span class="toc-text">Volume</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Namespace"><span class="toc-number">9.</span> <span class="toc-text">Namespace</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#proxy端部署"><span class="toc-number">1.</span> <span class="toc-text">proxy端部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装proxy"><span class="toc-number">1.1.</span> <span class="toc-text">安装proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置proxy基础环境"><span class="toc-number">1.2.</span> <span class="toc-text">配置proxy基础环境</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Server端配置"><span class="toc-number">2.</span> <span class="toc-text">Server端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主动式和被动式"><span class="toc-number">2.1.</span> <span class="toc-text">主动式和被动式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#proxy的应用"><span class="toc-number">2.2.</span> <span class="toc-text">proxy的应用</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
