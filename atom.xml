@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.huckops.xyz/"/>
-  <updated>2020-03-18T13:27:57.287Z</updated>
+  <updated>2020-03-20T08:31:27.279Z</updated>
   <id>http://www.huckops.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>维护和自动发现</title>
+    <link href="http://www.huckops.xyz/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/"/>
+    <id>http://www.huckops.xyz/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</id>
+    <published>2020-03-20T08:03:09.000Z</published>
+    <updated>2020-03-20T08:31:27.279Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h1><p>在生产环境中，所有服务器都不是搭建完成之后就不维护的。通常，对于一些大型的安全事件或者一些大型的产品更新，需要将服务暂挺。那么，在暂停服务的时候，监控肯定会对这个服务中断进行报警或者报错。那么，就需要使用维护期间这个功能来规避一些不必要的报错。</p><h2 id="添加维护期间"><a href="#添加维护期间" class="headerlink" title="添加维护期间"></a>添加维护期间</h2><p>在配置-&gt;维护-&gt;创建维护期间。里边有三个选项卡，分别是维护、期间、主机和组。</p><p>在维护选项卡，添设置名称和其他参数。维护类型选择的时候需要注意，有无数据收集的意思是在维护的时候是否从主机上获取数据，这个要根据需求来定。启用自动和启用直到表示这个维护时间段（注意，这是一个时间段）。</p><p>期间选项卡。维护周期表示在这个维护周期内的维护时间段。</p><p>主机和组选项卡。给维护时段指定主机或组。</p><h1 id="自动发现"><a href="#自动发现" class="headerlink" title="自动发现"></a>自动发现</h1><p>自动发现规则是server端或者proxy端进行ip端进行端口扫描，将扫描到的端口展现在dashboard上。</p><h2 id="创建一个发现规则"><a href="#创建一个发现规则" class="headerlink" title="创建一个发现规则"></a>创建一个发现规则</h2><p>在选项-&gt;自动发现-&gt;创建发现规则创建一个发现。</p><p>这个界面相对简单。主要是IP范围和检查属性。创建IP范围的时候，格式是192.168.1.1-255这样的，也可以使用子网掩码解析的方式。</p><p>更新事件，表示扫描端口的周期。</p><p>检查属性：创建检查，类型选择为自己服务的类型，一般情况下的端口都会默认为默认端口，我们需要手动将这个端口改成我们的业务端口。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;维护&quot;&gt;&lt;a href=&quot;#维护&quot; class=&quot;headerlink&quot; title=&quot;维护&quot;&gt;&lt;/a&gt;维护&lt;/h1&gt;&lt;p&gt;在生产环境中，所有服务器都不是搭建完成之后就不维护的。通常，对于一些大型的安全事件或者一些大型的产品更新，需要将服务暂挺。那么，在暂停服务的
+      
+    
+    </summary>
+    
+    
+      <category term="zabbix" scheme="http://www.huckops.xyz/categories/zabbix/"/>
+    
+    
+      <category term="分布式监控" scheme="http://www.huckops.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9B%91%E6%8E%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>PV和PVC</title>
@@ -522,30 +548,6 @@
       
         &lt;h1 id=&quot;虚拟化分类&quot;&gt;&lt;a href=&quot;#虚拟化分类&quot; class=&quot;headerlink&quot; title=&quot;虚拟化分类&quot;&gt;&lt;/a&gt;虚拟化分类&lt;/h1&gt;&lt;p&gt;虚拟化可分为半虚拟化和全虚拟化。半虚拟化和全虚拟化的本质区别在于虚拟化层。&lt;/p&gt;
 &lt;h1 id=&quot;半虚拟化网络（V
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>虚拟化（KVM）/KVM概念</title>
-    <link href="http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/KVM%E6%A6%82%E5%BF%B5/"/>
-    <id>http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/KVM%E6%A6%82%E5%BF%B5/</id>
-    <published>2020-03-08T12:19:13.587Z</published>
-    <updated>2020-01-13T11:22:49.347Z</updated>
-    
-    <content type="html"><![CDATA[<p>目前各大云计算厂商都在使用虚拟化云服务，大部分以VMware、Xen和KVM（Openstack）等架构，KVM是使用最广的虚拟化方案。</p><p>虚拟化是将空闲的硬件资源分配到虚拟计算机中，使服务器的性能能达到最好，发挥到极致。</p><p>KVM是内核加强虚拟机，从他的名称可以看出这是个基于内核的功能。</p><p>KVM是虚拟机软件，那么运行这个软件则要有CPU虚拟化选项打开，否则CPU无法进行虚拟化。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;目前各大云计算厂商都在使用虚拟化云服务，大部分以VMware、Xen和KVM（Openstack）等架构，KVM是使用最广的虚拟化方案。&lt;/p&gt;
-&lt;p&gt;虚拟化是将空闲的硬件资源分配到虚拟计算机中，使服务器的性能能达到最好，发挥到极致。&lt;/p&gt;
-&lt;p&gt;KVM是内核加强虚拟机，
       
     
     </summary>

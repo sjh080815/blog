@@ -347,6 +347,53 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/nfs/" >
+            
+                <span>基础服务/nfs</span>
+        </a>
+        <div class="abstract-content">
+            服务器列表
+
+
+
+服务器
+IP
+
+
+
+master
+192.168.139.146
+
+
+slave
+192.168.139.131
+
+
+首先，记得防火墙放行111端口。我这里直接关闭了防火墙，所以就不多赘述。
+安装NFS服务的几个必要软件：rpmbind和nfs-utils
+1yum install rpcbind nfs-utils
+
+启动服务
+1234systemctl start rpcbindsystemctl start nfssystemctl enable rpcbindsystemctl enable nfs
+咱们可以查看一下服务端口，看看服务是不是已经在运行了
+1234...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/lvs%E5%8E%9F%E7%90%86/" >
             
                 <span>基础服务/lvs原理</span>
@@ -664,42 +711,6 @@ RAID5四个磁盘组成一个RAID...
 这样就可以看到服务器上安装的数据盘。
 对各个数据盘进行分区：
 123456789# fdisk /etc/sdbbash# fdisk /dev/sdb欢迎使用 fdisk (util-linux 2.23.2)。更改将停留在内存中，直到您决定将更改写入磁盘。使...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "存储技术">存储技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/gluster%E5%88%86%E5%B8%83%E5%BC%8F%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/" >
-            
-                <span>gluster分部式存储技术</span>
-        </a>
-        <div class="abstract-content">
-            GlusterlFS是一种GNU的分布式文件系统，具有高可用，多种方式数据安全保障的数据系统。这种文件系统可以使用数据复制和分布储存的方式进行数据储存。
-安装GlusterFS使用yum安装Gluster的yum源
-1yum install centos-release-gluster
-
-安装Gluster和相关的依赖：
-1yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma
-
-数据盘管理使用分布式数据存储服务的时候，一般不会将数据直接放在宿主机的系统盘上，经常会使用RAID1的磁盘阵列作为数据储存...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2546,9 +2557,30 @@ RAID5四个磁盘组成一个RAID...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 118
+        Total : 119
         </div>
         <!-- search  -->
         
@@ -3323,6 +3355,11 @@ RAID5四个磁盘组成一个RAID...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" >维护和自动发现</a>
+        </li>
     
     
         <li class="archive-post-item">

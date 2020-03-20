@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Huck Blog</title>
+    <title>维护和自动发现 · Huck Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -204,12 +204,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Huck Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">维护和自动发现</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Huck Blog</a>
 </header>
@@ -221,24 +232,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            维护和自动发现
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "分布式监控">分布式监控</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">474</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/03/20</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -339,316 +400,78 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/" >
-            
-                <span>python/条件语句</span>
-        </a>
-        <div class="abstract-content">
-            三种逻辑在程序设计方面，有三种常用的逻辑，分别是或、与、非。或用or，与用and，非用！。
-123456&gt;&gt;&gt; a = 1&gt;&gt;&gt; b = 0&gt;&gt;&gt; a and b0&gt;&gt;&gt; a or b1
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h1><p>在生产环境中，所有服务器都不是搭建完成之后就不维护的。通常，对于一些大型的安全事件或者一些大型的产品更新，需要将服务暂挺。那么，在暂停服务的时候，监控肯定会对这个服务中断进行报警或者报错。那么，就需要使用维护期间这个功能来规避一些不必要的报错。</p>
+<h2 id="添加维护期间"><a href="#添加维护期间" class="headerlink" title="添加维护期间"></a>添加维护期间</h2><p>在配置-&gt;维护-&gt;创建维护期间。里边有三个选项卡，分别是维护、期间、主机和组。</p>
+<p>在维护选项卡，添设置名称和其他参数。维护类型选择的时候需要注意，有无数据收集的意思是在维护的时候是否从主机上获取数据，这个要根据需求来定。启用自动和启用直到表示这个维护时间段（注意，这是一个时间段）。</p>
+<p>期间选项卡。维护周期表示在这个维护周期内的维护时间段。</p>
+<p>主机和组选项卡。给维护时段指定主机或组。</p>
+<h1 id="自动发现"><a href="#自动发现" class="headerlink" title="自动发现"></a>自动发现</h1><p>自动发现规则是server端或者proxy端进行ip端进行端口扫描，将扫描到的端口展现在dashboard上。</p>
+<h2 id="创建一个发现规则"><a href="#创建一个发现规则" class="headerlink" title="创建一个发现规则"></a>创建一个发现规则</h2><p>在选项-&gt;自动发现-&gt;创建发现规则创建一个发现。</p>
+<p>这个界面相对简单。主要是IP范围和检查属性。创建IP范围的时候，格式是192.168.1.1-255这样的，也可以使用子网掩码解析的方式。</p>
+<p>更新事件，表示扫描端口的周期。</p>
+<p>检查属性：创建检查，类型选择为自己服务的类型，一般情况下的端口都会默认为默认端口，我们需要手动将这个端口改成我们的业务端口。</p>
 
-这里可以用int型数据，也可以是Boolean型。int型0是非，其他数据都是是。
-检查元素是否在列表在C语言中，只能通过轮询进行判断。python中可以直接用in语句进行判断,返回Boolean型参数。
-123456&gt;&gt;&gt; a = 1&gt;&gt;&gt; b = 0&gt;&gt;&gt; a and b0...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" >
-            
-                <span>python/文件操作</span>
-        </a>
-        <div class="abstract-content">
-            文件读取在进行数据持久化的过程中，经常会将数据储存到文本里，获取写入的数据那就需要读数据。
-在python中，常用的读数据的方法是先open再read，例子如下：
-12345def main():    with open("test.txt","r",encoding="UTF-8") as f:        print(f.read())if __name__ == '__main__':    main()
-这一段代码对文件进行了逐行的读取，并进行了逐行的输出。当然也可以直接使用open：
-12345def main():    f = open("test.txt",'r',e...
+        <div class="license-wrapper">
+            <p>Author：<a href="http://www.huckops.xyz">Huck</a>
+            <p>原文链接：<a href="http://www.huckops.xyz/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/">http://www.huckops.xyz/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</a>
+            <p>发表日期：<a href="http://www.huckops.xyz/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/">March 20th 2020, 4:03:09 pm</a>
+            <p>更新日期：<a href="http://www.huckops.xyz/2020/03/20/zabbix/%E7%BB%B4%E6%8A%A4%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/">March 20th 2020, 4:31:27 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" >
-            
-                <span>python/循环结构</span>
-        </a>
-        <div class="abstract-content">
-            while循环语法：
-12while 测试条件：    条件语句
-
-这个语句没有变量自加法，所以有时候遍历需要自行设置循环变量。
-这个语句的执行原理是先进行判断，再执行后边的语句。如果条件不成立则跳出循环。
-测试条件可以是Boolean型，也可以是测试条件。
-循环内常用语句：
-break，可以直接跳出循环。
-
-continue，直接跳过后边的语句，到循环头重新执行。遍历列表列表是有长度的。如果把列表放到测试条件，则执行和长度相同的循环次数。
-for循环常用方法：
-12for 循环量 in 循环列表：    循环语句
-
-循环量是从循环列表依次取出的数据，可以再循环语句使用。
-注意：这里循环...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%AD%97%E5%85%B8/" >
-            
-                <span>python/字典</span>
-        </a>
-        <div class="abstract-content">
-            字典定义字典类似于C语言的指针的集合，及一个键值对的集合。一个键对应一个内存空间，内存空间内的数据可以读写，但是键不能更改。
-定义方法1字典名 = &#123;key:value,......&#125;
-
-访问字典键值访问的语法：字典名[key]。返回key对应的value。
-123&gt;&gt;&gt; a = &#123;'b':1,'c':2&#125;&gt;&gt;&gt; print(a['b'])1
-同理，咱们在访问键值的时候可以进行重新赋值，则原value就被改变了。
-添加键值对没有特殊的语句，和访问键值的方法类似，但是传入key应该是新的key。
-123&gt;&g...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" >
-            
-                <span>python/多线程</span>
-        </a>
-        <div class="abstract-content">
-            当前主流的服务器和电脑都是多核机器。多核的定义就是多个核心，可以同时独立的进行多个工作。如果使用常规方法的话，程序就会排队进行执行。如果有了多线程，那么程序就会同时进行相关操作，提高程序的效率。
-多进行多进行就是启动多个进程（process）来运行一段方法，比如这样：
-12345678910111213141516171819202122from multiprocessing import Processfrom os import getpidfrom random import randintfrom time import sleepdef download(file):    ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%88%97%E8%A1%A8%E6%93%8D%E4%BD%9C/" >
-            
-                <span>python/列表操作</span>
-        </a>
-        <div class="abstract-content">
-            列表的定义列表相当于C语言的数组，用以储存数据组。内存分配和C语言相同，分配连续的内存空间。
-语法列表名 = [元素1，元素2``````]
-用法列表和C语言用法有一些不同，可以对列表进行遍历打印，也可以一次性打印。
-1234a = [1,2,3]print(a)for i in a:    print(i)
-输出
-1234[1, 2, 3]123
-第一列是直接打印列表，下边是使用轮询进行输出。
-索引列表索引方法和C语言相同，使用列表名[索引]。
-12a = [1,2,3]print(a[2])
-
-输出：
-13
-注意：索引是从0开始的，第一个元素索引是0
-修改、添加和删除元素修改：直接取...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/%E5%87%BD%E6%95%B0/" >
-            
-                <span>python/函数</span>
-        </a>
-        <div class="abstract-content">
-            定义可以认为函数和java的方法一样，功能也相同，就是一个语句的集合。
-定义方法def 函数名(形参)
-    函数体形参和实参形参是形式参数，没有实际值，只在定义函数的时候才会用上。
-实参是实际参数，是实际值，在调用函数的时候用到。
-参数默认值在定义函数时，形参可以做预定义。写形参的时候写形参=数值就好了。当然，这样的参数也是可以传递实参的。
-返回值函数不但可以做方法集合，也可以做数值处理函数，类似于数学的f(x)。会有一个返回值。返回值用return，和C语言一样可返回字典、列表和数据。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/xls%E8%A1%A8%E6%A0%BC/" >
-            
-                <span>python/xls表格</span>
-        </a>
-        <div class="abstract-content">
-            xls概念：
-workbook：工作薄。就是一个xls文件。
-worksheet：工作表。就是xls文件中的sheet。
-column:列。
-row：行。
-如下是一个demo：
-123456import xlsxwriterwork_book = xlsxwriter.Workbook('test.xls') #创建一个xls文件work_sheet = work_book.add_worksheet('test') #创建一个sheetwork_sheet.set_column('A:A',20) #调整列的宽度，如果将column换成row，则是修改行的行高work_sheet.wr...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/time%E6%A8%A1%E5%9D%97/" >
-            
-                <span>python/time模块</span>
-        </a>
-        <div class="abstract-content">
-            asctime()方法转换时间为string型。参数是时间。如果没有参数则是当前时间。
-ctime()方法把秒时间转换为标准时间。标准时间是1970年1月1日早上8点。
-gmtime()方法当前时间转换为struct_time对象。
-localtime()方法将元组格式的时间转换为秒数代表的时间。
-strftime()方法格式化输出时间。参数是输出格式。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/python/psutil%E6%A8%A1%E5%9D%97/" >
-            
-                <span>python/psutil模块</span>
-        </a>
-        <div class="abstract-content">
-            安装使用pip安装。直接执行
-1pip install psutil
-
-CPU信息使用方法：cpu_times()
-cpu信息以元组的方式传出。可以分别访问元素。
-内存和swap信息使用方法：virtual_memory()和swap_memory()
-返回内存和swap的信息。返回的参数都是以B为单位的。
-磁盘信息使用方法：disk_*()
-psutil.disk_partitions():返回所有磁盘。在windows中返回的是硬盘分区。
-psutil.disk_usage()：返回硬盘的信息。参数为硬盘的使用量和容量。
-psutil.disk_io_counters()：返回磁盘的...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" title= "PV和PVC">
+                    <div class="prevTitle">PV和PVC</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2020/page/6/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/5/">5</a><a class="page-number" href="/archives/2020/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/2020/page/8/">8</a><a class="page-number" href="/archives/2020/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/12/">12</a><a class="extend next" rel="next" href="/archives/2020/page/8/">NEXT &gt;</a>
-    </nav>
     
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "ahGfjxfCQNuEczwcgSPyiUk5-gzGzoHsz",
+        appKey: "uRizk8005ixjqsitoclXxz2C",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -779,6 +602,24 @@ psutil.disk_io_counters()：返回磁盘的...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#维护"><span class="toc-number">1.</span> <span class="toc-text">维护</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加维护期间"><span class="toc-number">1.1.</span> <span class="toc-text">添加维护期间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动发现"><span class="toc-number">2.</span> <span class="toc-text">自动发现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个发现规则"><span class="toc-number">2.1.</span> <span class="toc-text">创建一个发现规则</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -3715,6 +3556,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
