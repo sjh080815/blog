@@ -347,6 +347,33 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/rabbitMQ/" >
+            
+                <span>基础服务/rabbitMQ</span>
+        </a>
+        <div class="abstract-content">
+            RabbitMQ是一种常用的消息队列服务器，是通过erlang编写的，所以再运行这个服务器的服务器上需要先不是erlang的环境。
+环境部署我这里使用的是yum直接安装的RabbitMQ。再生产环境中，常用的是二进制部署或者编译安装。这里为了方便就使用了yum安装。
+注意：在使用yum安装的时候会自动安装erlang的环境，编译安装则需要进行手动安装
+RabbitMQ的原理当程序和RabbitMQ服务器认证后，会生成一个AMQP信道。一个AMQP中好汉多个信道。这样的话就可以减少TCP的连接创建数量，提高服务器效率，减少开销。
+虚拟主机和Nginx类似，RabbitMQ会生成多个虚拟主机...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1/NTP%E6%9C%8D%E5%8A%A1/" >
             
                 <span>基础服务/NTP服务</span>
@@ -684,48 +711,10 @@ RAID5四个磁盘组成一个RAID...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/MooseFS%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" >
-            
-                <span>MooseFS分部署存储技术</span>
-        </a>
-        <div class="abstract-content">
-            MooseFS是一种支持容错的分布式文件系统，将多台文件服务器联系在一起（数据分布），提供统一的接口供给客户端挂载使用。
-服务拓扑分析一个MooseFS存储系统内包含了Master，Log和Storage三个角色的主机，这三个角色的主机分别是控制、日志和存储节点。这种系统和其他系统不同点在于该种系统必须有一个专门的服务器记录相关的日志。
-准备工作在所有节点安装依赖：
-1yum -y install zlib-devel gcc-c++ lrzsz
-
-创建mfs账户：
-1useradd mfs -s /sbin/nologin
-
-下载并解压源码文件，进入目录：
-12wget https:/...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "存储技术">存储技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2020/page/3/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><a class="page-number" href="/archives/2020/page/2/">2</a><a class="page-number" href="/archives/2020/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/2020/page/5/">5</a><a class="page-number" href="/archives/2020/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/12/">12</a><a class="extend next" rel="next" href="/archives/2020/page/5/">NEXT &gt;</a>
+        <a class="extend prev" rel="prev" href="/archives/2020/page/3/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><a class="page-number" href="/archives/2020/page/2/">2</a><a class="page-number" href="/archives/2020/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/2020/page/5/">5</a><a class="page-number" href="/archives/2020/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/13/">13</a><a class="extend next" rel="next" href="/archives/2020/page/5/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2591,9 +2580,28 @@ RAID5四个磁盘组成一个RAID...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3368,6 +3376,11 @@ RAID5四个磁盘组成一个RAID...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

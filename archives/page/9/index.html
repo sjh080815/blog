@@ -347,6 +347,47 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/mysql/%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5/" >
+            
+                <span>计算字段</span>
+        </a>
+        <div class="abstract-content">
+            我们的身份证号就是一个很常见的计算字段，在这个字段里包含了多个数据。一般情况下，计算字段都是由多字段数据拼接成的。
+拼接字段就是将对各字段进行文本拼接，达到表示更大数据的方法。
+
+这是demo1表的数据，咱们对标中数据进行一下连接。
+1SELECT CONCAT(username,password) FROM demo1;
+
+输出
+
+数学计算在一条记录中我们可以对字段进行数学运算，如下：
+12SELECT num1+num2 AS sumFROM demo2;
+
+返回了sum列，内容是num1+num2的结果。但是查看数据库，可以发现数据库内的列并没有被写入数据，说明这样的运算是一次性的。
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "数据库技术">数据库技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/mysql/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >
             
                 <span>正则表达式</span>
@@ -639,52 +680,10 @@ IP概念：
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C2/" >
-            
-                <span>网络操作2</span>
-        </a>
-        <div class="abstract-content">
-            netstat命令：
-netstat是一种网络操作，可以查看服务器的连接状态、路由表等一系列参数。
-语法：netstat [选项]
-参数说明：
--a 显示所有 socket 包括正在监听的
--c 每隔 1 秒就重新显示一遍直到用户中断它
--i 显示所有网络接口的信息格式同 “ifconfig –e”
--n 以网络 IP 地址代替名称显示出网络连接情形
--r 显示核心路由表格式同 “route –e”
--t 显示 TCP 协议的连接情况
--u 显示 UDP 协议的连接情况
--v 显示正在进行的工作
-ping命令：
-在我们使用windows系统的时候，如果电脑妹网的，我们习惯性的去ping一...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/8/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/7/">7</a><a class="page-number" href="/archives/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/page/10/">10</a><a class="page-number" href="/archives/page/11/">11</a><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/10/">NEXT &gt;</a>
+        <a class="extend prev" rel="prev" href="/archives/page/8/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/7/">7</a><a class="page-number" href="/archives/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/archives/page/10/">10</a><a class="page-number" href="/archives/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/13/">13</a><a class="extend next" rel="next" href="/archives/page/10/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2550,9 +2549,28 @@ ping命令：
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3327,6 +3345,11 @@ ping命令：
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

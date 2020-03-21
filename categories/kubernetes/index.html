@@ -347,6 +347,39 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/21/kubernetes/Storage-Class/" >
+            
+                <span>Storage Class</span>
+        </a>
+        <div class="abstract-content">
+            Storage Class可以按照字面的意思来进行理解，可以认为就是一个储存类，将PV储存在一个类里边。
+Storage Class为PV管理提供了很大的便利。使用Storage Class以后，创建PVC直接指定Storage Class就可以了。
+创建Storage Class目前Storage Class支持多种方式，将目前所有主流的储存方式都涵盖了。这里我以nfs为例。
+创建一个Storage Class的定义：
+1234567891011apiVersion: storage.k8s.io/v1kind: StorageClassmetadata:  name: slowpro...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >
             
                 <span>PV和PVC</span>
@@ -611,41 +644,6 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
 
 这里定义了是否更换yum源和网络配置
 1234567891...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/Service/" >
-            
-                <span>Service</span>
-        </a>
-        <div class="abstract-content">
-            Service、Pod、RC和Deployment之间关系RC和Deployment批量自动生成Pod，且自动分配Pod IP，那么Pod IP就是随机的。在常规的生产环境中，容器的数量并非是一个定值，经常会删除或者增加Pod，那么Pod IP肯定就会发生改变。现在要外网访问Pod无外乎两种方法：
-
-使用HaProxy或者nginx一类的反向代理工具进行反向代理
-使用Service绑定RC或者Deployment
-
-以上方法，第一种，无论是haproxy还是nginx，都需要手动定义反向代理的IP，不具备灵活性，且不能满足HA，所以这种方式基本没有什么可行性。
-注意一点：如果单纯使用了P...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2532,9 +2530,28 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3309,6 +3326,11 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

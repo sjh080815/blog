@@ -347,6 +347,41 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/Linux%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/" >
+            
+                <span>Linux的文件和目录</span>
+        </a>
+        <div class="abstract-content">
+            Linux系统与Windows一样，都是由一个个小文件构成。Linux与Windows最大区别在于Linux一切皆文件。
+在Linux的跟挂载点/下，有一个很神奇的文件夹，叫/dev。在这个文件夹下保存着所有硬件设备的文件，如果刚入门的话，不要随意修改这个文件夹下任何文件，随意修改都可能会使主机崩溃。
+Linux和Windows的最大相同点就是文件夹树形结构，该种文件的特征我就不详细解释了，大家都懂，下来我讲一下文件夹和文件操作。
+ls命令：这个命令作用是列出目录下文件，其语法是ls -al
+-a 显示所有文件信息
+-l 以列表形式显示
+在运行ls -al命令时，我们可以看见.、..和以...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Linux">Linux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/Linux%E5%9F%BA%E7%A1%80/Linux%E6%98%AF%E5%A4%9A%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" >
             
                 <span>Linux是多用户操作系统</span>
@@ -629,49 +664,10 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" >
-            
-                <span>Pod生命周期</span>
-        </a>
-        <div class="abstract-content">
-            Pod状态Pending：正在下载镜像，容器未启动。
-Running：镜像正常运行。
-Succeeded：容器内指令执行完成，容器不会被重启。
-Failed：容器运行出现错误。
-Unknown：未知的容器状态。
-Pod重启策略Always：默认。容器失败自动重启。
-OnFailure：容器终止运行，自动重启。
-Never：不关注容器状态直接重启。
-存活检测（LivenessProbe）k8s中提供了三种容器生存检测，分别是文件检测、TCP检测、HTTP检测
-文件检测使用命令检测容器内的文件是否存在，不存在则重新创建容器。
-1234567livenessProbe:      exec: ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/10/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/9/">9</a><a class="page-number" href="/archives/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/12/">NEXT &gt;</a>
+        <a class="extend prev" rel="prev" href="/archives/page/10/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/9/">9</a><a class="page-number" href="/archives/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/archives/page/12/">12</a><a class="page-number" href="/archives/page/13/">13</a><a class="extend next" rel="next" href="/archives/page/12/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2537,9 +2533,28 @@ Never：不关注容器状态直接重启。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3314,6 +3329,11 @@ Never：不关注容器状态直接重启。
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

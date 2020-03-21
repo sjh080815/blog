@@ -347,6 +347,45 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" >
+            
+                <span>Pod生命周期</span>
+        </a>
+        <div class="abstract-content">
+            Pod状态Pending：正在下载镜像，容器未启动。
+Running：镜像正常运行。
+Succeeded：容器内指令执行完成，容器不会被重启。
+Failed：容器运行出现错误。
+Unknown：未知的容器状态。
+Pod重启策略Always：默认。容器失败自动重启。
+OnFailure：容器终止运行，自动重启。
+Never：不关注容器状态直接重启。
+存活检测（LivenessProbe）k8s中提供了三种容器生存检测，分别是文件检测、TCP检测、HTTP检测
+文件检测使用命令检测容器内的文件是否存在，不存在则重新创建容器。
+1234567livenessProbe:      exec: ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod/" >
             
                 <span>Pod</span>
@@ -671,44 +710,10 @@ package是包。一个文件必须被包含到一个package，这...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/Go%E8%AF%AD%E8%A8%80/%E5%87%BD%E6%95%B0/" >
-            
-                <span>函数</span>
-        </a>
-        <div class="abstract-content">
-            函数和python中的定义都是相同的，是一个程序段的集合。其定义方法如下：
-123func name(value1 type,value2 type) type &#123;function;&#125;
-
-这就是函数的基本形式。
-下边是一个例子：
-123456789101112131415161718package mainimport "fmt"func max( a ,b int)  int &#123;	var result int	if a &gt; b &#123;		result = a	&#125; else &#123;		result = b	&#125;	retur...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "云计算开发技术">云计算开发技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2020/page/11/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/10/">10</a><a class="page-number" href="/archives/2020/page/11/">11</a><span class="page-number current">12</span>
+        <a class="extend prev" rel="prev" href="/archives/2020/page/11/">&lt; PREV</a><a class="page-number" href="/archives/2020/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/10/">10</a><a class="page-number" href="/archives/2020/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/archives/2020/page/13/">13</a><a class="extend next" rel="next" href="/archives/2020/page/13/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2574,9 +2579,28 @@ package是包。一个文件必须被包含到一个package，这...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3351,6 +3375,11 @@ package是包。一个文件必须被包含到一个package，这...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

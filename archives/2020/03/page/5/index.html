@@ -347,6 +347,44 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/MooseFS%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" >
+            
+                <span>MooseFS分部署存储技术</span>
+        </a>
+        <div class="abstract-content">
+            MooseFS是一种支持容错的分布式文件系统，将多台文件服务器联系在一起（数据分布），提供统一的接口供给客户端挂载使用。
+服务拓扑分析一个MooseFS存储系统内包含了Master，Log和Storage三个角色的主机，这三个角色的主机分别是控制、日志和存储节点。这种系统和其他系统不同点在于该种系统必须有一个专门的服务器记录相关的日志。
+准备工作在所有节点安装依赖：
+1yum -y install zlib-devel gcc-c++ lrzsz
+
+创建mfs账户：
+1useradd mfs -s /sbin/nologin
+
+下载并解压源码文件，进入目录：
+12wget https:/...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "存储技术">存储技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/%E5%82%A8%E5%AD%98%E6%8A%80%E6%9C%AF/LVM/" >
             
                 <span>LVM</span>
@@ -661,81 +699,10 @@ highstate 高级模式。通常在file_root下存放的是以目录存放的剧�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/saltstack/saltstack%E6%A8%A1%E5%9D%97/" >
-            
-                <span>saltstack模块</span>
-        </a>
-        <div class="abstract-content">
-            Saltstack常用模块首先我们先看一下salt的命令规范
-
-需要注意的，目标主机和额外参数都需要用引号引起来，如salt &#39;*&#39; test.ping，测试所有的从机连通性。
-下面介绍一下几个常用模块的功能和使用方法。
-test模块该模块常用于测试主机，其常用方法为ping。
-
-
-
-方法
-功能
-
-
-
-ping
-测试主机和从机的连通性
-
-
-user模块这是用户模块。
-
-
-
-方法
-功能
-
-
-
-add
-添加用户
-
-
-chfullname
-添加用户全名
-
-
-chgid
-改变默认用户组
-
-
-chgroups
-修改用户的用户组
-
-
-cmd模块命令模块，该模块只有run一个方法，需要...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "自动化运维技术">自动化运维技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2020/03/page/4/">&lt; PREV</a><a class="page-number" href="/archives/2020/03/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/03/page/3/">3</a><a class="page-number" href="/archives/2020/03/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2020/03/page/6/">6</a><a class="page-number" href="/archives/2020/03/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/03/page/12/">12</a><a class="extend next" rel="next" href="/archives/2020/03/page/6/">NEXT &gt;</a>
+        <a class="extend prev" rel="prev" href="/archives/2020/03/page/4/">&lt; PREV</a><a class="page-number" href="/archives/2020/03/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/03/page/3/">3</a><a class="page-number" href="/archives/2020/03/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2020/03/page/6/">6</a><a class="page-number" href="/archives/2020/03/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/03/page/13/">13</a><a class="extend next" rel="next" href="/archives/2020/03/page/6/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2601,9 +2568,28 @@ cmd模块命令模块，该模块只有run一个方法，需要...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3378,6 +3364,11 @@ cmd模块命令模块，该模块只有run一个方法，需要...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

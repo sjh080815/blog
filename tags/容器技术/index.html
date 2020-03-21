@@ -347,6 +347,39 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/21/kubernetes/Storage-Class/" >
+            
+                <span>Storage Class</span>
+        </a>
+        <div class="abstract-content">
+            Storage Class可以按照字面的意思来进行理解，可以认为就是一个储存类，将PV储存在一个类里边。
+Storage Class为PV管理提供了很大的便利。使用Storage Class以后，创建PVC直接指定Storage Class就可以了。
+创建Storage Class目前Storage Class支持多种方式，将目前所有主流的储存方式都涵盖了。这里我以nfs为例。
+创建一个Storage Class的定义：
+1234567891011apiVersion: storage.k8s.io/v1kind: StorageClassmetadata:  name: slowpro...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/18/kubernetes/PV%E5%92%8CPVC/" >
             
                 <span>PV和PVC</span>
@@ -635,39 +668,6 @@ Docker是目前容器化的常用软件，它可以隔离真是主机环境，�
         <div class="abstract-content">
             Master和Node和别的服务集群一样，k8s集群也主从结构的。Master负责对集群内的资源进行控制和调度，Node是计算节点，提供服务计算。
 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990 kubectl describe node k8s1Name:               k8s1R...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/kubernetes/%E6%8E%A7%E5%88%B6%E5%99%A8/" >
-            
-                <span>控制器</span>
-        </a>
-        <div class="abstract-content">
-            k8s中一个有8种控制器，分别有不同的用途。
-RC（Replication Controller）副本控制器，控制生成Pod。当Pod删除时，RC检测到实际Pod数和Replicas定义的数量不同时会自动创建Pod。
-RC中定义了一个template，作为创建Pod的模板。
-Node Controller节点控制器。node有就绪、未就绪和未知三种状态。node上的kubelet通过API Server注册了node。Node Controller对各节点进行控制。
-ResourceQuota Controller资源控制器。控制集群内的资源。可控制容器的CPU和Menory，Pod内所...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -2554,9 +2554,28 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3331,6 +3350,11 @@ ResourceQuota Controller资源控制器。控制集群内的资源。可控制�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

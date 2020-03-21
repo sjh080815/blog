@@ -347,6 +347,39 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/kubernetes/%E6%8E%A7%E5%88%B6%E5%99%A8/" >
+            
+                <span>控制器</span>
+        </a>
+        <div class="abstract-content">
+            k8s中一个有8种控制器，分别有不同的用途。
+RC（Replication Controller）副本控制器，控制生成Pod。当Pod删除时，RC检测到实际Pod数和Replicas定义的数量不同时会自动创建Pod。
+RC中定义了一个template，作为创建Pod的模板。
+Node Controller节点控制器。node有就绪、未就绪和未知三种状态。node上的kubelet通过API Server注册了node。Node Controller对各节点进行控制。
+ResourceQuota Controller资源控制器。控制集群内的资源。可控制容器的CPU和Menory，Pod内所...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/kubernetes/%E5%AE%B9%E5%99%A8%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" >
             
                 <span>容器高级操作</span>
@@ -2508,9 +2541,28 @@ Never：不关注容器状态直接重启。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3285,6 +3337,11 @@ Never：不关注容器状态直接重启。
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.huckops.xyz/"/>
-  <updated>2020-03-20T08:56:51.726Z</updated>
+  <updated>2020-03-21T03:26:12.569Z</updated>
   <id>http://www.huckops.xyz/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Storage Class</title>
+    <link href="http://www.huckops.xyz/2020/03/21/kubernetes/Storage-Class/"/>
+    <id>http://www.huckops.xyz/2020/03/21/kubernetes/Storage-Class/</id>
+    <published>2020-03-21T03:16:07.000Z</published>
+    <updated>2020-03-21T03:26:12.569Z</updated>
+    
+    <content type="html"><![CDATA[<p>Storage Class可以按照字面的意思来进行理解，可以认为就是一个储存类，将PV储存在一个类里边。</p><p>Storage Class为PV管理提供了很大的便利。使用Storage Class以后，创建PVC直接指定Storage Class就可以了。</p><h1 id="创建Storage-Class"><a href="#创建Storage-Class" class="headerlink" title="创建Storage Class"></a>创建Storage Class</h1><p>目前Storage Class支持多种方式，将目前所有主流的储存方式都涵盖了。这里我以nfs为例。</p><p>创建一个Storage Class的定义：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">slow</span></span><br><span class="line"></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">kubernetes.io/nfs</span></span><br><span class="line"></span><br><span class="line"><span class="attr">parameters:</span></span><br><span class="line">  <span class="attr">fsType:</span> <span class="string">ext4</span></span><br></pre></td></tr></table></figure><p>这里边的provivioner表示的是这个Storage Class的支持块。写法都是<code>kubernetes.io/***</code>。</p><p>paramenters是定义了这个class的一些详细参数。</p><h1 id="创建面向Storage-Class的PVC"><a href="#创建面向Storage-Class的PVC" class="headerlink" title="创建面向Storage Class的PVC"></a>创建面向Storage Class的PVC</h1><p>和普通PVC的创建方式是相似的，但是在spec中添加了一条storageClassName，通过这个指定到定义的class上去。</p><p>其余的用法都与PV和PVC相同。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Storage Class可以按照字面的意思来进行理解，可以认为就是一个储存类，将PV储存在一个类里边。&lt;/p&gt;
+&lt;p&gt;Storage Class为PV管理提供了很大的便利。使用Storage Class以后，创建PVC直接指定Storage Class就可以了。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="kubernetes" scheme="http://www.huckops.xyz/categories/kubernetes/"/>
+    
+    
+      <category term="容器技术" scheme="http://www.huckops.xyz/tags/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>zabbix-proxy</title>
@@ -533,30 +561,6 @@
     
     
       <category term="业务理论" scheme="http://www.huckops.xyz/tags/%E4%B8%9A%E5%8A%A1%E7%90%86%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>虚拟化（KVM）/虚拟化及磁盘</title>
-    <link href="http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8F%8A%E7%A3%81%E7%9B%98/"/>
-    <id>http://www.huckops.xyz/2020/03/08/%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88KVM%EF%BC%89/%E8%99%9A%E6%8B%9F%E5%8C%96%E5%8F%8A%E7%A3%81%E7%9B%98/</id>
-    <published>2020-03-08T12:19:13.599Z</published>
-    <updated>2020-01-13T11:22:49.369Z</updated>
-    
-    <content type="html"><![CDATA[<p>虚拟机，我们常叫做实例。一个实例就含一个最基本的服务器的最小系统，包括虚拟硬件系统和软件系统。</p><p>通常生产环节的服务器不适用GUI界面，但是再做KVM的时候，需要GUI界面做辅助管理，所以再安装KVM之前务必先安装桌面。</p><p><strong>KVM最终生成的配置文件是xml文件</strong></p><p>创建虚拟机时，使用命令<code>virt-install</code>创建KVM虚拟机。</p><p>常用参数：</p><ul><li>name：虚拟机名</li><li>vCPUs：虚拟CPU核心数</li><li>ram：虚拟内存大小</li><li>os-type：系统类型</li><li>cdrom：CD挂载的镜像文件</li><li>file：虚拟机硬盘文件</li><li>file-size：虚拟硬盘大小</li></ul><h1 id="虚拟硬盘"><a href="#虚拟硬盘" class="headerlink" title="虚拟硬盘"></a>虚拟硬盘</h1><p>通常情况，任何电脑想运行起来都得有硬盘做数据存储支持，所以，咱们先创建虚拟硬盘：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create xxx.qcow2 -f qcow2 size</span><br></pre></td></tr></table></figure><p>上述代码创建了一个qcow2格式的虚拟硬盘。</p><p>虚拟磁盘大概有两种类型，一个是IDE，一个是Virtio。根据读写数据测试，Virtio是性能最好的方案。</p><p>虚拟磁盘的格式也有很多种，用的最多的是qcow2格式的硬盘文件。</p><p>QEMU支持常见使用的raw和qcow2格式。</p><h1 id="硬盘虚拟化的主要操作"><a href="#硬盘虚拟化的主要操作" class="headerlink" title="硬盘虚拟化的主要操作"></a>硬盘虚拟化的主要操作</h1><h2 id="硬盘创建"><a href="#硬盘创建" class="headerlink" title="硬盘创建"></a>硬盘创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create test 50G</span><br></pre></td></tr></table></figure><p>创建一个50G的硬盘，但是没有写是什么格式。要实际使用必须给一个指定的硬盘格式。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create test.qcow2 -f qcow2 50G</span><br></pre></td></tr></table></figure><p>上边就是指定生成一个qcow2格式的硬盘。注意钱两段语句test有无后缀。</p><p>这里不写绝对地址，那么就再当前目录生成文件。</p><p>可以通过<code>qemu-img info test.qcow2</code>查看生成硬盘的信息。</p><h2 id="硬盘格式转换"><a href="#硬盘格式转换" class="headerlink" title="硬盘格式转换"></a>硬盘格式转换</h2><p>平时硬盘也就一两种格式常用，但是有时候也会使用其他格式，那么就需要进行转换。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img convert -p -f raw -O qcow2 test test1.qcow2</span><br></pre></td></tr></table></figure><p>#快照</p><p>快照就是系统在某一个瞬间被“抓拍”到的状态，这个状态可以随时进行恢复。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img snapshot test.qcow2 -c s1</span><br></pre></td></tr></table></figure><p>以上代码创建了一个名为s1的快照，我们可以查看一下快照列表：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img snapshot test.qcow2 -l</span><br></pre></td></tr></table></figure><p>镜像是用来给特殊情况下给服务器做还原用的，所以必然就会用到还原，使用a参数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img snapshot test.qcow2 -a s1</span><br></pre></td></tr></table></figure><h1 id="后备镜像"><a href="#后备镜像" class="headerlink" title="后备镜像"></a>后备镜像</h1><p>后备镜像就是常说的公有镜像，一个后备镜像可以做多个虚拟机的母盘。</p><p>后备（backend）使用：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2 -b backend img_name</span><br></pre></td></tr></table></figure><p>使用后备磁盘创建一个虚拟硬盘。</p><h1 id="虚拟硬盘属性定义"><a href="#虚拟硬盘属性定义" class="headerlink" title="虚拟硬盘属性定义"></a>虚拟硬盘属性定义</h1><p>最常用的硬盘指标是容量，虚拟主机经常会出现硬盘不足，那么我们就需要手动再给加大硬盘了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img resize test1.qcow2 +2G</span><br></pre></td></tr></table></figure><p>这里是给元硬盘的基础加2G，当然也可以写成需要改到的大小。</p><h1 id="裸设备"><a href="#裸设备" class="headerlink" title="裸设备"></a>裸设备</h1><p>为让虚拟机获取极致的算力和性能，可以直接挂在裸硬盘到虚拟机。也可以使用lvm，但是lvm需要关闭cache，防止数据丢失。</p><h1 id="常用虚拟硬盘格式对比"><a href="#常用虚拟硬盘格式对比" class="headerlink" title="常用虚拟硬盘格式对比"></a>常用虚拟硬盘格式对比</h1><p>RAW：整体性能较高</p><p>qcow2：常见的虚拟硬盘格式，适合高消耗计算</p><p>lvm：适合高IO的计算</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;虚拟机，我们常叫做实例。一个实例就含一个最基本的服务器的最小系统，包括虚拟硬件系统和软件系统。&lt;/p&gt;
-&lt;p&gt;通常生产环节的服务器不适用GUI界面，但是再做KVM的时候，需要GUI界面做辅助管理，所以再安装KVM之前务必先安装桌面。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;KVM最终
-      
-    
-    </summary>
-    
-    
     
   </entry>
   

@@ -347,6 +347,39 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/21/kubernetes/Storage-Class/" >
+            
+                <span>Storage Class</span>
+        </a>
+        <div class="abstract-content">
+            Storage Class可以按照字面的意思来进行理解，可以认为就是一个储存类，将PV储存在一个类里边。
+Storage Class为PV管理提供了很大的便利。使用Storage Class以后，创建PVC直接指定Storage Class就可以了。
+创建Storage Class目前Storage Class支持多种方式，将目前所有主流的储存方式都涵盖了。这里我以nfs为例。
+创建一个Storage Class的定义：
+1234567891011apiVersion: storage.k8s.io/v1kind: StorageClassmetadata:  name: slowpro...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/20/zabbix/zabbix-proxy/" >
             
                 <span>zabbix-proxy</span>
@@ -642,49 +675,10 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/08/docker/%E9%95%9C%E5%83%8F/" >
-            
-                <span>镜像</span>
-        </a>
-        <div class="abstract-content">
-            
-镜像是被封装好的服务，镜像可以随时调用，方便进行部署。镜像可以是docker hub上的，也可以是自己封装的。
-
-咱们看一下系统镜像的组成
-
-可以认为镜像都是多镜像叠加起来的。
-咱们要部署环境，第一件事就是查找相关镜像。
-1docker search image_name:tag
-
-系统会返回相关的镜像信息，咱们以centos为例：
-1234[root@server etc]# docker search centosINDEX       NAME                                         DESCRIPTION                 ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/2020/03/page/2/">2</a><a class="page-number" href="/archives/2020/03/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/03/page/12/">12</a><a class="extend next" rel="next" href="/archives/2020/03/page/2/">NEXT &gt;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/archives/2020/03/page/2/">2</a><a class="page-number" href="/archives/2020/03/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/03/page/13/">13</a><a class="extend next" rel="next" href="/archives/2020/03/page/2/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -2550,9 +2544,28 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3327,6 +3340,11 @@ CPUCPU是服务器的核心。目前服务器CPU常用英特尔至强系列，�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">

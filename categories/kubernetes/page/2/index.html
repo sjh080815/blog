@@ -347,6 +347,41 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/03/08/kubernetes/Service/" >
+            
+                <span>Service</span>
+        </a>
+        <div class="abstract-content">
+            Service、Pod、RC和Deployment之间关系RC和Deployment批量自动生成Pod，且自动分配Pod IP，那么Pod IP就是随机的。在常规的生产环境中，容器的数量并非是一个定值，经常会删除或者增加Pod，那么Pod IP肯定就会发生改变。现在要外网访问Pod无外乎两种方法：
+
+使用HaProxy或者nginx一类的反向代理工具进行反向代理
+使用Service绑定RC或者Deployment
+
+以上方法，第一种，无论是haproxy还是nginx，都需要手动定义反向代理的IP，不具备灵活性，且不能满足HA，所以这种方式基本没有什么可行性。
+注意一点：如果单纯使用了P...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/08</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "容器技术">容器技术</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/03/08/kubernetes/Pod%E8%B0%83%E5%BA%A6/" >
             
                 <span>Pod调度</span>
@@ -2347,9 +2382,28 @@ Never：不关注容器状态直接重启。
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 120
+        Total : 121
         </div>
         <!-- search  -->
         
@@ -3124,6 +3178,11 @@ Never：不关注容器状态直接重启。
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/kubernetes/Storage-Class/" >Storage Class</a>
+        </li>
     
     
         <li class="archive-post-item">
